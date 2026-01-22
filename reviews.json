@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "Alok",
+    "location": "Radhamadhabpur, Kotulpur",
+    "review": "Very affordable price. All Products are available at Cheap rate.",
+    "image": "images/profile.png"
+  },
+  {
+    "id": 2,
+    "name": "Pritam",
+    "location": "Karakberia",
+    "review": "All Products are available for wiring and Home wairing products.",
+    "image": "images/profile.png"
+  },
+  {
+    "id": 3,
+    "name": "Santosh",
+    "location": "Karakberia",
+    "review": "Cheap rate and all good quality products are here.",
+    "image": "images/profile.png"
+  },
+  {
+    "id": 4,
+    "name": "Dibyendu",
+    "location": "Karakberia",
+    "review": "Very nice store, They also provide receipts of any purchases.",
+    "image": "images/profile.png"
+  }
+]
