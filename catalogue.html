@@ -13,7 +13,7 @@
   <meta name="author" content="Manoj Chakrabortty" />
   <link rel="shortcut icon" href="images/favcon.jpeg" type="">
 
-  <title> About - Mc Electronics And Electrics </title>
+  <title>Our Products - Mc Electronics And Electrics</title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -31,19 +31,134 @@
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
+  
+  <style>
+      .goods_section {
+          padding-top: 120px;
+          min-height: 800px;
+      }
+      
+      .filter-box {
+          background: #f8f9fa;
+          padding: 20px;
+          border-radius: 5px;
+          margin-bottom: 20px;
+      }
+      
+      .filter-title {
+          font-weight: bold;
+          margin-bottom: 15px;
+          color: #00204a;
+          border-bottom: 2px solid #00bbf0;
+          padding-bottom: 5px;
+          display: inline-block;
+      }
+      
+      .product-card {
+          border: 1px solid #eee;
+          transition: all 0.3s;
+          margin-bottom: 30px;
+          border-radius: 10px;
+          background: #fff;
+          overflow: hidden;
+      }
+      
+      .product-card:hover {
+          box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+          transform: translateY(-5px);
+      }
+      
+      .product-img-box {
+          height: 200px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+          background: #fff;
+          border-bottom: 1px solid #f0f0f0;
+      }
+      
+      .product-img-box img {
+          max-height: 100%;
+          max-width: 100%;
+          object-fit: contain;
+      }
+      
+      .product-detail-box {
+          padding: 15px;
+          text-align: center;
+      }
+      
+      .product-brand {
+          font-size: 12px;
+          color: #999;
+          text-transform: uppercase;
+      }
+      
+      .product-name {
+          font-weight: 600;
+          color: #333;
+          margin: 5px 0;
+          height: 40px; /* Fixed height for 2 lines */
+          overflow: hidden;
+          font-size: 15px;
+      }
+      
+      .product-price {
+          color: #00bbf0;
+          font-weight: bold;
+          font-size: 18px;
+      }
+      
+      .product-mrp {
+          color: #999;
+          text-decoration: line-through;
+          font-size: 14px;
+          margin-left: 5px;
+      }
 
+      .btn-add-cart {
+          background: #00204a;
+          color: white;
+          border: none;
+          padding: 8px 15px;
+          border-radius: 20px;
+          font-size: 14px;
+          margin-top: 10px;
+          transition: all 0.3s;
+      }
+      
+      .btn-add-cart:hover {
+          background: #00bbf0;
+      }
+
+      /* Loading Spinner */
+      .loader {
+        border: 5px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 5px solid #00bbf0;
+        width: 40px;
+        height: 40px;
+        -webkit-animation: spin 1s linear infinite; /* Safari */
+        animation: spin 1s linear infinite;
+        margin: 50px auto;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      @media (max-width: 992px) {
+          .goods_section {
+              padding-top: 100px;
+          }
+      }
+  </style>
 </head>
 
 <body class="sub_page">
-
   <div class="hero_area">
-
-    <div class="hero_bg_box">
-      <div class="bg_img_box">
-        <img src="images/hero-bg.png" alt="">
-      </div>
-    </div>
-
     <!-- header section strats -->
     <header class="header_section">
       <div class="container-fluid">
@@ -63,29 +178,21 @@
               <li class="nav-item ">
                 <a class="nav-link" href="index.html">Home </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about.html"> About</a>
+              </li>
               <li class="nav-item active">
-                <a class="nav-link" href="about.html"> About <span class="sr-only">(current)</span> </a>
+                <a class="nav-link" href="catalogue.html"> Products </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="service.html">Services</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="why.html">Why Us</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="team.html">Team</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="pay-us.html">Pay</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="login.html"> <i class="fa fa-user" aria-hidden="true"></i> Login</a>
+               <li class="nav-item" id="authNavItem">
+                <a class="nav-link" href="login.html" id="loginLink"> <i class="fa fa-user" aria-hidden="true"></i> Login</a>
               </li>
-              <form class="form-inline">
-                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-              </form>
             </ul>
           </div>
         </nav>
@@ -94,72 +201,94 @@
     <!-- end header section -->
   </div>
 
-  <!-- about section -->
-
-  <section class="about_section layout_padding">
-    <div class="container  ">
-      <div class="heading_container heading_center">
+  <!-- Goods section -->
+  <section class="goods_section layout_padding">
+    <div class="container">
+      <div class="heading_container heading_center mb-5">
         <h2>
-          About <span>Us</span>
+          Our <span>Catalogue</span>
         </h2>
-        <p>
-          <b>* </b><b>Mc Audio Karakberia</b> is a local Business and <b>Electronics And Electrics</b> is its subsidiary.<br>
-          <b>* </b>MC Electronics and Electrics is a new supplier of electronic components and equipment in Karakberia, Kotulpur area.<br>
-          <b>* </b>It's parent business <b>(Mc Audio)</b> was founded in 2000 and has since grown to become a trusted Business place for both businesses and consumers alike.
-        </p>
       </div>
+      
       <div class="row">
-        <div class="col-md-6 ">
-          <div class="img-box">
-            <img src="images/about-mc.jpg" alt="">
-          </div>
+        <!-- Category Tabs -->
+        <div class="col-12 mb-4">
+            <style>
+                .category-tabs {
+                    display: flex;
+                    overflow-x: auto;
+                    white-space: nowrap;
+                    padding-bottom: 10px;
+                    border-bottom: 1px solid #eee;
+                    margin-bottom: 20px;
+                    scrollbar-width: none; /* Firefox */
+                }
+                .category-tabs::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+                
+                .cat-tab {
+                    padding: 8px 20px;
+                    margin-right: 15px;
+                    cursor: pointer;
+                    font-weight: 500;
+                    color: #777;
+                    border-radius: 4px;
+                    transition: all 0.3s;
+                    font-size: 1rem;
+                }
+                .cat-tab:hover { color: #000; }
+                .cat-tab.active {
+                    background-color: #000;
+                    color: #fff;
+                }
+            </style>
+            <div class="category-tabs" id="categoryTabs">
+                <div class="cat-tab active" data-category="all">All Products</div>
+                <!-- Dynamic categories will be injected here -->
+                 <div class="cat-tab">Loading...</div>
+            </div>
         </div>
-        <div class="col-md-6">
-          <div class="detail-box">
-            <h3>
-              We Are Mc Electronics And Electrics
-            </h3>
-            <p>
-              <b>MC Electronics and Electrics</b> is a family-owned and operated business that has been serving the community for over 20 years.
-              We are a one-stop shop for all of your electronics needs, from appliances and televisions to computers and small appliances.
-              We also offer a wide range of services, including <b>repairs, installations, and maintenance contracts.</b>
-<h2>Our Mission</h2>
-At <b>MC Electronics and Electrics</b>, our mission is to provide our customers with the best possible products and services at the most competitive prices. 
-We believe that our customers deserve to be treated fairly and honestly, and we are committed to providing them with the highest level of customer service.
-<h2>Our Products and Services</h2>
-We offer a wide range of electronics products, including:
-Appliances, Televisions, Computers, Small appliances, Home theater systems, Stereo systems, Cell phones, Computers, Networking equipment, Security systems, And much more.
-We also offer a variety of services, including:<br>
-* <B>Repairs</B><br>
-* <B>Installations</B><br>
-* <B>Maintenance contracts</B><br>
-* And much more!<br>
-<h2>Our Commitment to Our Customers</h2>
-We are committed to providing our customers with the best possible products and services. We believe that our customers deserve to be treated fairly and honestly, and we are dedicated to providing them with the highest level of customer service.
-If you have any questions or concerns, please don't hesitate to contact us. We would be happy to help you in any way we can.<br>
-<br>
-Thank you for choosing...<br>
- <b>MC Electronics and Electrics!</b>
-            </p>
-            <a href="index.html">
-              Homepage
-            </a>
+
+        <!-- Sidebar Filters -->
+          <div class="col-lg-3">
+              <div class="filter-box">
+                  <h5 class="filter-title">Search</h5>
+                  <div class="input-group mb-3">
+                      <input type="text" class="form-control" id="searchInput" placeholder="Search products...">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="searchBtn"><i class="fa fa-search"></i></button>
+                      </div>
+                  </div>
+
+                  <h5 class="filter-title mt-4">Sort By</h5>
+                  <select class="form-control" id="sortSelect">
+                      <option value="newest">Newest First</option>
+                      <option value="price_asc">Price: Low to High</option>
+                      <option value="price_desc">Price: High to Low</option>
+                  </select>
+
+                  <h5 class="filter-title mt-4">Brands</h5>
+                  <div id="brandFilters">
+                      <p class="text-muted"><small>Loading brands...</small></p>
+                  </div>
+              </div>
           </div>
-        </div>
+
+          <!-- Product Grid -->
+          <div class="col-lg-9">
+              <div class="row" id="productsGrid">
+                  <!-- Products will be loaded here -->
+                  <div class="col-12 text-center">
+                      <div class="loader"></div>
+                      <p>Loading products...</p>
+                  </div>
+              </div>
+          </div>
       </div>
+
     </div>
   </section>
+  <!-- end Goods section -->
 
-  <!-- end about section -->
-
-  <!-- Separator -->
-  <div class="section-separator">
-    <!-- A longer, repeating path for the wave effect. ViewBox width doubled. -->
-    <svg viewBox="0 0 2400 120" preserveAspectRatio="none">
-        <!-- Two cycles of the wave: 0-1200, 1200-2400 -->
-        <path d="M0,60 C150,120 350,0 600,60 C850,120 1050,0 1200,60  C1350,120 1550,0 1800,60 C2050,120 2250,0 2400,60" />
-    </svg>
-  </div>
 
   <!-- info section -->
 
@@ -306,21 +435,14 @@ Thank you for choosing...<br>
 
   <!-- jQery -->
   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-  <!-- popper js -->
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-  </script>
-  <!-- bootstrap js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
-  <!-- owl slider -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
-  </script>
-  <!-- custom js -->
   <script type="text/javascript" src="js/custom.js"></script>
-  <!-- Google Map -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
-  </script>
-  <!-- End Google Map -->
+  
+  <script type="module" src="js/goods.js"></script>
+  
+  <!-- Navbar Auth (To update Login/My Account link) -->
+  <script type="module" src="js/navbar-auth.js"></script>
 
 </body>
-
 </html>

@@ -19,7 +19,7 @@
       content="Mc Electronics And Electrics, Mc Audio Karakberia"
     />
     <meta name="author" content="Manoj Chakrabortty" />
-    <link rel="shortcut icon" href="../images/favicon.png" type="" />
+    <link rel="shortcut icon" href="../images/favcon.jpeg" type="" />
 
     <title>My Account - Mc Electronics And Electrics</title>
 
@@ -48,6 +48,55 @@
     <link href="../css/responsive.css" rel="stylesheet" />
 
     <style>
+      .dashboard_section {
+        padding: 120px 0 50px 0;
+      }
+
+      .dashboard-sidebar .list-group-item {
+        border: none;
+        border-bottom: 1px solid #eee;
+        color: #333;
+        font-weight: 500;
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+
+      .dashboard-sidebar .list-group-item:hover {
+        background-color: #f8f9fa;
+        color: #00bbf0;
+        padding-left: 25px;
+      }
+
+      .dashboard-sidebar .list-group-item.active {
+        background-color: #00bbf0; /* Project Primary Color */
+        border-color: #00bbf0;
+        color: white;
+      }
+      
+      .dashboard-sidebar .list-group-item.active:hover {
+          padding-left: 20px; /* Reset padding for active item */
+      }
+
+      .dashboard-content h3 {
+        color: #00204a; /* Project Secondary Color */
+        margin-bottom: 20px;
+      }
+
+      .dashboard-content p {
+        color: #666;
+        line-height: 1.6;
+      }
+
+      .dashboard-content a {
+        color: #00bbf0;
+        text-decoration: none;
+      }
+      
+      .dashboard-content a:hover {
+          text-decoration: underline;
+      }
+
+      /* Profile Specific Styles */
       .profile-header {
         text-align: center;
         margin-bottom: 30px;
@@ -97,6 +146,23 @@
       }
       .btn-delete:hover {
         background-color: #c82333;
+      }
+      
+      /* Responsive Adjustments */
+      @media (max-width: 992px) {
+        .dashboard_section {
+          padding-top: 100px; /* Reduced padding but enough for fixed header */
+        }
+      }
+      
+      @media (max-width: 768px) {
+         .dashboard-sidebar {
+           margin-bottom: 30px; /* Spacing between sidebar and content on mobile */
+         }
+         
+         .dashboard-sidebar .list-group-item {
+           padding: 12px 15px; /* Slightly smaller padding */
+         }
       }
     </style>
   </head>
@@ -150,16 +216,11 @@
                   <a class="nav-link" href="../pay-us.html">Pay</a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link" href="my-account.html">
+                  <a class="nav-link" href="dashboard.html">
                     <i class="fa fa-user" aria-hidden="true"></i> My Account
                     <span class="sr-only">(current)</span>
                   </a>
                 </li>
-                <form class="form-inline">
-                  <button class="btn my-2 my-sm-0 nav_search-btn" type="submit">
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                  </button>
-                </form>
               </ul>
             </div>
           </nav>
@@ -168,79 +229,259 @@
       <!-- end header section -->
     </div>
 
-    <!-- profile section -->
-    <section class="login_section layout_padding">
+    <!-- Dashboard section -->
+    <section class="dashboard_section layout_padding">
       <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-8">
-            <div class="auth-card" style="padding: 30px;">
-              <div class="profile-header">
-                <div class="profile-img-container">
-                  <img src="../images/client1.jpg" alt="Profile Photo" id="profileImage" class="profile-img">
-                  <button class="profile-img-btn" onclick="document.getElementById('uploadProfileInput').click()">
-                    <i class="fa fa-camera"></i>
-                  </button>
-                  <input type="file" id="uploadProfileInput" accept="image/*" style="display: none;">
-                </div>
-                <h3>My <span>Profile</span></h3>
+        <div class="heading_container heading_center mb-5">
+          <h2>
+            My <span>Profile</span>
+          </h2>
+        </div>
+        <div class="row">
+          <!-- Sidebar -->
+          <div class="col-md-3 mb-4">
+            <div class="dashboard-sidebar">
+              <div class="list-group">
+                <a href="dashboard.html" class="list-group-item list-group-item-action">
+                  Dashboard
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">Orders</a>
+                <a href="#" class="list-group-item list-group-item-action">Addresses</a>
+                <a href="my-account.html" class="list-group-item list-group-item-action active">Account Details</a>
+                <button onclick="logout()" class="list-group-item list-group-item-action text-danger">Log Out</button>
               </div>
-
-              <form id="profileForm">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Full Name</label>
-                      <input type="text" class="form-control" id="profileName" placeholder="Enter Full Name" required>
-                    </div>
+            </div>
+          </div>
+  
+          <!-- Content -->
+          <div class="col-md-9">
+             <div class="auth-card" style="padding: 30px;">
+                <div class="profile-header">
+                  <div class="profile-img-container">
+                    <img src="../images/client1.jpg" alt="Profile Photo" id="profileImage" class="profile-img">
+                    <button class="profile-img-btn" onclick="document.getElementById('uploadProfileInput').click()">
+                      <i class="fa fa-camera"></i>
+                    </button>
+                    <input type="file" id="uploadProfileInput" accept="image/*" style="display: none;">
                   </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Email Address</label>
-                      <input type="email" class="form-control" id="profileEmail" placeholder="Enter Email" readonly style="background-color: #eee; cursor: not-allowed;">
-                    </div>
-                  </div>
+                  <h3>My <span>Profile</span></h3>
                 </div>
-
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Phone Number</label>
-                      <input type="tel" class="form-control" id="profilePhone" placeholder="Enter Phone Number">
+  
+                <form id="profileForm">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" class="form-control" id="profileName" placeholder="Enter Full Name" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" class="form-control" id="profileEmail" placeholder="Enter Email" readonly style="background-color: #eee; cursor: not-allowed;">
+                      </div>
                     </div>
                   </div>
-                  <div class="col-md-6">
-                     <div class="form-group">
-                      <label>Address</label>
-                      <input type="text" class="form-control" id="profileAddress" placeholder="Enter Address">
+  
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" class="form-control" id="profilePhone" placeholder="Enter Phone Number">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                       <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" class="form-control" id="profileAddress" placeholder="Enter Address">
+                      </div>
                     </div>
                   </div>
+  
+                  <div class="btn-box text-center mt-4">
+                    <button type="submit" class="toggle-btn" style="width: 200px;">Update Profile</button>
+                  </div>
+                </form>
+  
+  
+                <hr style="margin: 40px 0;">
+                
+                <div class="profile-header">
+                  <h3>Change <span>Password</span></h3>
                 </div>
-
-                <div class="btn-box text-center mt-4">
-                  <button type="submit" class="toggle-btn" style="width: 200px;">Update Profile</button>
+  
+                <form id="passwordForm">
+                  <div class="row">
+                     <div class="col-md-6">
+                      <div class="form-group">
+                        <label>New Password</label>
+                        <input type="password" class="form-control" id="newPassword" placeholder="New Password" required minlength="6">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required minlength="6">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="btn-box text-center mt-4">
+                    <button type="submit" class="toggle-btn" style="width: 200px;">Change Password</button>
+                  </div>
+                </form>
+  
+                <div class="danger-zone text-center">
+                  <h5 style="color: #dc3545; margin-bottom: 15px;">Danger Zone</h5>
+                  <p class="text-muted">Once you delete your account, there is no going back. Please be certain.</p>
+                  <button onclick="deleteAccount()" class="btn btn-delete">Delete My Account</button>
+                  <br><br>
                 </div>
-              </form>
-
-              <div class="danger-zone text-center">
-                <h5 style="color: #dc3545; margin-bottom: 15px;">Danger Zone</h5>
-                <p class="text-muted">Once you delete your account, there is no going back. Please be certain.</p>
-                <button onclick="deleteAccount()" class="btn btn-delete">Delete My Account</button>
-                <br><br>
-                <button onclick="logout()" class="btn btn-secondary">Logout</button>
+  
               </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end Dashboard section -->
 
+    <!-- info section -->
+    <section class="info_section layout_padding2">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-lg-3 info_col">
+            <div class="info_contact">
+              <h4>
+                <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Visit Our Shop:</span>
+              </h4>
+              <div class="contact_link_box">
+                <p>Address:</p>
+                <div class="gmap">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.143767942088!2d87.63039937477006!3d23.018492916481357!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f823602a61247d%3A0xdfc12bfb2f664e68!2sMC%20Electronics%20And%20Electrics!5e0!3m2!1sen!2sin!4v1736936820167!5m2!1sen!2sin" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <a href="https://maps.app.goo.gl/HV7RY9NQ7MfNPcB58" target="_blank">
+                  <i class="fa fa-map-marker" aria-hidden="true"></i>
+                  <span>
+                    Karakberia,Karak Berya,
+                    Kotulpur,Bankura,WB,722141
+                  </span>
+                </a>
+                <a href="tel:+918926171789">
+                  <i class="fa fa-phone" aria-hidden="true"></i>
+                  <span>
+                   +918926171789
+                  </span>
+                </a>
+                <a href="mailto: electronics.mcaudio@gmail.com">
+                  <i class="fa fa-envelope" aria-hidden="true"></i>
+                  <span>
+                    Click To email
+                  </span>
+                </a>
+              </div>
+            </div>
+            <div class="info_social">
+              <a href="https://www.facebook.com/MCAUDIOMANOJ/">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+              </a>
+              <a href="https://www.youtube.com/@mcaudiokarakberia">
+                <i class="fa fa-youtube" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 info_col">
+            <div class="info_detail">
+              <h4 style="text-align: center; margin-bottom: 20px;">
+                <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Information About Us</span>
+              </h4>
+              <div style="text-align: center;">
+                  <img src="../images/logo-mc-electronics.png" style="max-width: 100%; height: auto; margin-bottom: 20px; background: rgba(255, 255, 255, 0.95); padding: 15px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);" alt="MC Electronics And Electrics">
+              </div>
+              <p style="text-align: center; font-size: 0.95rem; line-height: 1.6;">
+                <b>Mc Audio Karakberia</b> is a local Business and <b>Electronics And Electrics</b> is its subsidiary.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-2 mx-auto info_col">
+            <div class="info_link_box">
+              <h4>
+                <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Links</span>
+              </h4>
+              <div class="info_links">
+                <a class="active" href="../index.html">
+                  <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Home
+                </a>
+                <a class="" href="../about.html">
+                  <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; About
+                </a>
+                <a class="" href="../service.html">
+                  <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Services
+                </a>
+                <a class="" href="../why.html">
+                   <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Why Us
+                </a>
+                <a class="" href="../pay-us.html">
+                   <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Pay Us
+                </a>
+                <a class="" href="../team.html">
+                   <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Team
+                </a>
+                <a class="" href="../sitemaps/sitemap1.html">
+                   <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Sitemap
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-2 info_col">
+            <h4>
+              <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Products</span>
+            </h4>
+            <div class="info_links">
+               <a href="../catalogue.html">
+                  <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Catalogue
+               </a>
+               <a href="../repairing.html">
+                  <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Repairing
+               </a>
+               <a href="../recharge.html">
+                  <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Recharge
+               </a>
+               <a href="../recharge.html">
+                  <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Bill Payment
+               </a>
+               <a href="https://mc-electronics.0-0-0.click/">
+                  <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Billing POS
+               </a>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-2 info_col">
+            <h4>
+              <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Our Policy</span>
+            </h4>
+            <div class="info_links">
+               <a href="../privacy.html">
+                  <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Privacy
+               </a>
+               <a href="../terms.html">
+                  <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Terms
+               </a>
+               <a href="../refund.html">
+                  <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Refunds
+               </a>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!-- end profile section -->
+  
+    <!-- end info section -->
 
     <!-- footer section -->
-    <section class="footer_section">
+    <section class="footer_section" style="padding: 5px 0; background-color: #ffffff;">
       <div class="container">
-        <p>
+        <p style="margin: 0; padding: 0; line-height: 1.2; font-size: 0.9rem;">
           &copy; <span id="displayYear"></span> <a href="http://mc-audio-karakberia.web.app/" target="_blank"><b>Mc Audio</b></a> All Rights Reserved.
+          <br>
+          <span style="font-size: 11px; color: #666;">Site Designed and Maintained by <a href="https://sumanonline.com" target="_blank" style="color: #666; text-decoration: none; font-weight: bold;">SumanOnline</a></span>
         </p>
       </div>
     </section>

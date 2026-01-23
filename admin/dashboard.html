@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="../images/favcon.jpeg" type="image/jpeg">
+    <title>Admin Dashboard - Mc Electronics</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <!-- Font Awesome -->
+    <link href="../css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #00204a; /* Dark Blue */
+            --accent-color: #00bbf0; /* Cyan */
+            --bg-color: #f4f6f9;
+            --text-color: #333;
+            --sidebar-width: 250px;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--primary-color);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            color: #fff;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            background-color: rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        
+        .sidebar-header h4 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0 0;
+        }
+        
+        .sidebar-menu li {
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .sidebar-menu a {
+            display: block;
+            padding: 15px 20px;
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            color: #fff;
+            background-color: var(--accent-color);
+            padding-left: 25px;
+        }
+        
+        .sidebar-menu i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        /* Topbar */
+        .topbar {
+            background-color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .toggle-btn {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+            display: none; /* Hidden on desktop */
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+            border: 2px solid var(--accent-color);
+        }
+
+        /* Stats Cards */
+        .stat-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(0, 187, 240, 0.1);
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 20px;
+        }
+        
+        .stat-details h5 {
+            margin: 0;
+            color: #888;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .stat-details h2 {
+            margin: 5px 0 0 0;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* Section Title */
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--accent-color);
+            padding-left: 15px;
+        }
+
+        /* Table */
+        .table-container {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            overflow-x: auto;
+        }
+        
+        .custom-table th {
+            border-top: none;
+            background-color: #f8f9fa;
+            color: var(--primary-color);
+        }
+        
+        .badge-success { background-color: #28a745; }
+        .badge-warning { background-color: #ffc107; color: #333; }
+        .badge-danger { background-color: #dc3545; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                margin-left: -250px;
+            }
+            .sidebar.active {
+                margin-left: 0;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .toggle-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h4>Mc Electronics</h4>
+            <small>Admin Panel</small>
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="dashboard.html" class="active">
+                    <i class="fa fa-tachometer"></i> Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="add-product.html">
+                    <i class="fa fa-plus-circle"></i> Add Product
+                </a>
+            </li>
+            <li>
+                <a href="manage-products.html">
+                    <i class="fa fa-list"></i> Manage Products
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-shopping-bag"></i> Orders (WIP)
+                </a>
+            </li>
+            <li>
+                <a href="manage-users.html">
+                    <i class="fa fa-users"></i> Users
+                </a>
+            </li>
+            <li>
+                <a href="manage-metadata.html">
+                    <i class="fa fa-tags"></i> Categories
+                </a>
+            </li>
+            <li>
+                <a href="../index.html">
+                    <i class="fa fa-home"></i> Back to Site
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="logout()">
+                    <i class="fa fa-sign-out"></i> Logout
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content" id="content">
+        <!-- Topbar -->
+        <div class="topbar">
+            <div class="toggle-btn" onclick="toggleSidebar()">
+                <i class="fa fa-bars"></i>
+            </div>
+            <div>
+                <h5 class="m-0 text-muted d-none d-md-block">Welcome Back</h5>
+            </div>
+            <div class="user-profile">
+                <img src="../images/client1.jpg" alt="User" id="adminImg">
+                <div>
+                    <span id="adminName" style="font-weight: 500;">Admin</span>
+                    <small class="d-block text-muted">Administrator</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Stats -->
+        <h3 class="section-title">Overview</h3>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fa fa-cube"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h5>Total Products</h5>
+                        <h2 id="totalProducts">Loading...</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fa fa-shopping-cart"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h5>Total Orders</h5>
+                        <h2>124</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h5>Total Users</h5>
+                        <h2 id="totalUsers">Loading...</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fa fa-money"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h5>Revenue</h5>
+                        <h2>₹85k</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h3 class="section-title">Recent Orders</h3>
+                <div class="table-container">
+                    <table class="table custom-table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Product</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Mock Data for now -->
+                            <tr>
+                                <td>#ORD-001</td>
+                                <td>John Doe</td>
+                                <td>Samsung S24 Ultra</td>
+                                <td>₹99,999</td>
+                                <td><span class="badge badge-success p-2">Completed</span></td>
+                                <td>23 Jan 2026</td>
+                            </tr>
+                            <tr>
+                                <td>#ORD-002</td>
+                                <td>Jane Smith</td>
+                                <td>Havells Fan</td>
+                                <td>₹2,499</td>
+                                <td><span class="badge badge-warning p-2">Pending</span></td>
+                                <td>22 Jan 2026</td>
+                            </tr>
+                            <tr>
+                                <td>#ORD-003</td>
+                                <td>Mike Ross</td>
+                                <td>Sony Headphones</td>
+                                <td>₹14,999</td>
+                                <td><span class="badge badge-danger p-2">Cancelled</span></td>
+                                <td>20 Jan 2026</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-5 text-center text-muted">
+             <p>&copy; 2026 Mc Electronics Admin Panel.</p>
+        </footer>
+
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+            // document.getElementById('content').classList.toggle('active'); // Optional: push content
+        }
+    </script>
+    
+    <!-- Auth & Logic -->
+    <script type="module">
+        import { initAdminAuth, db } from '../js/admin-auth.js';
+        import { collection, getCountFromServer } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Initialize Auth Check
+        initAdminAuth(async (user) => {
+            // Load Real Stats
+            try {
+                // Products Count
+                const productsColl = collection(db, "products");
+                const productsSnap = await getCountFromServer(productsColl);
+                document.getElementById('totalProducts').innerText = productsSnap.data().count;
+
+                // Users Count
+                const usersColl = collection(db, "users");
+                const usersSnap = await getCountFromServer(usersColl);
+                document.getElementById('totalUsers').innerText = usersSnap.data().count;
+
+            } catch (e) {
+                console.error("Error fetching stats:", e);
+                document.getElementById('totalProducts').innerText = "Err";
+                document.getElementById('totalUsers').innerText = "Err";
+            }
+        });
+    </script>
+
+</body>
+</html>

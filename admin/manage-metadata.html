@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="../images/favcon.jpeg" type="image/jpeg">
+    <title>Manage Metadata - Admin Dashboard</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <!-- Font Awesome -->
+    <link href="../css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { --primary-color: #00204a; --accent-color: #00bbf0; --bg-color: #f4f6f9; --sidebar-width: 250px; }
+        body { font-family: 'Roboto', sans-serif; background-color: var(--bg-color); margin: 0; overflow-x: hidden; }
+
+        /* Sidebar & Layout */
+        .sidebar { width: var(--sidebar-width); background-color: var(--primary-color); height: 100vh; position: fixed; top: 0; left: 0; color: #fff; transition: all 0.3s; z-index: 1000; }
+        .sidebar-header { padding: 20px; background-color: rgba(0,0,0,0.2); text-align: center; }
+        .sidebar-header h4 { margin: 0; font-weight: 700; font-size: 1.2rem; }
+        .sidebar-menu { list-style: none; padding: 0; margin: 20px 0 0 0; }
+        .sidebar-menu li { border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .sidebar-menu a { display: block; padding: 15px 20px; color: #bdc3c7; text-decoration: none; transition: all 0.3s; }
+        .sidebar-menu a:hover, .sidebar-menu a.active { color: #fff; background-color: var(--accent-color); padding-left: 25px; }
+        .sidebar-menu i { margin-right: 10px; width: 20px; text-align: center; }
+        .main-content { margin-left: var(--sidebar-width); padding: 20px; }
+        .toggle-btn { display: none; font-size: 1.5rem; cursor: pointer; color: var(--primary-color); margin-bottom: 20px; }
+        
+        .meta-card { background: #fff; padding: 25px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); height: 100%; }
+        .custom-list { list-style: none; padding: 0; margin-top: 20px; max-height: 400px; overflow-y: auto; }
+        .custom-list li { background: #f8f9fa; padding: 10px 15px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .custom-list li:hover { background: #e9ecef; }
+        .btn-delete { color: #dc3545; cursor: pointer; transition: color 0.2s; }
+        .btn-delete:hover { color: darkred; }
+
+        @media (max-width: 768px) {
+            .sidebar { margin-left: -250px; }
+            .sidebar.active { margin-left: 0; }
+            .main-content { margin-left: 0; }
+            .toggle-btn { display: block; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h4>Mc Electronics</h4>
+            <small>Admin Panel</small>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html"><i class="fa fa-tachometer"></i> Dashboard</a></li>
+            <li><a href="add-product.html"><i class="fa fa-plus-circle"></i> Add Product</a></li>
+            <li><a href="manage-products.html"><i class="fa fa-list"></i> Manage Products</a></li>
+            <li><a href="#"><i class="fa fa-shopping-bag"></i> Orders</a></li>
+             <li><a href="manage-users.html"><i class="fa fa-users"></i> Users</a></li>
+             <li><a href="manage-metadata.html" class="active"><i class="fa fa-tags"></i> Categories</a></li>
+            <li><a href="../index.html"><i class="fa fa-home"></i> Back to Site</a></li>
+            <li><a href="#" onclick="logout()"><i class="fa fa-sign-out"></i> Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="toggle-btn" onclick="document.getElementById('sidebar').classList.toggle('active')">
+            <i class="fa fa-bars"></i> Menu
+        </div>
+
+        <h3 class="mb-4" style="color: var(--primary-color); font-weight: 700;">Manage Metadata</h3>
+        
+        <div class="row">
+            <!-- Brands Column -->
+            <div class="col-md-6 mb-4">
+                <div class="meta-card">
+                    <h5 class="mb-3">Brands</h5>
+                    <div class="input-group mb-3">
+                        <input type="text" id="newBrandInput" class="form-control" placeholder="New Brand Name">
+                        <div class="input-group-append">
+                          <button class="btn btn-primary" style="background-color: var(--accent-color); border:none;" onclick="addBrand()">Add</button>
+                        </div>
+                    </div>
+                    <ul class="custom-list" id="brandsList">
+                        <li class="text-center text-muted">Loading...</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Categories Column -->
+            <div class="col-md-6 mb-4">
+                <div class="meta-card">
+                    <h5 class="mb-3">Categories</h5>
+                    <div class="input-group mb-3">
+                        <input type="text" id="newCategoryInput" class="form-control" placeholder="New Category Name">
+                        <div class="input-group-append">
+                          <button class="btn btn-primary" style="background-color: var(--accent-color); border:none;" onclick="addCategory()">Add</button>
+                        </div>
+                    </div>
+                    <ul class="custom-list" id="categoriesList">
+                        <li class="text-center text-muted">Loading...</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script type="module" src="../js/admin-metadata.js"></script>
+
+</body>
+</html>

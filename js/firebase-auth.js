@@ -91,7 +91,7 @@ if (loginForm) {
       console.log("Logged in user:", user);
       
       // Optional: Redirect to home page
-      window.location.href = "accounts/my-account.html"; 
+      window.location.href = "accounts/dashboard.html"; 
 
     } catch (error) {
       const errorCode = error.code;

@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, onAuthStateChanged, updateProfile, deleteUser, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getAuth, onAuthStateChanged, updateProfile, deleteUser, signOut, updatePassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { getFirestore, doc, getDoc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 // REUSE CONFIG FROM firebase-auth.js (Ideally should be in a shared config file)
@@ -50,8 +50,9 @@ onAuthStateChanged(auth, async (user) => {
     }
 
   } else {
-    // User is NOT signed in. Redirect to Login.
-    console.log("No user found, redirecting...");
+    // User is NOT signed in. Redirect to Homepage.
+    alert("You must be logged in to view this page.");
+    window.location.href = "../index.html";
   }
 });
 
@@ -66,9 +67,9 @@ if (fileInput) {
     
     if (!file || !user) return;
 
-    // Limit file size to 100KB to prevent Firestore issues
-    if (file.size > 100 * 1024) {
-      alert("Please select an image smaller than 100KB.");
+    // Limit file size to 550KB to prevent Firestore issues
+    if (file.size > 550 * 1024) {
+      alert("Please select an image smaller than 550KB.");
       return;
     }
 
@@ -135,6 +136,40 @@ if (profileForm) {
     }
   });
 }
+
+// UPDATE PASSWORD
+const passwordForm = document.getElementById('passwordForm');
+if (passwordForm) {
+  passwordForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const newPassword = document.getElementById('newPassword').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    if (newPassword !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    try {
+      await updatePassword(user, newPassword);
+      alert("Password updated successfully!");
+      passwordForm.reset();
+    } catch (error) {
+      console.error("Error updating password:", error);
+      if (error.code === 'auth/requires-recent-login') {
+         alert("Security Check: You need to re-login to change your password.");
+         // Optionally logout user to force re-login
+         await logout();
+      } else {
+         alert("Failed to update password: " + error.message);
+      }
+    }
+  });
+}
+
 
 // DELETE ACCOUNT
 window.deleteAccount = async () => {

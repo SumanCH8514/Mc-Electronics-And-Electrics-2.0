@@ -11,12 +11,12 @@
   <meta name="keywords" content="Mc Electronics And Electrics , Mc Audio, Mc Electronics" />
   <meta name="description" content="Mc Electronics And Electrics, Mc Audio Karakberia" />
   <meta name="author" content="Manoj Chakrabortty" />
-  <link rel="shortcut icon" href="images/favcon.jpeg" type="">
+  <link rel="shortcut icon" href="../images/favcon.jpeg" type="">
 
-  <title> About - Mc Electronics And Electrics </title>
+  <title>Dashboard - Mc Electronics And Electrics</title>
 
   <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
 
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -25,22 +25,86 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 
   <!-- font awesome style -->
-  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <link href="../css/font-awesome.min.css" rel="stylesheet" />
 
   <!-- Custom styles for this template -->
-  <link href="css/style.css" rel="stylesheet" />
+  <link href="../css/style.css" rel="stylesheet" />
   <!-- responsive style -->
-  <link href="css/responsive.css" rel="stylesheet" />
+  <link href="../css/responsive.css" rel="stylesheet" />
 
+  <style>
+    .dashboard_section {
+      padding: 120px 0 50px 0;
+    }
+
+    .dashboard-sidebar .list-group-item {
+      border: none;
+      border-bottom: 1px solid #eee;
+      color: #333;
+      font-weight: 500;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .dashboard-sidebar .list-group-item:hover {
+      background-color: #f8f9fa;
+      color: #00bbf0;
+      padding-left: 25px;
+    }
+
+    .dashboard-sidebar .list-group-item.active {
+      background-color: #00bbf0; /* Project Primary Color */
+      border-color: #00bbf0;
+      color: white;
+    }
+    
+    .dashboard-sidebar .list-group-item.active:hover {
+        padding-left: 20px; /* Reset padding for active item */
+    }
+
+    .dashboard-content h3 {
+      color: #00204a; /* Project Secondary Color */
+      margin-bottom: 20px;
+    }
+
+    .dashboard-content p {
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .dashboard-content a {
+      color: #00bbf0;
+      text-decoration: none;
+    }
+    
+    .dashboard-content a:hover {
+        text-decoration: underline;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 992px) {
+      .dashboard_section {
+        padding-top: 100px; /* Reduced padding but enough for fixed header */
+      }
+    }
+    
+    @media (max-width: 768px) {
+       .dashboard-sidebar {
+         margin-bottom: 30px; /* Spacing between sidebar and content on mobile */
+       }
+       
+       .dashboard-sidebar .list-group-item {
+         padding: 12px 15px; /* Slightly smaller padding */
+       }
+    }
+  </style>
 </head>
 
 <body class="sub_page">
-
   <div class="hero_area">
-
     <div class="hero_bg_box">
       <div class="bg_img_box">
-        <img src="images/hero-bg.png" alt="">
+        <img src="../images/hero-bg.png" alt="">
       </div>
     </div>
 
@@ -48,7 +112,7 @@
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="../index.html">
             <span>
               Mc Electronics And Electrics
             </span>
@@ -61,31 +125,26 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ">
               <li class="nav-item ">
-                <a class="nav-link" href="index.html">Home </a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="about.html"> About <span class="sr-only">(current)</span> </a>
+                <a class="nav-link" href="../index.html">Home </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="service.html">Services</a>
+                <a class="nav-link" href="../about.html"> About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="why.html">Why Us</a>
+                <a class="nav-link" href="../service.html">Services</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="team.html">Team</a>
+                <a class="nav-link" href="../why.html">Why Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="pay-us.html">Pay</a>
+                <a class="nav-link" href="../team.html">Team</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="login.html"> <i class="fa fa-user" aria-hidden="true"></i> Login</a>
+                <a class="nav-link" href="../pay-us.html">Pay</a>
               </li>
-              <form class="form-inline">
-                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-              </form>
+               <li class="nav-item active">
+                <a class="nav-link" href="dashboard.html"> <i class="fa fa-user" aria-hidden="true"></i> My Account</a>
+              </li>
             </ul>
           </div>
         </nav>
@@ -94,75 +153,49 @@
     <!-- end header section -->
   </div>
 
-  <!-- about section -->
-
-  <section class="about_section layout_padding">
-    <div class="container  ">
-      <div class="heading_container heading_center">
+  <!-- Dashboard section -->
+  <section class="dashboard_section layout_padding">
+    <div class="container">
+      <div class="heading_container heading_center mb-5">
         <h2>
-          About <span>Us</span>
+          My <span>Dashboard</span>
         </h2>
-        <p>
-          <b>* </b><b>Mc Audio Karakberia</b> is a local Business and <b>Electronics And Electrics</b> is its subsidiary.<br>
-          <b>* </b>MC Electronics and Electrics is a new supplier of electronic components and equipment in Karakberia, Kotulpur area.<br>
-          <b>* </b>It's parent business <b>(Mc Audio)</b> was founded in 2000 and has since grown to become a trusted Business place for both businesses and consumers alike.
-        </p>
       </div>
       <div class="row">
-        <div class="col-md-6 ">
-          <div class="img-box">
-            <img src="images/about-mc.jpg" alt="">
+        <!-- Sidebar -->
+        <div class="col-md-3 mb-4">
+          <div class="dashboard-sidebar">
+            <div class="list-group">
+              <a href="dashboard.html" class="list-group-item list-group-item-action active">
+                Dashboard
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">Orders</a>
+              <a href="#" class="list-group-item list-group-item-action">Addresses</a>
+              <a href="my-account.html" class="list-group-item list-group-item-action">Account Details</a>
+              <button onclick="logout()" class="list-group-item list-group-item-action text-danger">Log Out</button>
+            </div>
           </div>
         </div>
-        <div class="col-md-6">
-          <div class="detail-box">
-            <h3>
-              We Are Mc Electronics And Electrics
-            </h3>
+
+        <!-- Content -->
+        <div class="col-md-9">
+          <div class="dashboard-content">
+            <h3>Hello, <span id="userDisplayName">User</span>!</h3>
             <p>
-              <b>MC Electronics and Electrics</b> is a family-owned and operated business that has been serving the community for over 20 years.
-              We are a one-stop shop for all of your electronics needs, from appliances and televisions to computers and small appliances.
-              We also offer a wide range of services, including <b>repairs, installations, and maintenance contracts.</b>
-<h2>Our Mission</h2>
-At <b>MC Electronics and Electrics</b>, our mission is to provide our customers with the best possible products and services at the most competitive prices. 
-We believe that our customers deserve to be treated fairly and honestly, and we are committed to providing them with the highest level of customer service.
-<h2>Our Products and Services</h2>
-We offer a wide range of electronics products, including:
-Appliances, Televisions, Computers, Small appliances, Home theater systems, Stereo systems, Cell phones, Computers, Networking equipment, Security systems, And much more.
-We also offer a variety of services, including:<br>
-* <B>Repairs</B><br>
-* <B>Installations</B><br>
-* <B>Maintenance contracts</B><br>
-* And much more!<br>
-<h2>Our Commitment to Our Customers</h2>
-We are committed to providing our customers with the best possible products and services. We believe that our customers deserve to be treated fairly and honestly, and we are dedicated to providing them with the highest level of customer service.
-If you have any questions or concerns, please don't hesitate to contact us. We would be happy to help you in any way we can.<br>
-<br>
-Thank you for choosing...<br>
- <b>MC Electronics and Electrics!</b>
+              (not <span id="userDisplayNameSmall">User</span>? <a href="#" onclick="logout()">Log out</a>)
             </p>
-            <a href="index.html">
-              Homepage
-            </a>
+            <p class="mt-4">
+              From your account dashboard you can view your <a href="#">recent orders</a>, manage your <a href="#">shipping and billing addresses</a>, and <a href="my-account.html">edit your password and account details</a>.
+            </p>
           </div>
         </div>
       </div>
     </div>
   </section>
+  <!-- end Dashboard section -->
 
-  <!-- end about section -->
-
-  <!-- Separator -->
-  <div class="section-separator">
-    <!-- A longer, repeating path for the wave effect. ViewBox width doubled. -->
-    <svg viewBox="0 0 2400 120" preserveAspectRatio="none">
-        <!-- Two cycles of the wave: 0-1200, 1200-2400 -->
-        <path d="M0,60 C150,120 350,0 600,60 C850,120 1050,0 1200,60  C1350,120 1550,0 1800,60 C2050,120 2250,0 2400,60" />
-    </svg>
-  </div>
 
   <!-- info section -->
-
   <section class="info_section layout_padding2">
     <div class="container">
       <div class="row">
@@ -212,7 +245,7 @@ Thank you for choosing...<br>
               <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Information About Us</span>
             </h4>
             <div style="text-align: center;">
-                <img src="images/logo-mc-electronics.png" style="max-width: 100%; height: auto; margin-bottom: 20px; background: rgba(255, 255, 255, 0.95); padding: 15px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);" alt="MC Electronics And Electrics">
+                <img src="../images/logo-mc-electronics.png" style="max-width: 100%; height: auto; margin-bottom: 20px; background: rgba(255, 255, 255, 0.95); padding: 15px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);" alt="MC Electronics And Electrics">
             </div>
             <p style="text-align: center; font-size: 0.95rem; line-height: 1.6;">
               <b>Mc Audio Karakberia</b> is a local Business and <b>Electronics And Electrics</b> is its subsidiary.
@@ -225,25 +258,25 @@ Thank you for choosing...<br>
               <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Links</span>
             </h4>
             <div class="info_links">
-              <a class="active" href="index.html">
+              <a class="active" href="../index.html">
                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Home
               </a>
-              <a class="" href="about.html">
+              <a class="" href="../about.html">
                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; About
               </a>
-              <a class="" href="service.html">
+              <a class="" href="../service.html">
                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Services
               </a>
-              <a class="" href="why.html">
+              <a class="" href="../why.html">
                  <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Why Us
               </a>
-              <a class="" href="pay-us.html">
+              <a class="" href="../pay-us.html">
                  <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Pay Us
               </a>
-              <a class="" href="team.html">
+              <a class="" href="../team.html">
                  <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Team
               </a>
-              <a class="" href="./sitemaps/sitemap1.html">
+              <a class="" href="../sitemaps/sitemap1.html">
                  <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Sitemap
               </a>
             </div>
@@ -254,16 +287,16 @@ Thank you for choosing...<br>
             <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Products</span>
           </h4>
           <div class="info_links">
-             <a href="catalogue.html">
+             <a href="../catalogue.html">
                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Catalogue
              </a>
-             <a href="repairing.html">
+             <a href="../repairing.html">
                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Repairing
              </a>
-             <a href="recharge.html">
+             <a href="../recharge.html">
                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Recharge
              </a>
-             <a href="recharge.html">
+             <a href="../recharge.html">
                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Bill Payment
              </a>
              <a href="https://mc-electronics.0-0-0.click/">
@@ -276,13 +309,13 @@ Thank you for choosing...<br>
             <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Our Policy</span>
           </h4>
           <div class="info_links">
-             <a href="privacy.html">
+             <a href="../privacy.html">
                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Privacy
              </a>
-             <a href="terms.html">
+             <a href="../terms.html">
                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Terms
              </a>
-             <a href="refund.html">
+             <a href="../refund.html">
                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Refunds
              </a>
           </div>
@@ -291,6 +324,7 @@ Thank you for choosing...<br>
   </section>
 
   <!-- end info section -->
+
 
   <!-- footer section -->
   <section class="footer_section" style="padding: 5px 0; background-color: #ffffff;">
@@ -305,21 +339,54 @@ Thank you for choosing...<br>
   <!-- footer section -->
 
   <!-- jQery -->
-  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
   <!-- popper js -->
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
   </script>
   <!-- bootstrap js -->
-  <script type="text/javascript" src="js/bootstrap.js"></script>
-  <!-- owl slider -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
-  </script>
+  <script type="text/javascript" src="../js/bootstrap.js"></script>
   <!-- custom js -->
-  <script type="text/javascript" src="js/custom.js"></script>
-  <!-- Google Map -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
+  <script type="text/javascript" src="../js/custom.js"></script>
+  
+  <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+      // Firebase Config
+      const firebaseConfig = {
+        apiKey: "AIzaSyBunseGlJg3XiyXzKiepjyilYZ8n5Cl0lE",
+        authDomain: "mc-electronics.firebaseapp.com",
+        projectId: "mc-electronics",
+        storageBucket: "mc-electronics.firebasestorage.app",
+        messagingSenderId: "1021368016185",
+        appId: "1:1021368016185:web:2e0dfa85d55a4c92af9ce8",
+        measurementId: "G-LGB225ZZXM"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+
+      // Check Auth State
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          const name = user.displayName || user.email;
+          document.getElementById('userDisplayName').textContent = name;
+          document.getElementById('userDisplayNameSmall').textContent = name;
+        } else {
+          // Redirect to login if not logged in
+           window.location.href = "../login.html";
+        }
+      });
+
+      // Logout Function
+      window.logout = function() {
+          signOut(auth).then(() => {
+              window.location.href = "../login.html";
+          }).catch((error) => {
+              console.error("Logout Error:", error);
+          });
+      }
   </script>
-  <!-- End Google Map -->
 
 </body>
 
