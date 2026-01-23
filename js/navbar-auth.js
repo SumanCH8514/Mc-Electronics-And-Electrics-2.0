@@ -22,7 +22,7 @@ if (loginLink) {
     if (user) {
       // User is signed in.
       loginLink.innerHTML = '<i class="fa fa-user" aria-hidden="true"></i> My Account';
-      loginLink.href = 'my-account.html';
+      loginLink.href = 'accounts/my-account.html';
     } else {
       // User is signed out.
       loginLink.innerHTML = '<i class="fa fa-user" aria-hidden="true"></i> Login';

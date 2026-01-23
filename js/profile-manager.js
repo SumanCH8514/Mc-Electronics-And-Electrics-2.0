@@ -164,7 +164,7 @@ window.deleteAccount = async () => {
 window.logout = async () => {
   try {
     await signOut(auth);
-    window.location.href = "login.html";
+    window.location.href = "../login.html";
   } catch (error) {
     console.error("Error signing out:", error);
   }
