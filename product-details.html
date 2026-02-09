@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="Mc Electronics And Electrics , Mc Audio, Mc Electronics" />
+  <meta name="description" content="Product Details - Mc Electronics And Electrics" />
+  <meta name="author" content="Manoj Chakrabortty" />
+  <link rel="shortcut icon" href="images/favcon.jpeg" type="">
+
+  <title>Product Details - Mc Electronics And Electrics</title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- font awesome style -->
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+
+  <!-- Custom styles -->
+  <link href="css/style.css" rel="stylesheet" />
+  <link href="css/responsive.css" rel="stylesheet" />
+
+  <style>
+    .product_details_section {
+      padding-top: 120px;
+      min-height: 600px;
+    }
+
+    .product-img-large {
+      width: 100%;
+      height: 400px;
+      /* Fixed height to prevent CLS */
+      object-fit: contain;
+      border: 1px solid #eee;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #fff;
+      /* Ensure background is white */
+    }
+
+    #loading {
+      min-height: 500px;
+      /* Reserve space for content to prevent footer shift */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .product-info h2 {
+      color: #00204a;
+      font-weight: 700;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .product-info .brand {
+      font-size: 14px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+    }
+
+    /* Price Styling */
+    .price-container {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin: 15px 0;
+    }
+
+    .price-label {
+      font-size: 24px;
+      color: #000;
+      margin-right: 5px;
+    }
+
+    .final-price {
+      font-size: 32px;
+      color: #00b3e9;
+      font-weight: bold;
+    }
+
+    .mrp-container {
+      margin-left: 10px;
+      font-size: 16px;
+      color: #666;
+    }
+
+    .mrp-price {
+      text-decoration: line-through;
+    }
+
+    .discount-badge {
+      color: #388e3c;
+      /* Green color for discount */
+      font-weight: bold;
+      font-size: 18px;
+      margin-left: 10px;
+    }
+
+    .tax-note {
+      color: #666;
+      font-size: 14px;
+    }
+
+    /* Share Buttons */
+    .share-container {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .share-btn {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      transition: transform 0.2s;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .share-btn:hover {
+      transform: translateY(-3px);
+      color: white;
+    }
+
+    .btn-copy {
+      background: #6c757d;
+    }
+
+    .btn-wa {
+      background: #25D366;
+    }
+
+    .btn-fb {
+      background: #1877F2;
+    }
+
+    .btn-insta {
+      background: #E1306C;
+    }
+
+    .btn-x {
+      background: #000000;
+    }
+
+    .btn-linkedin {
+      background: #0077b5;
+    }
+
+    .tooltip-inner {
+      max-width: 200px;
+      padding: 0.25rem 0.5rem;
+      color: #fff;
+      text-align: center;
+      background-color: #000;
+      border-radius: 0.25rem;
+    }
+
+    .description-box {
+      margin-top: 15px;
+      /* Reduced margin since header has padding */
+      line-height: 1.8;
+      color: #555;
+      /* Transition for smooth toggle */
+      transition: all 0.3s ease-out;
+      overflow: hidden;
+    }
+
+    .accordion-header {
+      cursor: pointer;
+      padding: 15px 0;
+      border-bottom: 2px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s;
+    }
+
+    .accordion-header h4 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .accordion-icon {
+      transition: transform 0.3s;
+    }
+
+    .accordion-header.active .accordion-icon {
+      transform: rotate(180deg);
+    }
+
+    .accordion-header.active {
+      border-bottom: 2px solid #00bbf0;
+    }
+
+    .btn-back {
+      background: #eee;
+      color: #333;
+      padding: 8px 15px;
+      border-radius: 5px;
+      display: inline-block;
+      margin-bottom: 20px;
+      text-decoration: none;
+    }
+
+    .btn-back:hover {
+      background: #ddd;
+      color: #000;
+      text-decoration: none;
+    }
+
+    /* Floating Cart Icon */
+    .floating-cart-icon {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background-color: #25D366;
+      /* Whatsapp green requested? User said "same as whatsapp icon". Whatsapp usually green. */
+      background-color: #00204a;
+      /* Matching theme color might be better, but user said "same as whatsapp icon on homepage" which usually means position. Let's stick to theme color for cart to distinguish, or maybe orange? Let's use Theme Blue. */
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      z-index: 1000;
+      transition: transform 0.3s;
+    }
+
+    .floating-cart-icon:hover {
+      transform: scale(1.1);
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: red;
+      color: white;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    /* Cart Sidebar */
+    .cart-sidebar {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      /* Hidden by default */
+      width: 350px;
+      height: 100%;
+      background: white;
+      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+      z-index: 1001;
+      transition: right 0.3s ease-in-out;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-sidebar.open {
+      right: 0;
+    }
+
+    .cart-header {
+      padding: 20px;
+      background: #00204a;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-header h3 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    .close-cart-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .cart-items-container {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .cart-item {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 15px;
+    }
+
+    .cart-item img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      margin-right: 15px;
+      border-radius: 5px;
+    }
+
+    .cart-item-details {
+      flex: 1;
+    }
+
+    .cart-item-title {
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .cart-item-price {
+      color: #00204a;
+      font-weight: bold;
+    }
+
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
+    }
+
+    .qty-btn {
+      width: 25px;
+      height: 25px;
+      background: #eee;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+
+    .qty-display {
+      margin: 0 10px;
+      font-size: 14px;
+    }
+
+    .remove-item-btn {
+      margin-left: auto;
+      color: red;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .cart-footer {
+      padding: 20px;
+      border-top: 1px solid #eee;
+      background: #f9f9f9;
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .cart-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      display: none;
+    }
+
+    .cart-overlay.show {
+      display: block;
+    }
+
+    /* Loading Spinner */
+    .loader {
+      border: 5px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 5px solid #00bbf0;
+      width: 40px;
+      height: 40px;
+      -webkit-animation: spin 1s linear infinite;
+      /* Safari */
+      animation: spin 1s linear infinite;
+      margin: 50px auto;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Mobile Floating Action Bar */
+    .mobile-action-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      display: flex;
+      gap: 10px;
+      z-index: 999;
+      border-top: 1px solid #eee;
+    }
+
+    .mobile-action-bar .btn {
+      border-radius: 5px;
+      border: none;
+    }
+
+    /* Add padding to body on mobile to prevent content from being hidden behind the action bar */
+    @media (max-width: 767px) {
+      body {
+        padding-bottom: 70px;
+      }
+    }
+  </style>
+</head>
+
+<body class="sub_page">
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="index.html">
+            <span>
+              Mc Electronics And Electrics
+            </span>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""> </span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-lg-none sidebar-header">
+
+              <h5 class="mb-0">Mc Electronics</h5>
+              <p class="small text-muted mb-0" style="font-size: 0.7rem; letter-spacing: 1px;">MENU</p>
+              <div id="mobileProfileWrapper" class="mt-3"></div>
+            </div>
+            <ul class="navbar-nav  ">
+              <li class="nav-item animate-on-scroll animate-fade-up delay-100">
+                <a class="nav-link" href="index.html"><i class="fa fa-home"></i> Home </a>
+              </li>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-200">
+                <a class="nav-link" href="about.html"><i class="fa fa-info-circle"></i> About</a>
+              </li>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-300">
+                <a class="nav-link" href="catalogue.html"><i class="fa fa-shopping-bag"></i> Products</a>
+              </li>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-400">
+                <a class="nav-link" href="service.html"><i class="fa fa-wrench"></i> Services</a>
+              </li>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-100">
+                <a class="nav-link" href="why.html"><i class="fa fa-question-circle"></i> Why Us</a>
+              </li>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-200">
+                <a class="nav-link" href="team.html"><i class="fa fa-users"></i> Team</a>
+              </li>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-300">
+                <a class="nav-link" href="pay-us.html"><i class="fa fa-credit-card"></i> Pay</a>
+              </li>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-400">
+                <a class="nav-link" href="https://mc-electronics.0-0-0.click/"> <i class="	fa fa-desktop"></i> POS</a>
+              </li>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-100">
+                <a class="nav-link" href="auth/login.html" id="loginLink"> <i class="fa fa-user" aria-hidden="true"></i>
+                  Login</a>
+              </li>
+              <!-- <li class="nav-item animate-on-scroll animate-fade-up delay-200" id="adminNavItem" style="display: none;">
+                <a class="nav-link" href="admin/dashboard.html"> <i class="fa fa-lock"></i> Admin Panel</a>
+              </li> -->
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+  </div>
+
+  <section class="product_details_section layout_padding">
+    <div class="container">
+
+      <a href="catalogue.html" class="btn-back"><i class="fa fa-arrow-left"></i> Back to Catalogue</a>
+
+      <div id="loading" class="text-center">
+        <div class="loader"></div>
+        <h5 style="font-weight: 400; font-size: 1.2rem;">Loading Product Details...</h5>
+      </div>
+
+      <div id="productContent" class="row" style="display: none;">
+        <div class="col-md-5">
+          <img src="images/no-image.png" alt="Product Image" id="p_image" class="product-img-large">
+
+          <!-- Action Buttons - Desktop Only (Below Image) -->
+          <div class="mt-3 d-none d-md-flex flex-row justify-content-center action-buttons-desktop" style="gap: 10px;">
+            <a href="tel:+918926171789" class="btn btn-primary btn-lg"
+              style="background-color: #00204a; border-color: #00204a;">
+              <i class="fa fa-phone"></i> Call to Order
+            </a>
+            <button id="addToCartBtn" class="btn btn-warning btn-lg"
+              style="background-color: #ff9800; border-color: #ff9800; color: white;">
+              <i class="fa fa-shopping-cart"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+        <div class="col-md-7">
+          <div class="product-info">
+            <div class="brand" id="p_brand">BRAND</div>
+            <h2 id="p_name">Product Name</h2>
+
+            <div class="price-container">
+              <span class="final-price" id="p_price">₹0</span>
+
+              <span class="mrp-container" id="mrp_block" style="display: none;">
+                MRP: <span class="mrp-price" id="p_mrp">₹0</span>
+              </span>
+
+              <span class="discount-badge" id="p_discount" style="display: none;">0% OFF</span>
+
+              <div class="w-100"></div>
+
+              <div class="d-flex flex-column flex-md-row align-items-center w-100 mt-2">
+                <span class="tax-note">Inclusive of all taxes</span>
+
+                <!-- Share Buttons -->
+                <div class="share-container ml-md-auto mt-2 mt-md-0">
+                  <span style="font-weight: 500; font-size: 14px; color: #555; margin-right: 5px;">Share:</span>
+
+                  <button class="share-btn btn-copy" onclick="copyProductLink()" title="Copy Link">
+                    <i class="fa fa-link"></i>
+                  </button>
+                  <a href="#" id="shareWa" class="share-btn btn-wa" target="_blank" title="WhatsApp">
+                    <i class="fa fa-whatsapp"></i>
+                  </a>
+                  <a href="#" id="shareFb" class="share-btn btn-fb" target="_blank" title="Facebook">
+                    <i class="fa fa-facebook"></i>
+                  </a>
+                  <a href="#" id="shareInsta" class="share-btn btn-insta" target="_blank" title="Instagram">
+                    <i class="fa fa-instagram"></i>
+                  </a>
+                  <a href="#" id="shareX" class="share-btn btn-x" target="_blank" title="X (Twitter)">
+                    <i class="fa fa-twitter"></i>
+                  </a>
+                  <a href="#" id="shareLinkedin" class="share-btn btn-linkedin" target="_blank" title="LinkedIn">
+                    <i class="fa fa-linkedin"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Seller & Warranty -->
+            <div class="seller-warranty-box p-3 mb-3"
+              style="background: #f8f9fa; border-radius: 8px; border: 1px solid #eee;">
+              <div class="d-flex align-items-center mb-2">
+                <i class="fa fa-user-circle-o mr-2" style="color: #00204a; font-size: 18px;"></i>
+                <div>
+                  <span class="text-muted" style="font-size: 12px;">Seller:</span>
+                  <div style="font-weight: 600; font-size: 14px; color: #333;" id="p_seller">Mc Electronics And
+                    Electrics</div>
+                </div>
+              </div>
+              <div class="d-flex align-items-center">
+                <i class="fa fa-shield mr-2" style="color: #00204a; font-size: 18px;"></i>
+                <div>
+                  <span class="text-muted" style="font-size: 12px;">Warranty:</span>
+                  <div style="font-weight: 600; font-size: 14px; color: #333;" id="p_warranty">1 Year Manufacturer
+                    Warranty</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Key Highlights Accordion -->
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <h4><b>Product Highlights:</b></h4>
+              <i class="fa fa-chevron-down accordion-icon"></i>
+            </div>
+            <div class="description-box" id="p_highlights_box" style="display: none;">
+              <ul class="pl-3" id="p_highlights"
+                style="font-size: 14px; color: #555; list-style-type: disc; margin-bottom: 0;">
+                <!-- Highlights injected here -->
+              </ul>
+            </div>
+
+            <hr style="border: none; margin: 0;"> <!-- Replaced standard hr with styled header border -->
+
+            <div class="accordion-header active" onclick="toggleAccordion(this)">
+              <h4><b>Product Description:</b></h4>
+              <i class="fa fa-chevron-down accordion-icon"></i>
+            </div>
+
+            <div class="description-box" id="p_desc" style="display: block;">
+              Product description goes here.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="errorMsg" class="alert alert-danger text-center" style="display: none; margin-top: 20px;">
+        Product not found.
+      </div>
+
+    </div>
+
+    <!-- Floating Action Bar - Mobile Only -->
+    <div class="mobile-action-bar d-md-none" id="mobileActionBar" style="display: none;">
+      <a href="tel:+918926171789" class="btn btn-call"
+        style="background-color: #00204a; border-color: #00204a; color: white; flex: 1; padding: 12px; font-size: 16px; font-weight: 500;">
+        <i class="fa fa-phone"></i> Call to Order
+      </a>
+      <button id="addToCartBtnMobile" class="btn btn-cart"
+        style="background-color: #ff9800; border-color: #ff9800; color: white; flex: 1; padding: 12px; font-size: 16px; font-weight: 500;">
+        <i class="fa fa-shopping-cart"></i> Add to Cart
+      </button>
+    </div>
+  </section>
+
+  <!-- info section -->
+  <section class="info_section layout_padding2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-lg-3 info_col">
+          <div class="info_contact">
+            <h4>
+              <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Visit Our Shop:</span>
+            </h4>
+            <div class="contact_link_box">
+              <p>Address:</p>
+              <div class="gmap">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.143767942088!2d87.63039937477006!3d23.018492916481357!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f823602a61247d%3A0xdfc12bfb2f664e68!2sMC%20Electronics%20And%20Electrics!5e0!3m2!1sen!2sin!4v1736936820167!5m2!1sen!2sin"
+                  width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+              <a href="https://maps.app.goo.gl/HV7RY9NQ7MfNPcB58" target="_blank">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span>
+                  Karakberia,Karak Berya,
+                  Kotulpur,Bankura,WB,722141
+                </span>
+              </a>
+              <a href="tel:+918926171789">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span>
+                  +918926171789
+                </span>
+              </a>
+              <a href="mailto: electronics.mcaudio@gmail.com">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <span>
+                  Click To email
+                </span>
+              </a>
+            </div>
+          </div>
+          <div class="info_social">
+            <a href="https://www.facebook.com/MCAUDIOMANOJ/">
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>
+            <a href="https://www.youtube.com/@mcaudiokarakberia">
+              <i class="fa fa-youtube" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 info_col">
+          <div class="info_detail">
+            <h4 style="text-align: center; margin-bottom: 20px;">
+              <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Information About Us</span>
+            </h4>
+            <div style="text-align: center;">
+              <img src="images/logo-mc-electronics.png"
+                style="max-width: 100%; height: auto; margin-bottom: 20px; background: rgba(255, 255, 255, 0.95); padding: 15px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"
+                alt="MC Electronics And Electrics">
+            </div>
+            <p style="text-align: center; font-size: 0.95rem; line-height: 1.6;">
+              <b>Mc Audio Karakberia</b> is a local Business and <b>Electronics And Electrics</b> is its subsidiary.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-2 mx-auto info_col">
+          <div class="info_link_box">
+            <h4>
+              <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Links</span>
+            </h4>
+            <div class="info_links">
+              <a class="active" href="index.html">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Home
+              </a>
+              <a class="" href="about.html">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; About
+              </a>
+              <a class="" href="service.html">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Services
+              </a>
+              <a class="" href="why.html">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Why Us
+              </a>
+              <a class="" href="pay-us.html">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Pay Us
+              </a>
+              <a class="" href="team.html">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Team
+              </a>
+              <a class="" href="./sitemaps/sitemap1.html">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Sitemap
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-2 info_col">
+          <h4>
+            <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Products</span>
+          </h4>
+          <div class="info_links">
+            <a href="catalogue.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Catalogue
+            </a>
+            <a href="repairing.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Repairing
+            </a>
+            <a href="recharge.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Recharge
+            </a>
+            <a href="recharge.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Bill Payment
+            </a>
+            <a href="https://mc-electronics.0-0-0.click/">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Billing POS
+            </a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-2 info_col">
+          <h4>
+            <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Our Policy</span>
+          </h4>
+          <div class="info_links">
+            <a href="pages/privacy.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Privacy
+            </a>
+            <a href="pages/terms.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Terms
+            </a>
+            <a href="pages/return.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Refunds
+            </a>
+            <a href="pages/contact.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Contact
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end info section -->
+
+  <!-- footer section -->
+  <section class="footer_section" style="padding: 5px 0; background-color: #ffffff;">
+    <div class="container">
+      <p style="margin: 0; padding: 0; line-height: 1.2; font-size: 0.9rem;">
+        &copy; <span id="displayYear"></span> <a href="http://mc-audio-karakberia.web.app/" target="_blank"><b>Mc
+            Audio</b></a> All Rights Reserved.
+        <br>
+        <span style="font-size: 11px; color: #666;">Site Designed and Maintained by <a href="https://sumanonline.com"
+            target="_blank" style="color: #666; text-decoration: none; font-weight: bold;">SumanOnline</a></span>
+      </p>
+    </div>
+  </section>
+
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/custom.js"></script>
+  <!-- Animations -->
+  <script src="js/animations.js"></script>
+  <!-- Navbar Auth Script -->
+  <script type="module" src="js/navbar-auth.js"></script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import firebaseConfig from "./js/firebase-config.js";
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    async function loadProduct() {
+      const params = new URLSearchParams(window.location.search);
+      const productId = params.get('id');
+
+      if (!productId) {
+        showError("No product specified.");
+        return;
+      }
+
+      try {
+        const docRef = doc(db, "products", productId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          displayProduct(docSnap.data());
+        } else {
+          showError("Product not found.");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        showError("Error loading product.");
+      }
+    }
+
+    function displayProduct(data) {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('productContent').style.display = 'flex';
+
+      // Show mobile action bar on mobile devices
+      const mobileActionBar = document.getElementById('mobileActionBar');
+      if (mobileActionBar && window.innerWidth < 768) {
+        mobileActionBar.style.display = 'flex';
+      }
+
+      document.getElementById('p_name').textContent = data.name;
+      document.getElementById('p_brand').textContent = data.brand || 'Generic';
+
+      if (data.image) document.getElementById('p_image').src = data.image;
+
+      // Price Logic
+      const price = Number(data.price) || 0;
+      const mrp = Number(data.mrp) || 0;
+
+      document.getElementById('p_price').textContent = '₹' + price.toLocaleString();
+
+      if (mrp > price) {
+        document.getElementById('mrp_block').style.display = 'inline';
+        document.getElementById('p_mrp').textContent = '₹' + mrp.toLocaleString();
+
+        // Calculate Discount
+        const discount = Math.round(((mrp - price) / mrp) * 100);
+        if (discount > 0) {
+          const discountEl = document.getElementById('p_discount');
+          discountEl.textContent = discount + '% OFF';
+          discountEl.style.display = 'block';
+        }
+      }
+
+      document.getElementById('p_desc').textContent = data.description || 'No description available.';
+
+      // Highlights
+      const highlightsList = document.getElementById('p_highlights');
+      const highlightsBox = document.getElementById('p_highlights_box');
+      // Find the header associated (previous sibling of box)
+      const highlightsHeader = highlightsBox.previousElementSibling;
+
+      if (data.highlights && Array.isArray(data.highlights) && data.highlights.length > 0) {
+        highlightsList.innerHTML = data.highlights.map(h => `<li>${h}</li>`).join('');
+        // Open by default if you want, or keep logic same. 
+        // User asked for "same as Product Description", which is often open by default.
+        // Let's open it.
+        highlightsBox.style.display = 'block';
+        highlightsHeader.classList.add('active');
+      } else {
+        // Fallback default
+        highlightsList.innerHTML = '<li>Top quality product</li><li>Best value for money</li>';
+        highlightsBox.style.display = 'block';
+        highlightsHeader.classList.add('active');
+      }
+
+      // Seller & Warranty
+      document.getElementById('p_seller').textContent = data.seller || "Mc Electronics And Electrics";
+      document.getElementById('p_warranty').textContent = data.warranty || "1 Year Manufacturer Warranty";
+
+      // Setup Share Links
+      const currentUrl = encodeURIComponent(window.location.href);
+      const title = encodeURIComponent("Check out " + data.name + " on Mc Electronics:");
+
+      document.getElementById('shareWa').href = `https://api.whatsapp.com/send?text=${title}%20${currentUrl}`;
+      document.getElementById('shareFb').href = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;
+      // Instagram doesn't support direct link sharing via URL, taking to profile or home usually, but user asked for it. 
+      // We will just link to instagram.com or use a generic intent if possible. Actually IG provides no URL sharer. 
+      // We will link to the main page or just '#' with an alert for now? Or better, just link to Instagram so they can post.
+      document.getElementById('shareInsta').href = `https://www.instagram.com/`;
+      document.getElementById('shareX').href = `https://twitter.com/intent/tweet?text=${title}&url=${currentUrl}`;
+      document.getElementById('shareLinkedin').href = `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`;
+    }
+
+    // Generic Accordion Toggle Function
+    window.toggleAccordion = function (header) {
+      // The content box should be the next element sibling with class 'description-box'
+      // or just the next element sibling if structure is strict. 
+      // Let's assume strict structure: header + div.description-box
+      const content = header.nextElementSibling;
+
+      if (content && content.classList.contains('description-box')) {
+        const icon = header.querySelector('.accordion-icon');
+
+        if (content.style.display === 'none') {
+          // Show
+          content.style.display = 'block';
+          header.classList.add('active');
+        } else {
+          // Hide
+          content.style.display = 'none';
+          header.classList.remove('active');
+        }
+      }
+    }
+
+    window.copyProductLink = function () {
+      const dummy = document.createElement('input');
+      document.body.appendChild(dummy);
+      dummy.value = window.location.href;
+      dummy.select();
+      document.execCommand('copy');
+      document.body.removeChild(dummy);
+      alert("Link copied to clipboard!");
+    }
+
+    function showError(msg) {
+      document.getElementById('loading').style.display = 'none';
+      const err = document.getElementById('errorMsg');
+      err.textContent = msg;
+      err.style.display = 'block';
+    }
+
+    loadProduct();
+  </script>
+
+  <!-- Cart Logic -->
+  <script type="module" src="js/cart.js"></script>
+
+  <!-- Floating Cart Icon -->
+  <div id="floatingCartIcon" class="floating-cart-icon" style="display: none;">
+    <i class="fa fa-shopping-cart"></i>
+    <span id="cartBadge" class="cart-badge" style="display: none;">0</span>
+  </div>
+
+  <!-- Cart Sidebar -->
+  <div id="cartSidebar" class="cart-sidebar">
+    <div class="cart-header">
+      <h3>Your Cart</h3>
+      <button id="closeCartBtn" class="close-cart-btn"><i class="fa fa-times"></i></button>
+    </div>
+    <div id="cartItemsContainer" class="cart-items-container">
+      <!-- Cart items will be injected here -->
+      <p class="empty-cart-msg">Your cart is empty.</p>
+    </div>
+    <div class="cart-footer">
+      <div id="cartAddressBlock" class="mb-3"
+        style="font-size: 0.9rem; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
+        <strong>Address:</strong> <span id="cartDeliveryAddress" class="text-muted">Loading...</span>
+      </div>
+      <div class="cart-total">
+        <span>Total:</span>
+        <span id="cartTotalAmount">₹0</span>
+      </div>
+      <button id="placeOrderBtn" class="btn btn-primary btn-block"
+        style="background-color: #00204a; border-color: #00204a;">Place Order</button>
+    </div>
+  </div>
+  <div id="cartOverlay" class="cart-overlay"></div>
+
+  <!-- Select Address Modal -->
+  <div class="modal fade" id="selectAddressModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Select Delivery Address</h5>
+          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body" id="addressSelectionList">
+          <!-- Addresses injected here -->
+        </div>
+        <div class="modal-footer">
+          <span class="text-muted small mr-auto">Only saved addresses are shown.</span>
+          <a href="accounts/addresses.html" class="btn btn-sm btn-outline-primary">Manage Addresses</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Modal -->
+  <div class="modal fade" id="paymentModal" tabindex="-1" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #00204a; color: white;">
+          <h5 class="modal-title">Payment Method</h5>
+          <button type="button" class="close text-white" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-center font-weight-bold mb-3">Total Amount: <span id="paymentTotalDisplay"
+              class="text-success">₹0</span></p>
+
+          <div class="form-group">
+            <div class="custom-control custom-radio mb-2">
+              <input type="radio" id="payOnline" name="paymentMethod" class="custom-control-input" value="Prepaid"
+                onchange="window.togglePaymentDetails()">
+              <label class="custom-control-label font-weight-bold" for="payOnline">Prepaid (Pay Online)</label>
+            </div>
+            <!-- Dynamic QR Section -->
+            <div id="qrPaymentSection" class="text-center p-3 border rounded mb-3 bg-light" style="display: none;">
+              <p class="small text-muted mb-2">Scan QR to Pay</p>
+              <img id="paymentQRCode" src="" alt="QR Code" class="img-fluid border p-2 bg-white mb-2"
+                style="width: 150px; height: 150px;">
+              <p class="small font-weight-bold text-dark">UPI ID: 8514900224@upi</p>
+
+              <a id="payGenericUpiBtn" href="#" class="btn btn-warning btn-block mb-2 font-weight-bold">
+                <i class="fa fa-mobile mr-1"></i> Pay using UPI App
+              </a>
+
+              <hr>
+              <button class="btn btn-success btn-block" onclick="window.processOrder('Prepaid')">I have made the
+                payment</button>
+            </div>
+
+            <div class="custom-control custom-radio">
+              <input type="radio" id="payCOD" name="paymentMethod" class="custom-control-input" value="COD"
+                onchange="window.togglePaymentDetails()">
+              <label class="custom-control-label font-weight-bold" for="payCOD">Cash on Delivery (COD)</label>
+            </div>
+            <div id="codSection" class="p-3" style="display: none;">
+              <button class="btn btn-primary btn-block" onclick="window.processOrder('COD')">Confirm Order</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

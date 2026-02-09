@@ -3,26 +3,94 @@
 
 <head>
   <!-- Google tag (gtag.js) -->
-<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-BSWHDKT1H6"></script> -->
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-BSWHDKT1H6"></script> -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-  gtag('config', 'G-BSWHDKT1H6');
-</script>
+    gtag('config', 'G-BSWHDKT1H6');
+  </script>
   <!-- Basic -->
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <!-- Mobile Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Site Metas -->
-  <meta name="keywords" content="Mc Electronics And Electrics , Mc Audio, Mc Electronics" />
-  <meta name="description" content="Mc Electronics And Electrics, Mc Audio Karakberia" />
+
+  <!-- SEO Metas -->
+  <title>Mc Electronics And Electrics | Wholesale Electronics & Repair Services in Kotulpur</title>
+  <meta name="description"
+    content="Mc Electronics And Electrics offers best prices on wholesale electronic goods, expert TV/Speaker repair, and bill payment services in Karakberia, Kotulpur. Visit us for quality products and services." />
+  <meta name="keywords"
+    content="Mc Electronics And Electrics, Mc Audio, Electronics Shop Kotulpur, TV Repair Karakberia, Mobile Recharge, Wholesale Electronics West Bengal" />
   <meta name="author" content="Manoj Chakrabortty" />
+  <link rel="canonical" href="https://mc-electronics.web.app/" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mc-electronics.web.app/" />
+  <meta property="og:title" content="Mc Electronics And Electrics | Your Trusted Electronics Partner" />
+  <meta property="og:description"
+    content="Shop for electrical goods, get expert device repairs, and pay bills easily at Mc Electronics And Electrics in Karakberia." />
+  <meta property="og:image" content="https://mc-electronics.web.app/images/logo-mc-electronics.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://mc-electronics.web.app/" />
+  <meta property="twitter:title" content="Mc Electronics And Electrics | Wholesale & Repair" />
+  <meta property="twitter:description"
+    content="Quality electronics, expert repairs, and instant recharges. Visit Mc Electronics And Electrics today!" />
+  <meta property="twitter:image" content="https://mc-electronics.web.app/images/logo-mc-electronics.png" />
+
+  <!-- Structured Data / JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ElectronicsStore",
+    "name": "Mc Electronics And Electrics",
+    "image": "https://mc-electronics.web.app/images/logo-mc-electronics.png",
+    "description": "Wholesale electronics shop and expert repair center in Karakberia, Kotulpur.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Karakberia, Karak Berya",
+      "addressLocality": "Kotulpur",
+      "addressRegion": "Kotulpur, West Bengal",
+      "postalCode": "722141",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 23.0184929,
+      "longitude": 87.6303994
+    },
+    "url": "https://mc-electronics.web.app/",
+    "telephone": "+918926171789",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Fri",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "08:00",
+        "closes": "20:00"
+      }
+    ],
+    "priceRange": "₹₹"
+  }
+  </script>
+
   <link rel="shortcut icon" href="images/favcon.jpeg" type="">
 
-  <title> Mc Electronics And Electrics </title>
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#00bbf0">
+  <link rel="apple-touch-icon" href="images/favcon.jpeg">
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -31,7 +99,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
   <!--owl slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 
   <!-- font awesome style -->
   <link href="css/font-awesome.min.css" rel="stylesheet" />
@@ -63,39 +132,51 @@
             </span>
           </a>
 
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class=""> </span>
           </button>
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-lg-none sidebar-header">
+
+              <h5 class="mb-0">Mc Electronics</h5>
+              <p class="small text-muted mb-0" style="font-size: 0.7rem; letter-spacing: 1px;">MENU</p>
+              <div id="mobileProfileWrapper" class="mt-3"></div>
+            </div>
             <ul class="navbar-nav  ">
               <li class="nav-item active animate-on-scroll animate-fade-up delay-100">
-                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="index.html"><i class="fa fa-home"></i> Home <span
+                    class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item animate-on-scroll animate-fade-up delay-200">
-                <a class="nav-link" href="about.html"> About</a>
+                <a class="nav-link" href="about.html"><i class="fa fa-info-circle"></i> About</a>
               </li>
               <li class="nav-item animate-on-scroll animate-fade-up delay-300">
-                <a class="nav-link" href="service.html">Services</a>
+                <a class="nav-link" href="catalogue.html"><i class="fa fa-shopping-bag"></i> Products</a>
               </li>
               <li class="nav-item animate-on-scroll animate-fade-up delay-400">
-                <a class="nav-link" href="why.html">Why Us</a>
+                <a class="nav-link" href="service.html"><i class="fa fa-wrench"></i> Services</a>
               </li>
               <li class="nav-item animate-on-scroll animate-fade-up delay-100">
-                <a class="nav-link" href="team.html">Team</a>
+                <a class="nav-link" href="why.html"><i class="fa fa-question-circle"></i> Why Us</a>
               </li>
               <li class="nav-item animate-on-scroll animate-fade-up delay-200">
-                <a class="nav-link" href="pay-us.html">Pay</a>
+                <a class="nav-link" href="team.html"><i class="fa fa-users"></i> Team</a>
               </li>
               <li class="nav-item animate-on-scroll animate-fade-up delay-300">
-                <a class="nav-link" href="https://mc-electronics.0-0-0.click/"> <i class="	fa fa-desktop"></i> POS</a>
+                <a class="nav-link" href="pay-us.html"><i class="fa fa-credit-card"></i> Pay</a>
               </li>
               <li class="nav-item animate-on-scroll animate-fade-up delay-400">
-                <a class="nav-link" href="login.html" id="loginLink"> <i class="fa fa-user" aria-hidden="true"></i> Login</a>
+                <a class="nav-link" href="https://mc-electronics.0-0-0.click/"> <i class="	fa fa-desktop"></i> POS</a>
               </li>
-              <li class="nav-item animate-on-scroll animate-fade-up delay-100" id="adminNavItem" style="display: none;">
+              <li class="nav-item animate-on-scroll animate-fade-up delay-100">
+                <a class="nav-link" href="auth/login.html" id="loginLink"> <i class="fa fa-user" aria-hidden="true"></i>
+                  Login</a>
+              </li>
+              <!-- <li class="nav-item animate-on-scroll animate-fade-up delay-200" id="adminNavItem" style="display: none;">
                 <a class="nav-link" href="admin/dashboard.html"> <i class="fa fa-lock"></i> Admin Panel</a>
-              </li>
+              </li> -->
               <!-- <form class="form-inline">
                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
                   <i class="fa fa-search" aria-hidden="true"></i>
@@ -115,26 +196,21 @@
             <div class="container ">
               <div class="row">
                 <div class="col-md-6 ">
-                  <div class="detail-box animate-on-scroll animate-fade-right">
-                    <h1>
-                      Mc Electronics<br>
-                          And
-                      Electrics<br>
-                      <p>a Mc Audio subsidiary</p>
+                  <div class="detail-box">
+                    <h1 style="color: #00bbf0;">
+                      Welcome to <br>
+                      <h1 style=" color: #e3ea15;font-size: 30px;">Mc Electronics And Electrics</h1>
                     </h1>
-                    <p>
-                    <b>Mc Audio Karakberia</b> is a local Business and <b>Mc Electronics And Electrics</b> is it's subsidiary.<br>
+                    <h3 style="color: #ff9010;font-size: 20px;">Karakberia | Kotulpur | Bankura | WB</h3>
+                    <p style="color: #ffffff;font-weight: bold;">
+                      Your trusted partner for wholesale electronics, repairs, and digital services.
                     </p>
-                    <div class="btn-box">
-                      <a class="btn1" href="about.html">
-                        Know About Us
-                      </a>
-                    </div>
+
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="img-box animate-on-scroll animate-fade-left">
-                    <img src="png/png%20(7).png" alt="">
+                  <div class="img-box">
+                    <img src="png\welcome_slider_illustration.png" alt="Mc Electronics And Electrics">
                   </div>
                 </div>
               </div>
@@ -146,13 +222,43 @@
                 <div class="col-md-6 ">
                   <div class="detail-box">
                     <h1>
-                      এম.সি. অডিও<br>
-                      <p>ইলেকট্রনিক্স এন্ড ইলেকট্রিকস
-
-                      </p>
+                      Mc Electronics<br>
+                      And
+                      Electrics<br>
+                      <p>a Mc Audio subsidiary</p>
                     </h1>
                     <p>
-                      এখানে সমস্ত প্রকার ইলেকট্রনিক এবং ইলেকট্রিক দ্রব্য সামগ্রী খুচরো ও পাইকারী দরে বিক্রয় করা হয়।<br>
+                      <b>Mc Audio Karakberia</b> is a local Business and <b>Mc Electronics And Electrics</b> is it's
+                      subsidiary.<br>
+                    </p>
+                    <div class="btn-box">
+                      <a class="btn1" href="about.html">
+                        Know About Us
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="img-box">
+                    <img src="images/logo-mc-electronics.png" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item ">
+            <div class="container ">
+              <div class="row">
+                <div class="col-md-6 ">
+                  <div class="detail-box">
+                    <h1>
+                      <h1 style="color: #ffffff;">এম.সি. অডিও & </h1>
+                      <h1 style="color: #e3ea15;font-weight: bold;font-size: 30px;">ইলেকট্রনিক্স এন্ড ইলেকট্রিকস
+                      </h1>
+                    </h1>
+                    <p>
+                      এখানে সমস্ত প্রকার ইলেকট্রনিক এবং ইলেকট্রিক দ্রব্য সামগ্রী খুচরো ও পাইকারী দরে বিক্রয় করা
+                      হয়।
                       এখানে যাবতীয় ইলেকট্রনিক্স দ্রব্য সামগ্রী যত্ন সহকারে মেরামত করা হয়।<br>
                     </p>
                     <div class="btn-box">
@@ -180,7 +286,7 @@
                       <p>a mc Electronics And Electrics Service</p>
                     </h1>
                     <p>
-                      Welcome to Recharge and Bill Pay division of  Mc Electrnics And Electrics, <br>
+                      Welcome to Recharge and Bill Pay division of Mc Electrnics And Electrics, <br>
                       Here you pay your any bills without going anywhere, You'll also get receipt with it as Proof<br>
 
                     </p>
@@ -213,8 +319,8 @@
                       Order from the comfort of your home. Fast and secure delivery right to your doorstep. T&C Apply
                     </p>
                     <div class="btn-box">
-                      <a href="#" class="btn1">
-                        Order Now
+                      <a href="catalogue.html" class="btn1" style="padding: 10px 4px;">
+                        View Our Products
                       </a>
                     </div>
                   </div>
@@ -233,6 +339,7 @@
           <li data-target="#customCarousel1" data-slide-to="1"></li>
           <li data-target="#customCarousel1" data-slide-to="2"></li>
           <li data-target="#customCarousel1" data-slide-to="3"></li>
+          <li data-target="#customCarousel1" data-slide-to="4"></li>
         </ol>
         <div class="carousel_btn_box">
           <a class="carousel-control-prev" href="#customCarousel1" role="button" data-slide="prev">
@@ -272,12 +379,12 @@
               </div>
               <div class="detail-box">
                 <h5>
-                  Selling Goods
+                  Sales & Distribution
                 </h5>
                 <p>
-                  All Kind of Electrical Goods are available.<br>
-                  You will get products at cheap price.<br>
-                  Retail and Wholesale Rate available.<br>
+                  Explore a wide range of top-quality electronics and electrical essentials.<br>
+                  From home appliances to industrial components, we offer the best competitive prices for both wholesale
+                  and retail customers.
                 </p>
                 <a href="service.html">
                   Read More
@@ -292,14 +399,14 @@
               </div>
               <div class="detail-box">
                 <h5>
-                  Repairing
+                  Expert Repairs
                 </h5>
                 <p>
-                  We repair all Electrical Product such as (Torch, Tv, Remote,Bulb etc)<br>
-                  We also Repair SoundSet's Machine, Speaker,Unit, Stabilizer etc
-                
+                  Professional repair solutions for all your devices.<br>
+                  We specialize in repairing TVs, Sound Systems, Stabilizers, Torches, and more with skilled technicians
+                  ensuring long-lasting fixes.
                 </p>
-                <a href="service.html">
+                <a href="repairing.html">
                   Read More
                 </a>
               </div>
@@ -312,15 +419,15 @@
               </div>
               <div class="detail-box">
                 <h5>
-                  Recharge/Bill Payment
+                  Recharge & Bill Pay
                 </h5>
                 <p>
-                  All Kind Of Bill Payments such as Electricity,Premium,LIC,etc
-                  Mobile Recharge, DTH Recharge
-                  are done here.
+                  Your one-stop solution for digital payments.<br>
+                  Seamlessly pay Electricity bills, LIC premiums, and recharge your Mobile or DTH instantly with
+                  authorized receipts.
                 </p>
-                <a href="https://Sumanrechargeservice.ml/" target="_blank">
-                  Visit Us
+                <a href="recharge.html">
+                  Read More
                 </a>
               </div>
             </div>
@@ -347,15 +454,18 @@
           About <span>Us</span>
         </h2>
         <p>
-          <b>* </b><b>Mc Audio Karakberia</b> is a local Business and <b>Mc Electronics And Electrics</b> is its subsidiary.<br>
-          <b>* </b><b>MC Electronics and Electrics</b> is a new supplier of electronic components and equipment in Karakberia, Kotulpur area.<br>
-          <b>* </b>It's Parent business <b>(Mc Audio)</b> was founded in 2000 and has since grown to become a trusted Business place for both businesses and consumers alike.
-       </p>
+          <b>* </b><b>Mc Audio Karakberia</b> is a local Business and <b>Mc Electronics And Electrics</b> is its
+          subsidiary.<br>
+          <b>* </b><b>MC Electronics and Electrics</b> is a new supplier of electronic components and equipment in
+          Karakberia, Kotulpur area.<br>
+          <b>* </b>It's Parent business <b>(Mc Audio)</b> was founded in 2000 and has since grown to become a trusted
+          Business place for both businesses and consumers alike.
+        </p>
       </div>
       <div class="row">
         <div class="col-md-6 ">
           <div class="img-box animate-on-scroll animate-fade-left">
-            <center><img src="png/about-us.png" alt=""width="400" ></center>
+            <center><img src="png/about-us.png" alt="" width="400"></center>
           </div>
         </div>
         <div class="col-md-6">
@@ -364,15 +474,20 @@
               We Are Mc Electronics And Electrics
             </h3>
             <p>
-              <b>MC Electronics and Electrics</b> is a family-owned and operated business that has been serving the community for over 20 years.
-              We are a one-stop shop for all of your electronics needs, from appliances and televisions to computers and small appliances.
-              We also offer a wide range of services, including <b>repairs, installations, and maintenance contracts.</b>
-<h2>Our Mission</h2>
-At <b>MC Electronics and Electrics</b>, our mission is to provide our customers with the best possible products and services at the most competitive prices. 
-We believe that our customers deserve to be treated fairly and honestly, and we are committed to providing them with the highest level of customer service.
+              <b>MC Electronics and Electrics</b> is a family-owned and operated business that has been serving the
+              community for over 20 years.
+              We are a one-stop shop for all of your electronics needs, from appliances and televisions to computers and
+              small appliances.
+              We also offer a wide range of services, including <b>repairs, installations, and maintenance
+                contracts.</b>
+            <h2>Our Mission</h2>
+            At <b>MC Electronics and Electrics</b>, our mission is to provide our customers with the best possible
+            products and services at the most competitive prices.
+            We believe that our customers deserve to be treated fairly and honestly, and we are committed to providing
+            them with the highest level of customer service.
 
             </p>
-            
+
             <a href="about.html">
               Read More...
             </a>
@@ -384,82 +499,88 @@ We believe that our customers deserve to be treated fairly and honestly, and we 
 
   <!-- end about section -->
 
-    <!-- why section -->
+  <!-- why section -->
 
-    <section class="why_section layout_padding">
-      <div class="container">
-        <div class="heading_container heading_center">
-          <h2>
-            Why Choose <span>Us</span>
-          </h2>
-        </div>
-        <div class="why_container">
-          <div class="box animate-on-scroll animate-zoom delay-100">
-            <div class="img-box">
-              <img src="images/w1.png" alt="">
-            </div>
-            <div class="detail-box">
-              <h5>
-                Competitive prices
-              </h5>
-              <p>
-                At <b>MC Electronics and Electrics</b>, our mission is to provide our customers with the best possible products and services at the most competitive prices. 
-                We believe that our customers deserve to be treated fairly and honestly, and we are committed to providing them with the highest level of customer service.<br>
-             </p>
-            </div>
+  <section class="why_section layout_padding">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          Why Choose <span>Us</span>
+        </h2>
+      </div>
+      <div class="why_container">
+        <div class="box animate-on-scroll animate-zoom delay-100">
+          <div class="img-box">
+            <img src="images/w1.png" alt="">
           </div>
-          <div class="box animate-on-scroll animate-zoom delay-200">
-            <div class="img-box">
-              <img src="images/w2.png" alt="Quality Product">
-            </div>
-            <div class="detail-box">
-              <h5>
-                Trust And Quality Product
-              </h5>
-              <p>
-                When you're looking for an electrics shop, it's important to choose one that you can trust. You need to know that you're getting quality products and services, and that you're getting a fair price.<br>
-              </p>
-            </div>
-          </div>
-          <div class="box animate-on-scroll animate-zoom delay-300">
-            <div class="img-box">
-              <img src="images/w3.png" alt="">
-            </div>
-            <div class="detail-box">
-              <h5>
-                Wide selection of products
-              </h5>
-              <p>
-                We offer a wide range of products and services. We have everything from Conceal Pipe and Module Kits to light bulbs and holder.<br>
-                We also offer a wide variety of electronics products, from Normal or Module Items and Conceal Wire or Pipe to light bulbs and accessories.<br>
-                We have something for everyone, and we're always adding new products to our inventory.<br>
-  
-              </p>
-            </div>
-          </div>
-          <div class="box animate-on-scroll animate-zoom delay-400">
-            <div class="img-box">
-              <img src="images/w4.png" alt="">
-            </div>
-            <div class="detail-box">
-              <h5>
-                Happy Customers
-              </h5>
-              <p>
-                Our customer service is second to none. We're here to help you with anything you need, from choosing the right products to troubleshooting technical issues.<br>
-              </p>
-            </div>
+          <div class="detail-box">
+            <h5>
+              Competitive prices
+            </h5>
+            <p>
+              At <b>MC Electronics and Electrics</b>, our mission is to provide our customers with the best possible
+              products and services at the most competitive prices.
+              We believe that our customers deserve to be treated fairly and honestly, and we are committed to providing
+              them with the highest level of customer service.<br>
+            </p>
           </div>
         </div>
-        <div class="btn-box">
-          <a href="index.html">
-            Homepage
-          </a>
+        <div class="box animate-on-scroll animate-zoom delay-200">
+          <div class="img-box">
+            <img src="images/w2.png" alt="Quality Product">
+          </div>
+          <div class="detail-box">
+            <h5>
+              Trust And Quality Product
+            </h5>
+            <p>
+              When you're looking for an electrics shop, it's important to choose one that you can trust. You need to
+              know that you're getting quality products and services, and that you're getting a fair price.<br>
+            </p>
+          </div>
+        </div>
+        <div class="box animate-on-scroll animate-zoom delay-300">
+          <div class="img-box">
+            <img src="images/w3.png" alt="">
+          </div>
+          <div class="detail-box">
+            <h5>
+              Wide selection of products
+            </h5>
+            <p>
+              We offer a wide range of products and services. We have everything from Conceal Pipe and Module Kits to
+              light bulbs and holder.<br>
+              We also offer a wide variety of electronics products, from Normal or Module Items and Conceal Wire or Pipe
+              to light bulbs and accessories.<br>
+              We have something for everyone, and we're always adding new products to our inventory.<br>
+
+            </p>
+          </div>
+        </div>
+        <div class="box animate-on-scroll animate-zoom delay-400">
+          <div class="img-box">
+            <img src="images/w4.png" alt="">
+          </div>
+          <div class="detail-box">
+            <h5>
+              Happy Customers
+            </h5>
+            <p>
+              Our customer service is second to none. We're here to help you with anything you need, from choosing the
+              right products to troubleshooting technical issues.<br>
+            </p>
+          </div>
         </div>
       </div>
-    </section>
-  
-    <!-- end why section -->
+      <div class="btn-box">
+        <a href="why.html">
+          Read More...
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- end why section -->
 
   <!-- team section -->
   <section class="team_section layout_padding">
@@ -562,10 +683,11 @@ We believe that our customers deserve to be treated fairly and honestly, and we 
                 <a href="https://www.youtube.com/@SumanChakrabortty8514">
                   <i class="fa fa-youtube-play" aria-hidden="true"></i>
                 </a>
-              
-        </div>
-      </div>
-    </div>
+
+              </div>
+            </div>
+          </div>
+
   </section>
   <!-- end team section -->
 
@@ -603,25 +725,28 @@ We believe that our customers deserve to be treated fairly and honestly, and we 
             <div class="contact_link_box">
               <p>Address:</p>
               <div class="gmap">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.143767942088!2d87.63039937477006!3d23.018492916481357!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f823602a61247d%3A0xdfc12bfb2f664e68!2sMC%20Electronics%20And%20Electrics!5e0!3m2!1sen!2sin!4v1736936820167!5m2!1sen!2sin" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.143767942088!2d87.63039937477006!3d23.018492916481357!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f823602a61247d%3A0xdfc12bfb2f664e68!2sMC%20Electronics%20And%20Electrics!5e0!3m2!1sen!2sin!4v1736936820167!5m2!1sen!2sin"
+                  width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"></iframe>
               </div>
               <a href="https://maps.app.goo.gl/HV7RY9NQ7MfNPcB58" target="_blank">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                 <span>
                   Karakberia,Karak Berya,
-				  Kotulpur,Bankura,WB,722141
+                  Kotulpur,Kotulpur,WB,722141
                 </span>
               </a>
               <a href="tel:+918926171789">
                 <i class="fa fa-phone" aria-hidden="true"></i>
                 <span>
-                 +918926171789
+                  +918926171789
                 </span>
               </a>
               <a href="mailto: electronics.mcaudio@gmail.com">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-				        Click To email
+                  Click To email
                 </span>
               </a>
             </div>
@@ -647,7 +772,9 @@ We believe that our customers deserve to be treated fairly and honestly, and we 
               <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Information About Us</span>
             </h4>
             <div style="text-align: center;">
-                <img src="images/logo-mc-electronics.png" style="max-width: 100%; height: auto; margin-bottom: 20px; background: rgba(255, 255, 255, 0.95); padding: 15px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);" alt="MC Electronics And Electrics">
+              <img src="images/logo-mc-electronics.png"
+                style="max-width: 100%; height: auto; margin-bottom: 20px; background: rgba(255, 255, 255, 0.95); padding: 15px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"
+                alt="MC Electronics And Electrics">
             </div>
             <p style="text-align: center; font-size: 0.95rem; line-height: 1.6;">
               <b>Mc Audio Karakberia</b> is a local Business and <b>Electronics And Electrics</b> is its subsidiary.
@@ -670,16 +797,16 @@ We believe that our customers deserve to be treated fairly and honestly, and we 
                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Services
               </a>
               <a class="" href="why.html">
-                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Why Us
+                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Why Us
               </a>
               <a class="" href="pay-us.html">
-                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Pay Us
+                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Pay Us
               </a>
               <a class="" href="team.html">
-                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Team
+                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Team
               </a>
               <a class="" href="./sitemaps/sitemap1.html">
-                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Sitemap
+                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Sitemap
               </a>
             </div>
           </div>
@@ -689,21 +816,21 @@ We believe that our customers deserve to be treated fairly and honestly, and we 
             <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Products</span>
           </h4>
           <div class="info_links">
-             <a href="catalogue.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Catalogue
-             </a>
-             <a href="repairing.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Repairing
-             </a>
-             <a href="recharge.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Recharge
-             </a>
-             <a href="recharge.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Bill Payment
-             </a>
-             <a href="https://mc-electronics.0-0-0.click/">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Billing POS
-             </a>
+            <a href="catalogue.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Catalogue
+            </a>
+            <a href="repairing.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Repairing
+            </a>
+            <a href="recharge.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Recharge
+            </a>
+            <a href="recharge.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Bill Payment
+            </a>
+            <a href="https://mc-electronics.0-0-0.click/">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Billing POS
+            </a>
           </div>
         </div>
         <div class="col-md-6 col-lg-2 info_col">
@@ -711,18 +838,21 @@ We believe that our customers deserve to be treated fairly and honestly, and we 
             <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Our Policy</span>
           </h4>
           <div class="info_links">
-             <a href="privacy.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Privacy
-             </a>
-             <a href="terms.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Terms
-             </a>
-             <a href="refund.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Refunds
-             </a>
+            <a href="pages/privacy.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Privacy
+            </a>
+            <a href="pages/terms.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Terms
+            </a>
+            <a href="pages/return.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Refunds
+            </a>
+            <a href="pages/contact.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Contact
+            </a>
           </div>
         </div>
-    </div>
+      </div>
   </section>
 
   <!-- end info section -->
@@ -731,9 +861,11 @@ We believe that our customers deserve to be treated fairly and honestly, and we 
   <section class="footer_section" style="padding: 5px 0; background-color: #ffffff;">
     <div class="container">
       <p style="margin: 0; padding: 0; line-height: 1.2; font-size: 0.9rem;">
-        &copy; <span id="displayYear"></span> <a href="http://mc-audio-karakberia.web.app/" target="_blank"><b>Mc Audio</b></a> All Rights Reserved.
+        &copy; <span id="displayYear"></span> <a href="http://mc-audio-karakberia.web.app/" target="_blank"><b>Mc
+            Audio</b></a> All Rights Reserved.
         <br>
-        <span style="font-size: 11px; color: #666;">Site Designed and Maintained by <a href="https://sumanonline.com" target="_blank" style="color: #666; text-decoration: none; font-weight: bold;">SumanOnline</a></span>
+        <span style="font-size: 11px; color: #666;">Site Designed and Maintained by <a href="https://sumanonline.com"
+            target="_blank" style="color: #666; text-decoration: none; font-weight: bold;">SumanOnline</a></span>
       </p>
     </div>
   </section>
@@ -742,8 +874,9 @@ We believe that our customers deserve to be treated fairly and honestly, and we 
   <!-- jQery -->
   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
   <!-- popper js -->
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
   <!-- bootstrap js -->
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <!-- owl slider -->
@@ -752,7 +885,8 @@ We believe that our customers deserve to be treated fairly and honestly, and we 
   <!-- custom js -->
   <script type="text/javascript" src="js/custom.js"></script>
   <!-- WhatsApp Chat Button -->
-  <a href="https://wa.me/918926171789?text=I'm%20inquiring%20about%20the%20Mc%20Electronics%20And%20Electrics"class="whatsapp_float" target="_blank" rel="noopener noreferrer">
+  <a href="https://wa.me/918926171789?text=I'm%20inquiring%20about%20the%20Mc%20Electronics%20And%20Electrics"
+    class="whatsapp_float" target="_blank" rel="noopener noreferrer">
     <i class="fa fa-whatsapp my-float"></i>
   </a>
 
@@ -760,10 +894,10 @@ We believe that our customers deserve to be treated fairly and honestly, and we 
   <script src="js/reviews.js"></script>
   <!-- Animations -->
   <script src="js/animations.js"></script>
-  
+
   <!-- Navbar Auth Script -->
   <script type="module" src="js/navbar-auth.js"></script>
- 
+
 
 </body>
 

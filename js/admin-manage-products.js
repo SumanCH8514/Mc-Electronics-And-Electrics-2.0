@@ -2,7 +2,16 @@ import { initAdminAuth, db } from './admin-auth.js';
 import { collection, getDocs, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 // Initialize Auth
-initAdminAuth(fetchProducts);
+// Initialize Auth
+initAdminAuth(() => {
+    // Hide Loader
+    const loader = document.getElementById('page-loader');
+    if (loader) {
+        loader.style.opacity = '0';
+        setTimeout(() => loader.remove(), 500);
+    }
+    fetchProducts();
+});
 
 async function fetchProducts() {
     const tableBody = document.getElementById('productsTableBody');
@@ -10,14 +19,14 @@ async function fetchProducts() {
 
     try {
         tableBody.innerHTML = '<tr><td colspan="5" class="text-center">Loading...</td></tr>';
-        
+
         const querySnapshot = await getDocs(collection(db, "products"));
         let html = "";
-        
+
         querySnapshot.forEach((doc) => {
             const product = doc.data();
             const pid = doc.id;
-            const img = product.image || '../images/p1.png'; 
+            const img = product.image || '../images/p1.png';
 
             html += `
                 <tr>
@@ -43,9 +52,9 @@ async function fetchProducts() {
         });
 
         if (html === "") {
-             html = '<tr><td colspan="5" class="text-center">No products found</td></tr>';
+            html = '<tr><td colspan="5" class="text-center">No products found</td></tr>';
         }
-        
+
         tableBody.innerHTML = html;
 
     } catch (error) {

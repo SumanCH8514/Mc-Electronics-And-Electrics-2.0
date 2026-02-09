@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="Mc Electronics And Electrics , Mc Audio, Mc Electronics" />
+    <meta name="description" content="My Orders - Mc Electronics And Electrics" />
+    <meta name="author" content="Manoj Chakrabortty" />
+    <link rel="shortcut icon" href="../images/favcon.jpeg" type="">
+
+    <title>My Orders - Mc Electronics And Electrics</title>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- font awesome style -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles -->
+    <link href="../css/style.css" rel="stylesheet" />
+    <link href="../css/responsive.css" rel="stylesheet" />
+
+    <!-- Sidebar styles -->
+    <link href="../css/accounts-sidebar.css" rel="stylesheet" />
+
+    <style>
+        body {
+            background-color: #f4f7f6;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .dashboard_section {
+            padding: 40px 0;
+        }
+
+        /* Order Container */
+        .page-header {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-header h3 {
+            font-weight: 700;
+            color: #00204a;
+            margin: 0;
+        }
+
+        /* Order Card Styles */
+        .order-card {
+            background: #fff;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: none;
+        }
+
+        .order-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Order Header */
+        .order-header {
+            background: #f8f9fa;
+            padding: 20px 25px;
+            border-bottom: 1px solid #edf1f3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .order-meta {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .order-meta strong {
+            color: #00204a;
+            font-weight: 600;
+        }
+
+        /* Status Badges */
+        .order-status {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            padding: 6px 14px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .status-pending {
+            background: #fff8e1;
+            color: #f57f17;
+            border: 1px solid #ffe0b2;
+        }
+
+        /* Processing / In Process - Yellow (Warning style like Cancelled but Yellow) */
+        .status-processing,
+        .status-in-process {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+
+        .status-accepted {
+            background: #e0f2f1;
+            color: #00695c;
+            border: 1px solid #b2dfdb;
+            /* Pastel Teal */
+        }
+
+        .status-shipped {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #bbdefb;
+        }
+
+        .status-transit {
+            background: #e0f7fa;
+            color: #006064;
+            border: 1px solid #b2ebf2;
+        }
+
+        .status-out-for-delivery {
+            background: #fff3cd;
+            color: #e65100;
+            border: 1px solid #ffecb3;
+        }
+
+        /* Delivered / Completed - Green */
+        .status-delivered,
+        .status-completed {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+
+        .status-cancelled {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ffcdd2;
+        }
+
+        /* Order Body */
+        .order-body {
+            padding: 25px 25px 5px 25px;
+        }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0px;
+            padding-bottom: 10px;
+        }
+
+        .item-img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            margin-right: 20px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .item-name a {
+            transition: color 0.2s;
+        }
+
+        .item-name a:hover {
+            color: #00bbf0 !important;
+            text-decoration: none !important;
+        }
+
+        .item-meta {
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        .item-total {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #00204a;
+            min-width: 80px;
+            text-align: right;
+        }
+
+        /* Order Footer */
+        .order-footer {
+            padding: 15px 25px;
+            background: #fafafa;
+            border-top: 1px solid #edf1f3;
+            text-align: right;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .order-total {
+            font-size: 1.1rem;
+            /* Slightly smaller than h4 */
+            font-weight: 700;
+            color: #00204a;
+            background: #fff;
+            padding: 8px 15px;
+            border-radius: 6px;
+            border: 1px solid #eee;
+        }
+
+        /* Empty State */
+        .no-orders {
+            text-align: center;
+            padding: 60px 20px;
+            color: #777;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .no-orders i {
+            color: #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        .no-orders h4 {
+            color: #00204a;
+            font-weight: 700;
+        }
+
+        /* Loading */
+        .loading-spinner {
+            color: #00bbf0;
+        }
+
+        @media (max-width: 768px) {
+            .order-header {
+                flex-direction: row;
+                /* Keep it in a row */
+                align-items: flex-start;
+                /* Align top */
+                padding: 15px;
+                /* Slightly less padding */
+            }
+
+            .order-meta {
+                font-size: 0.75rem;
+                /* Make Order ID & Date small */
+                max-width: 65%;
+                /* Ensure space for status */
+                word-wrap: break-word;
+            }
+
+            .order-status {
+                margin-top: 0;
+                /* Remove top margin */
+                font-size: 0.65rem;
+                /* Smaller status text */
+                padding: 4px 10px;
+            }
+
+            .item-img {
+                width: 50px;
+                height: 50px;
+                margin-right: 15px;
+            }
+
+            .item-name {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+
+</head>
+
+<body class="sub_page sidebar-layout">
+    <!-- Page Loader -->
+    <div id="page-loader"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffffff; z-index: 99999; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease;">
+        <i class="fa fa-spinner fa-spin" style="font-size: 3rem; color: #00bbf0;"></i>
+    </div>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h4>Mc Electronics</h4>
+            <small class="text-white-50">My Account</small>
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="dashboard.html">
+                    <i class="fa fa-tachometer"></i> Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="orders.html" class="active">
+                    <i class="fa fa-shopping-bag"></i> Orders
+                </a>
+            </li>
+            <li>
+                <a href="addresses.html">
+                    <i class="fa fa-map-marker"></i> Addresses
+                </a>
+            </li>
+            <li>
+                <a href="my-account.html">
+                    <i class="fa fa-user"></i> Account Details
+                </a>
+            </li>
+            <li>
+                <a href="../index.html">
+                    <i class="fa fa-home"></i> Back to Site
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="logout()" class="text-danger">
+                    <i class="fa fa-sign-out"></i> Logout
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content" id="content">
+
+        <!-- Topbar -->
+        <div class="topbar">
+            <div class="d-flex align-items-center">
+                <div class="toggle-btn mr-3" onclick="toggleSidebar()">
+                    <i class="fa fa-bars"></i>
+                </div>
+                <h4 class="m-0 text-dark">My Orders</h4>
+            </div>
+            <div class="user-profile">
+                <div class="mr-2 text-right d-none d-md-block">
+                    <span id="userDisplayNameHeader" style="font-weight: 600; color: #333;">User</span>
+                    <small class="d-block text-muted">Customer</small>
+                </div>
+                <img src="../images/client1.gif" alt="User" id="userImg" style="object-fit: cover;">
+            </div>
+        </div>
+
+        <section class="dashboard_section">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-10 mx-auto">
+                        <!-- Orders Container -->
+                        <div id="ordersContainer">
+                            <!-- Loading State -->
+                            <div class="text-center" style="padding: 50px;">
+                                <i class="fa fa-circle-o-notch fa-spin fa-3x loading-spinner"></i>
+                                <p class="mt-3 text-muted">Loading your orders...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- footer section -->
+        <section class="footer_section mt-auto"
+            style="padding: 20px 0; background-color: #fff; border-top: 1px solid #eee;">
+            <div class="container-fluid">
+                <p class="text-center" style="margin: 0; padding: 0; line-height: 1.2; font-size: 0.9rem; color: #666;">
+                    &copy; <span id="displayYear"></span> <a href="http://mc-audio-karakberia.web.app/" target="_blank"
+                        style="color: #00204a;"><b>Mc Audio</b></a> All Rights Reserved.
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Payment Upload Modal -->
+    <div class="modal fade" id="paymentUploadModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #00204a; color: white;">
+                    <h5 class="modal-title">Upload Payment Screenshot</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal"><span>&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="uploadOrderId">
+                    <div class="form-group">
+                        <label>Select Screenshot/Receipt</label>
+                        <input type="file" id="paymentFile" class="form-control-file" accept="image/*">
+                    </div>
+                    <p class="small text-muted">Please upload a clear image of your payment transaction.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" style="background-color: #00bbf0; border:none;"
+                        onclick="window.uploadPaymentProof()">Upload</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Payment Modal (For COD -> Pay Online) -->
+    <div class="modal fade" id="qrPaymentModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #00204a; color: white;">
+                    <h5 class="modal-title">Pay Online</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal"><span>&times;</span></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p class="font-weight-bold" id="qrPayAmount">Total: ₹0</p>
+                    <div class="p-3 border rounded mb-3 bg-light">
+                        <img id="qrCodeImage" src="" alt="QR Code" class="img-fluid border p-2 bg-white mb-2"
+                            style="width: 150px; height: 150px;">
+                        <p class="small font-weight-bold text-dark">UPI ID: 8514900224@upi</p>
+
+                        <a id="payExampleUpiBtn" href="#" class="btn btn-warning btn-block mb-2 font-weight-bold">
+                            <i class="fa fa-mobile mr-1"></i> Pay using UPI App
+                        </a>
+                    </div>
+                    <p class="small text-muted">After payment, please upload the screenshot proof.</p>
+                    <hr>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="paymentMadeCheckbox">
+                        <label class="form-check-label" for="paymentMadeCheckbox">
+                            Yes, I have made the payment
+                        </label>
+                    </div>
+                    <button id="confirmPaymentBtn" class="btn btn-success btn-block" disabled
+                        onclick="window.confirmOnlinePayment()">
+                        Proceed to Upload Proof
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+    <script type="text/javascript" src="../js/custom.js"></script>
+
+    <!-- Sidebar Logic -->
+    <script src="../js/accounts-sidebar.js"></script>
+
+    <!-- Orders Logic -->
+    <script type="module" src="../js/orders.js"></script>
+
+    <script type="module" src="../js/accounts-auth.js"></script>
+
+</body>
+
+</html>

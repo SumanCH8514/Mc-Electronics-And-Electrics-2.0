@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="../images/favcon.jpeg" type="image/jpeg">
+    <title>Site Settings - Mc Electronics Admin</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <!-- Font Awesome -->
+    <link href="../css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #00204a;
+            --accent-color: #00bbf0;
+            --bg-color: #f4f6f9;
+            --text-color: #333;
+            --sidebar-width: 250px;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar Styles (Same as Dashboard) */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--primary-color);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            color: #fff;
+            transition: all 0.3s;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        /* Sidebar Scrollbar */
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .sidebar-header h4 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0 0;
+        }
+
+        .sidebar-menu li {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 15px 20px;
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            color: #fff;
+            background-color: var(--accent-color);
+            padding-left: 25px;
+        }
+
+        .sidebar-menu i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        .topbar {
+            background-color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .toggle-btn {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+            display: none;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            text-align: right;
+        }
+
+        .user-info {
+            margin-right: 15px;
+        }
+
+        .user-name {
+            display: block;
+            font-weight: 500;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .user-role {
+            font-size: 0.85rem;
+            color: #888;
+            display: block;
+        }
+
+        .user-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-color);
+            padding: 2px;
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            color: #6c757d;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        /* Settings Specific Styles */
+        .settings-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .settings-group {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .settings-group:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .settings-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .settings-desc {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        /* Custom Switch */
+        .custom-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .custom-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: var(--accent-color);
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px var(--accent-color);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(26px);
+        }
+
+        .status-text {
+            margin-left: 15px;
+            font-weight: 500;
+            vertical-align: super;
+        }
+
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10000;
+            width: auto;
+            max-width: 90%;
+            /* Prevent overflow on very small screens */
+            white-space: nowrap;
+            /* Force single row */
+        }
+
+        .toast {
+            min-width: unset;
+            /* Allow it to shrink/grow based on content */
+        }
+
+        .toast-body {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                margin-left: -250px;
+            }
+
+            .sidebar.active {
+                margin-left: 0;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .toggle-btn {
+                display: block;
+            }
+
+            .settings-card {
+                padding: 15px;
+                /* Reduced padding on mobile */
+            }
+
+            .settings-title {
+                font-size: 1rem;
+                /* Slightly smaller font */
+                white-space: nowrap;
+                /* Force single row */
+            }
+
+            .settings-desc {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Page Loader -->
+    <div id="page-loader"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffffff; z-index: 99999; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease;">
+        <i class="fa fa-spinner fa-spin" style="font-size: 3rem; color: #00bbf0;"></i>
+    </div>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h4>Mc Electronics</h4>
+            <small>Admin Panel</small>
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="dashboard.html">
+                    <i class="fa fa-tachometer"></i> Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="manage-associates.html">
+                    <i class="fa fa-id-badge"></i> Associates
+                </a>
+            </li>
+            <li>
+                <a href="add-product.html">
+                    <i class="fa fa-plus-circle"></i> Add Product
+                </a>
+            </li>
+            <li>
+                <a href="manage-products.html">
+                    <i class="fa fa-list"></i> Manage Products
+                </a>
+            </li>
+            <li>
+                <a href="orders.html">
+                    <i class="fa fa-shopping-bag"></i> Manage Orders
+                </a>
+            </li>
+            <li>
+                <a href="manage-users.html">
+                    <i class="fa fa-users"></i> Manage Users
+                </a>
+            </li>
+            <li>
+                <a href="manage-metadata.html">
+                    <i class="fa fa-tags"></i> Categories
+                </a>
+            </li>
+            <li>
+                <a href="manage-db.html">
+                    <i class="fa fa-database"></i> Manage DB
+                </a>
+            </li>
+            <li>
+                <a href="track-order.html">
+                    <i class="fa fa-map-marker"></i> Track Order
+                </a>
+            </li>
+            <li>
+                <a href="settings.html" class="active">
+                    <i class="fa fa-cogs"></i> Settings
+                </a>
+            </li>
+            <li>
+                <a href="../index.html">
+                    <i class="fa fa-home"></i> Back to Site
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="logout()">
+                    <i class="fa fa-sign-out"></i> Logout
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content" id="content">
+        <!-- Topbar -->
+        <div class="topbar">
+            <div class="d-flex align-items-center">
+                <div class="toggle-btn mr-3 d-md-none"
+                    onclick="document.getElementById('sidebar').classList.toggle('active')"
+                    style="display: block; margin-bottom: 0; font-size: 1.2rem;">
+                    <i class="fa fa-bars"></i>
+                </div>
+                <h2 class="page-title">Site Settings</h2>
+            </div>
+
+            <div class="user-profile">
+                <div class="user-info d-none d-sm-block">
+                    <span class="user-name" id="adminName">Loading...</span>
+                    <span class="user-role">Administrator</span>
+                </div>
+                <!-- Default admin image, can be dynamic -->
+                <img src="../images/client1.gif" alt="Admin" class="user-img" id="adminImg">
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="settings-card">
+
+                        <!-- Maintenance Mode -->
+                        <div class="settings-group">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="settings-title"><i class="fa fa-wrench mr-2"></i> Maintenance Mode</div>
+                                    <div class="settings-desc">
+                                        Enable to show a "Under Maintenance" page to all non-admin users.
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="custom-switch">
+                                        <input type="checkbox" id="maintenanceToggle">
+                                        <span class="slider"></span>
+                                    </label>
+                                    <span class="status-text" id="maintenanceStatus">Off</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- User Registration -->
+                        <div class="settings-group">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="settings-title"><i class="fa fa-user-plus mr-2"></i> User Registration
+                                    </div>
+                                    <div class="settings-desc">
+                                        Allow new users to register. Turn off to temporarily stop sign-ups.
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="custom-switch">
+                                        <input type="checkbox" id="registrationToggle" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                    <span class="status-text" id="registrationStatus">On</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recaptcha -->
+                        <div class="settings-group">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="settings-title"><i class="fa fa-shield mr-2"></i> Google ReCaptcha</div>
+                                    <div class="settings-desc">
+                                        Enable ReCaptcha v3 on forms to prevent spam.
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="custom-switch">
+                                        <input type="checkbox" id="recaptchaToggle">
+                                        <span class="slider"></span>
+                                    </label>
+                                    <span class="status-text" id="recaptchaStatus">Off</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- WhatsApp Float Button -->
+                        <div class="settings-group">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="settings-title"><i class="fa fa-whatsapp mr-2"></i> WhatsApp Float
+                                        Button</div>
+                                    <div class="settings-desc">
+                                        Show or hide the floating WhatsApp chat button on the website.
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="custom-switch">
+                                        <input type="checkbox" id="whatsappToggle" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                    <span class="status-text" id="whatsappStatus">On</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Delivery Incentive -->
+                        <div class="settings-group">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="flex-grow-1">
+                                    <div class="settings-title"><i class="fa fa-rupee mr-2"></i> Delivery Incentive (Per
+                                        Order)</div>
+                                    <div class="settings-desc">
+                                        Amount paid to delivery associates for each successful delivery.
+                                    </div>
+                                </div>
+                                <div style="width: 200px;">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">₹</span>
+                                        </div>
+                                        <input type="number" class="form-control" id="deliveryIncentive"
+                                            placeholder="50" min="0" step="1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Store Cache (PWA) -->
+                        <div class="settings-group">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="settings-title"><i class="fa fa-hdd-o mr-2"></i> Store Cache (PWA)</div>
+                                    <div class="settings-desc">
+                                        Enable caching for offline access and faster updates. Turn off to force network
+                                        fetch.
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="custom-switch">
+                                        <input type="checkbox" id="cacheToggle" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                    <span class="status-text" id="cacheStatus">On</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-right mt-4">
+                            <button id="saveSettingsBtn" class="btn btn-primary px-4"
+                                style="background-color: var(--primary-color);">
+                                <i class="fa fa-save"></i> Save Changes
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Container -->
+        <div id="toastContainer" class="toast-container"></div>
+
+        <!-- Footer -->
+        <footer class="mt-5 text-center text-muted">
+            <p>&copy; 2026 Mc Electronics Admin Panel.</p>
+        </footer>
+
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
+        // Simple Toast Function
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast show align-items-center text-white bg-${type} border-0 mb-2`;
+            toast.role = 'alert';
+            toast.setAttribute('aria-live', 'assertive');
+            toast.setAttribute('aria-atomic', 'true');
+
+            toast.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">
+                        ${type === 'success' ? '<i class="fa fa-check-circle mr-2"></i>' : '<i class="fa fa-exclamation-circle mr-2"></i>'}
+                        ${message}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-dismiss="toast" aria-label="Close" onclick="this.parentElement.parentElement.remove()"></button>
+                </div>
+            `;
+
+            container.appendChild(toast);
+
+            // Auto remove
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+    </script>
+    <script src="../js/admin-sidebar.js"></script>
+
+    <!-- Auth & Logic -->
+    <!-- We need admin auth check (can reuse admin-dashboard logic or create new) -->
+    <!-- Let's create admin-settings.js which also handles auth check -->
+    <script type="module" src="../js/admin-settings.js"></script>
+
+</body>
+
+</html>

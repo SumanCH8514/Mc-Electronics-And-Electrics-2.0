@@ -21,11 +21,81 @@ service cloud.firestore {
     }
 
     // Users: Owner Read/Write OR Admin Read
+    // SECURITY HARDENING:
+    // 1. 'create': Allow anyone to create their own doc, but ONLY with default role 'user'
+    // 2. 'update': Allow owner to update own doc, but preventing changing 'role'
     match /users/{userId} {
       allow read: if request.auth != null && (request.auth.uid == userId || isAdmin());
-      allow write: if request.auth != null && (request.auth.uid == userId || isAdmin());
+      
+      allow create: if request.auth != null && request.auth.uid == userId
+                    && request.resource.data.role == 'user';
+                    
+      allow update: if request.auth != null && (request.auth.uid == userId || isAdmin())
+                    && (isAdmin() || request.resource.data.role == resource.data.role);
+
+      allow delete: if request.auth != null && request.auth.uid == userId;
+
+      // Allow users to manage their own cart
+      match /cart/{itemId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+      
+      // Allow users to manage their own addresses
+      match /addresses/{addressId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+
+      // Allow users to read and create orders
+      // Allow admins to read specific user orders
+      match /orders/{orderId} {
+        allow read: if request.auth != null && (request.auth.uid == userId || isAdmin());
+        allow create: if request.auth != null && request.auth.uid == userId;
+        // Allow admins to update status, AND allow users to update (e.g. for payment proof)
+        allow update: if request.auth != null && (request.auth.uid == userId || isAdmin());
+        allow delete: if isAdmin();
+      }
     }
     
+    // Orders Collection
+    match /orders/{orderId} {
+        // Admins can read all. 
+        // Users can create (dual-write strategy) but cannot list all.
+        // PUBLIC TRACKING: Allow anyone to read a single order if they know the ID
+        allow get: if true; 
+        allow list: if isAdmin();
+        
+        allow create: if request.auth != null; 
+        // Allow admins to update/delete. 
+        // Allow users to update their own orders (e.g. upload payment proof) checking userId field
+        allow update: if isAdmin() || (request.auth != null && (resource.data.userId == request.auth.uid || resource.data.deliveryAssignedTo == request.auth.uid));
+        allow delete: if isAdmin();
+    }
+    
+    // Associates Collection
+    // Associates can read/write their own profile
+    // Admins can read/write all associate profiles and subcollections
+    match /associates/{associateId} {
+      allow read, write: if (request.auth != null && request.auth.uid == associateId) || isAdmin();
+      
+      // Allow access to subcollections (like assignedOrders)
+      match /{document=**} {
+        allow read, write: if (request.auth != null && request.auth.uid == associateId) || isAdmin();
+      }
+    }
+    
+    // Settings Collection (Public Read, Admin Write)
+    match /settings/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Notifications Collection
+    match /notifications/{notificationId} {
+      allow read: if request.auth != null && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isAdmin();
+      allow update, delete: if request.auth != null && (resource.data.userId == request.auth.uid || isAdmin());
+    }
+
     // Default deny
     match /{document=**} {
       allow read, write: if false;

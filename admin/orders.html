@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="../images/favcon.jpeg" type="image/jpeg">
+    <title>Manage Orders - Mc Electronics</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <!-- Font Awesome -->
+    <link href="../css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #00204a;
+            /* Dark Blue */
+            --accent-color: #00bbf0;
+            /* Cyan */
+            --bg-color: #f4f6f9;
+            --text-color: #333;
+            --sidebar-width: 250px;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar & Main Layout (Copied from dashboard) */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--primary-color);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            color: #fff;
+            transition: all 0.3s;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        /* Sidebar Scrollbar */
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .sidebar-header h4 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0 0;
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 15px 20px;
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            color: #fff;
+            background-color: var(--accent-color);
+            padding-left: 25px;
+        }
+
+        .sidebar-menu i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        .topbar {
+            background-color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .toggle-btn {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+            display: none;
+        }
+
+        /* Table & Content */
+        .table-container {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow-x: auto;
+        }
+
+        .custom-table th {
+            border-top: none;
+            background-color: #f8f9fa;
+            color: var(--primary-color);
+        }
+
+        .order-filters .btn {
+            margin-right: 5px;
+            border-radius: 20px;
+        }
+
+        .order-filters .btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Status Badges */
+        .badge-pending {
+            background-color: #ffc107;
+            color: #333;
+        }
+
+        .badge-accepted {
+            background-color: #17a2b8;
+            color: #fff;
+        }
+
+        .badge-process {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .badge-delivered {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .badge-delivered {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .badge-transit {
+            background-color: #17a2b8;
+            color: #fff;
+        }
+
+        /* Teal/Info */
+        .badge-out-delivery {
+            background-color: #fd7e14;
+            color: #fff;
+        }
+
+        /* Orange */
+        .badge-cancelled {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        /* Modal */
+        .modal-content {
+            border-radius: 10px;
+            border: none;
+        }
+
+        .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .close {
+            color: white;
+            opacity: 0.8;
+        }
+
+        .close:hover {
+            opacity: 1;
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 20px;
+        }
+
+        /* Updated Topbar Style */
+        .topbar {
+            background-color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            color: #6c757d;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            text-align: right;
+        }
+
+        .user-info {
+            margin-right: 15px;
+        }
+
+        .user-name {
+            display: block;
+            font-weight: 500;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .user-role {
+            font-size: 0.85rem;
+            color: #888;
+            display: block;
+        }
+
+        .user-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-color);
+            padding: 2px;
+        }
+
+        .toggle-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                margin-left: -250px;
+            }
+
+            .sidebar.active {
+                margin-left: 0;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .toggle-btn {
+                display: block;
+            }
+
+            .topbar {
+                padding: 15px;
+            }
+
+            .page-title {
+                font-size: 1.2rem;
+                text-align: center;
+                flex-grow: 1;
+            }
+
+            .btn-qr-update {
+                display: block;
+                margin: 0 auto 15px auto;
+            }
+        }
+
+        /* Full Screen Modal Support */
+        .modal-fullscreen {
+            padding: 0 !important;
+        }
+
+        .modal-fullscreen .modal-dialog {
+            width: 100%;
+            max-width: none;
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-fullscreen .modal-content {
+            height: 100%;
+            border: 0;
+            border-radius: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-fullscreen .modal-body {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .modal-fullscreen .modal-footer {
+            flex-shrink: 0;
+        }
+
+        /* Checkbox Error Animation */
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-10px);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(10px);
+            }
+        }
+
+        .checkbox-error {
+            animation: shake 0.5s;
+        }
+
+        .checkbox-error label {
+            color: #dc3545 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Page Loader -->
+    <div id="page-loader"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffffff; z-index: 99999; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease;">
+        <i class="fa fa-spinner fa-spin" style="font-size: 3rem; color: #00bbf0;"></i>
+    </div>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h4>Mc Electronics</h4>
+            <small>Admin Panel</small>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html"><i class="fa fa-tachometer"></i> Dashboard</a></li>
+            <li>
+                <a href="manage-associates.html">
+                    <i class="fa fa-id-badge"></i> Associates
+                </a>
+            </li>
+            <li><a href="add-product.html"><i class="fa fa-plus-circle"></i> Add Product</a></li>
+            <li><a href="manage-products.html"><i class="fa fa-list"></i> Manage Products</a></li>
+            <li><a href="orders.html" class="active"><i class="fa fa-shopping-bag"></i> Orders</a></li>
+            <li><a href="manage-users.html"><i class="fa fa-users"></i> Manage Users</a></li>
+            <li><a href="manage-metadata.html"><i class="fa fa-tags"></i> Categories</a></li>
+            <li><a href="manage-db.html"><i class="fa fa-database"></i> Manage DB</a></li>
+            <li><a href="track-order.html"><i class="fa fa-map-marker"></i> Track Order</a></li>
+            <li>
+                <a href="settings.html">
+                    <i class="fa fa-cogs"></i> Settings
+                </a>
+            </li>
+            <li><a href="../index.html"><i class="fa fa-home"></i> Back to Site</a></li>
+            <li><a href="#" onclick="logout()"><i class="fa fa-sign-out"></i> Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content" id="content">
+        <!-- Topbar -->
+        <!-- New Topbar Layout -->
+        <div class="topbar">
+            <div class="d-flex align-items-center">
+                <div class="toggle-btn mr-3 d-md-none"
+                    onclick="document.getElementById('sidebar').classList.toggle('active')"
+                    style="display: block; margin-bottom: 0; font-size: 1.2rem;">
+                    <i class="fa fa-bars"></i>
+                </div>
+                <h2 class="page-title">Manage Orders</h2>
+            </div>
+
+            <div class="user-profile">
+                <div class="user-info d-none d-sm-block">
+                    <span class="user-name" id="adminName">Loading...</span>
+                    <!-- Using 'Administrator' as role, can be dynamic if needed -->
+                    <span class="user-role">Administrator</span>
+                </div>
+                <img src="../images/client1.gif" alt="Admin" class="user-img" id="adminImg">
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+            <!-- Desktop Filters -->
+            <div class="order-filters mb-2 d-none d-md-block" id="orderFilters">
+                <button class="btn btn-outline-secondary active" data-filter="all">All</button>
+                <button class="btn btn-outline-warning" data-filter="pending">Pending</button>
+                <button class="btn btn-outline-info" data-filter="accepted">Accepted</button>
+                <button class="btn btn-outline-primary" data-filter="process">In Process</button>
+                <button class="btn btn-outline-info" data-filter="transit">In Transit</button>
+                <button class="btn btn-outline-warning" data-filter="out-for-delivery">Out for Delivery</button>
+                <button class="btn btn-outline-success" data-filter="delivered">Delivered</button>
+                <button class="btn btn-outline-danger" data-filter="cancelled">Cancelled</button>
+            </div>
+
+            <!-- Qr Update Button -->
+            <button class="btn btn-dark btn-qr-update" onclick="handleQrUpdate()">
+                <i class="fa fa-qrcode"></i> Qr Update
+            </button>
+
+            <!-- Mobile Filters (Dropdown) -->
+            <div class="d-md-none mb-3 w-100">
+                <div class="dropdown">
+                    <button class="btn btn-primary btn-block dropdown-toggle" type="button" id="mobileFilterBtn"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-filter mr-2"></i> Orders Filter: All
+                    </button>
+                    <div class="dropdown-menu w-100" id="mobileFilterMenu" aria-labelledby="mobileFilterBtn">
+                        <a class="dropdown-item active" href="#" data-filter="all">All</a>
+                        <a class="dropdown-item" href="#" data-filter="pending">Pending</a>
+                        <a class="dropdown-item" href="#" data-filter="accepted">Accepted</a>
+                        <a class="dropdown-item" href="#" data-filter="process">In Process</a>
+                        <a class="dropdown-item" href="#" data-filter="transit">In Transit</a>
+                        <a class="dropdown-item" href="#" data-filter="out-for-delivery">Out for Delivery</a>
+                        <a class="dropdown-item" href="#" data-filter="delivered">Delivered</a>
+                        <a class="dropdown-item" href="#" data-filter="cancelled">Cancelled</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mb-2">
+            <!-- Search or Export could go here -->
+        </div>
+
+        <!-- Orders Table -->
+        <div class="table-container">
+            <table class="table custom-table table-hover">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Items</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="ordersTableBody">
+                    <tr>
+                        <td colspan="7" class="text-center">Loading...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- Order Details Modal -->
+    <div class="modal fade" id="orderModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Order Details: <span id="modalOrderId">...</span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <button class="btn btn-outline-primary btn-block mb-2" type="button" data-toggle="collapse"
+                            data-target="#customerDetailsCollapse" aria-expanded="false"
+                            aria-controls="customerDetailsCollapse">
+                            <i class="fa fa-user mr-1"></i> View Customer Details
+                        </button>
+                        <div class="collapse" id="customerDetailsCollapse">
+                            <div class="card card-body bg-light">
+                                <div id="modalCustomerDetailsContent" style="font-size: 0.95rem;">Loading...</div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <h6>Items</h6>
+                    <div id="modalItems" style="max-height: 300px; overflow-y: auto;">
+                        <!-- Items populated here -->
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="m-0">Total: <span id="modalTotal" class="text-primary font-weight-bold">...</span>
+                        </h5>
+                    </div>
+                    <hr>
+                    <div class="mb-3">
+                        <h6>Payment Details</h6>
+                        <div id="modalPaymentInfo" class="mb-2">...</div>
+
+                        <div id="paymentProofContainer" style="display: none;">
+                            <button class="btn btn-sm btn-info mb-2" type="button" data-toggle="collapse"
+                                data-target="#proofCollapse" aria-expanded="false" aria-controls="proofCollapse">
+                                <i class="fa fa-eye"></i> View Payment Proof
+                            </button>
+                            <div class="collapse" id="proofCollapse">
+                                <div class="card card-body bg-light">
+                                    <img id="paymentProofImg" src="" class="img-fluid border rounded mb-2"
+                                        alt="Payment Proof" style="max-height: 400px; object-fit: contain;">
+                                    <div>
+                                        <a id="paymentProofDownload" href="#" download="payment_proof.jpg"
+                                            class="btn btn-sm btn-dark" target="_blank">
+                                            <i class="fa fa-download"></i> Download Image
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <h6>Update Status</h6>
+                    <div class="form-group d-flex align-items-center">
+                        <select id="modalStatusSelect" class="form-control w-50 mr-2">
+                            <option value="pending">Pending</option>
+                            <option value="accepted">Accepted</option>
+                            <option value="process">In Process</option>
+                            <option value="transit">In Transit</option>
+                            <option value="out-for-delivery">Out for Delivery</option>
+                            <option value="delivered">Delivered</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                        <button id="updateStatusBtn" class="btn btn-success">Update Status</button>
+                        <button id="printLabelBtn" class="btn btn-secondary ml-2">
+                            <i class="fa fa-print"></i> Print Label
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-5 text-center text-muted">
+        <p>&copy; 2026 Mc Electronics Admin Panel.</p>
+    </footer>
+
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Scripts -->
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+        // Logout helper (global scope check)
+        window.logout = function () {
+            // This will be handled by admin-auth module export but for safety:
+            window.location.href = "../index.html";
+        }
+    </script>
+    <script src="../js/admin-sidebar.js"></script>
+
+    <!-- Logic -->
+    <!-- html5-qrcode -->
+    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+    <script src="../js/admin-orders.js" type="module"></script>
+
+    <!-- QR Scanner Modal -->
+    <div class="modal fade" id="qrScannerModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Scan QR to Update Order</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        onclick="stopQrScanner()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <div id="qr-reader" style="width: 100%;"></div>
+                    <p class="mt-3 text-muted">Point camera at the "Scan to Update" QR Code.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Delivery Verification Modal -->
+    <div class="modal fade modal-fullscreen" id="deliveryVerificationModal" tabindex="-1" role="dialog"
+        aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title"><i class="fa fa-check-circle"></i> Order Verified</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body d-flex flex-column justify-content-start align-items-center text-center"
+                    style="padding: 15px; overflow-y: auto;">
+
+                    <!-- Product Images -->
+                    <div id="dvProductImages" class="d-flex justify-content-center mb-3"
+                        style="gap: 10px; flex-wrap: wrap; max-height: 150px; overflow: hidden;">
+                        <!-- Images populated by JS -->
+                    </div>
+
+                    <!-- Customer Name Card -->
+                    <div class="card w-100 mb-2" style="max-width: 500px;">
+                        <div class="card-body py-2">
+                            <h6 class="text-muted mb-1">Customer Name</h6>
+                            <h5 id="dvCustomerName" class="font-weight-bold text-dark mb-0">Customer Name</h5>
+                        </div>
+                    </div>
+
+                    <div class="card w-100 mb-2" style="max-width: 500px;">
+                        <div class="card-body py-2">
+                            <h6 class="text-muted mb-1">Order ID</h6>
+                            <h5 id="dvOrderId" class="font-weight-bold text-dark mb-0">#123456...</h5>
+                        </div>
+                    </div>
+
+                    <div class="card w-100 mb-3" style="max-width: 500px;">
+                        <div class="card-body py-2">
+                            <h6 class="text-muted mb-1">Payment Status</h6>
+                            <h3 id="dvPaymentStatus" class="font-weight-bold mb-0">PREPAID</h3>
+                            <div id="dvCodAmountWrapper" style="display: none;">
+                                <hr class="my-2">
+                                <h6 class="text-danger mb-1">COD Collect Amount</h6>
+                                <h2 id="dvCodAmount" class="font-weight-bold text-danger mb-0">₹0</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Modal Footer with Button -->
+                <div class="modal-footer"
+                    style="border-top: 2px solid #ddd; padding: 15px; background: #f8f9fa; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                    <!-- COD Payment Confirmation Checkbox -->
+                    <div id="dvCodConfirmWrapper" class="mb-2" style="display: none; max-width: 500px; width: 100%;">
+                        <div class="custom-control custom-checkbox text-center">
+                            <input type="checkbox" class="custom-control-input" id="dvCodConfirmCheck">
+                            <label class="custom-control-label" for="dvCodConfirmCheck"
+                                style="font-size: 0.9rem; color: #333; font-weight: 500;">
+                                Confirm that you have collected payment from customer
+                            </label>
+                        </div>
+                    </div>
+
+                    <button id="dvUpdateBtn" class="btn btn-success btn-lg"
+                        style="height: 55px; font-size: 1.3rem; margin: 0; max-width: 500px; width: 100%;">
+                        <i class="fa fa-truck"></i> Update Delivery
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <link rel="shortcut icon" href="../images/favcon.jpeg" type="">
+    <title>Addresses - Mc Electronics</title>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- font awesome style -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles -->
+    <link href="../css/style.css" rel="stylesheet" />
+    <link href="../css/responsive.css" rel="stylesheet" />
+
+    <!-- Sidebar styles -->
+    <link href="../css/accounts-sidebar.css" rel="stylesheet" />
+
+    <style>
+        .dashboard_section {
+            padding: 30px 0;
+        }
+
+        .address-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            transition: box-shadow 0.3s;
+            background: #fff;
+        }
+
+        .address-card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .badge-type {
+            background: #f0f2f5;
+            color: #555;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-action {
+            font-size: 0.9rem;
+            color: #00bbf0;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
+        .btn-action:hover {
+            text-decoration: underline;
+        }
+
+        .btn-action.delete {
+            color: #dc3545;
+        }
+
+        /* Modal Form */
+        .form-group label {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 992px) {
+            .dashboard_section {
+                padding-top: 30px;
+            }
+        }
+    </style>
+
+</head>
+
+<body class="sub_page sidebar-layout">
+    <!-- Page Loader -->
+    <div id="page-loader"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffffff; z-index: 99999; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease;">
+        <i class="fa fa-spinner fa-spin" style="font-size: 3rem; color: #00bbf0;"></i>
+    </div>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h4>Mc Electronics</h4>
+            <small class="text-white-50">My Account</small>
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="dashboard.html">
+                    <i class="fa fa-tachometer"></i> Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="orders.html">
+                    <i class="fa fa-shopping-bag"></i> Orders
+                </a>
+            </li>
+            <li>
+                <a href="addresses.html" class="active">
+                    <i class="fa fa-map-marker"></i> Addresses
+                </a>
+            </li>
+            <li>
+                <a href="my-account.html">
+                    <i class="fa fa-user"></i> Account Details
+                </a>
+            </li>
+            <li>
+                <a href="../index.html">
+                    <i class="fa fa-home"></i> Back to Site
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="logout()" class="text-danger">
+                    <i class="fa fa-sign-out"></i> Logout
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content" id="content">
+
+        <!-- Topbar -->
+        <div class="topbar">
+            <div class="d-flex align-items-center">
+                <div class="toggle-btn mr-3" onclick="toggleSidebar()">
+                    <i class="fa fa-bars"></i>
+                </div>
+                <h4 class="m-0 text-dark">My Addresses</h4>
+            </div>
+            <div class="user-profile">
+                <div class="mr-2 text-right d-none d-md-block">
+                    <span id="userDisplayNameHeader" style="font-weight: 500; color: #333;">User</span>
+                    <small class="d-block text-muted">Customer</small>
+                </div>
+                <img src="../images/client1.gif" alt="User" id="userImg">
+            </div>
+        </div>
+
+        <!-- Dashboard section -->
+        <section class="dashboard_section">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <p class="m-0">Manage your shipping and billing addresses.</p>
+                            <button class="btn btn-primary" onclick="openAddressModal()"
+                                style="background-color: #00204a; border:none;">
+                                <i class="fa fa-plus"></i> Add New Address
+                            </button>
+                        </div>
+
+                        <div id="addressesList">
+                            <div class="text-center p-5">
+                                <i class="fa fa-spinner fa-spin fa-2x text-muted"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <section class="footer_section mt-auto"
+            style="padding: 15px 0; background-color: #fff; border-top: 1px solid #eee;">
+            <div class="container text-center">
+                <p class="m-0">&copy; <span id="displayYear"></span> Mc Electronics.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Add/Edit Address Modal -->
+    <div class="modal fade" id="addressModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #00204a; color: white;">
+                    <h5 class="modal-title" id="modalTitle">Add Address</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal"><span>&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addressForm">
+                        <input type="hidden" id="editAddressId">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <input type="text" class="form-control" id="addrName" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="text" class="form-control" id="addrPhone" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>House No., Building Name</label>
+                            <input type="text" class="form-control" id="addrLine1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Road Name, Area, Colony</label>
+                            <input type="text" class="form-control" id="addrLine2" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input type="text" class="form-control" id="addrCity" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>State</label>
+                                    <select class="form-control" id="addrState" required>
+                                        <option value="">Select State</option>
+                                        <option value="West Bengal">West Bengal</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Pincode</label>
+                                    <input type="text" class="form-control" id="addrPincode" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Address Type</label>
+                                    <div class="d-flex mt-2">
+                                        <div class="custom-control custom-radio mr-3">
+                                            <input type="radio" id="typeHome" name="addrType"
+                                                class="custom-control-input" value="Home" checked>
+                                            <label class="custom-control-label" for="typeHome">Home</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="typeWork" name="addrType"
+                                                class="custom-control-input" value="Work">
+                                            <label class="custom-control-label" for="typeWork">Work</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block mt-3"
+                            style="background-color: #00bbf0; border:none;">
+                            Save Address
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/custom.js"></script>
+
+    <!-- Sidebar Logic -->
+    <script src="../js/accounts-sidebar.js"></script>
+
+    <!-- Logic -->
+    <script type="module" src="../js/addresses.js"></script>
+
+    <script type="module" src="../js/accounts-auth.js"></script>
+
+</body>
+
+</html>

@@ -1,28 +1,42 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, onAuthStateChanged, updateProfile, deleteUser, signOut, updatePassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getAuth, onAuthStateChanged, updateProfile, deleteUser, signOut, updatePassword, reauthenticateWithCredential, EmailAuthProvider, GoogleAuthProvider, reauthenticateWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 // REUSE CONFIG FROM firebase-auth.js (Ideally should be in a shared config file)
-const firebaseConfig = {
-  apiKey: "AIzaSyBunseGlJg3XiyXzKiepjyilYZ8n5Cl0lE",
-  authDomain: "mc-electronics.firebaseapp.com",
-  projectId: "mc-electronics",
-  storageBucket: "mc-electronics.firebasestorage.app",
-  messagingSenderId: "1021368016185",
-  appId: "1:1021368016185:web:2e0dfa85d55a4c92af9ce8",
-  measurementId: "G-LGB225ZZXM"
-};
+import firebaseConfig from "./firebase-config.js";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+// Helper: Safe Update User (Handles Create vs Update logic for Rules)
+async function safeUpdateUser(uid, dataToUpdate) {
+  const docRef = doc(db, "users", uid);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    // Document exists: Use updateDoc to avoid overwriting unrelated fields
+    // and to respect "allow update" rules (keeping existing role)
+    await updateDoc(docRef, dataToUpdate);
+  } else {
+    // Document missing: Must use setDoc and INCLUDE 'role: user' to pass "allow create" rules
+    // Also add createdAt
+    const newData = {
+      ...dataToUpdate,
+      role: 'user',
+      createdAt: new Date(),
+      emailVerified: true // Assuming they are verified if they are here
+    };
+    await setDoc(docRef, newData);
+  }
+}
+
 // AUTH GUARD & DATA LOADING
 onAuthStateChanged(auth, async (user) => {
   if (user) {
     // User is signed in.
-    console.log("Current User:", user.email);
-    
+    // console.log("Current User:", user.email);
+
     // Populate Basic Auth Data
     document.getElementById('profileName').value = user.displayName || "";
     document.getElementById('profileEmail').value = user.email || "";
@@ -39,7 +53,7 @@ onAuthStateChanged(auth, async (user) => {
         const data = docSnap.data();
         document.getElementById('profilePhone').value = data.phone || "";
         document.getElementById('profileAddress').value = data.address || "";
-        
+
         // Load Profile Photo from Firestore (Base64)
         if (data.photoURL) {
           document.getElementById('profileImage').src = data.photoURL;
@@ -64,7 +78,7 @@ if (fileInput) {
   fileInput.addEventListener('change', async (e) => {
     const file = e.target.files[0];
     const user = auth.currentUser;
-    
+
     if (!file || !user) return;
 
     // Limit file size to 550KB to prevent Firestore issues
@@ -75,7 +89,7 @@ if (fileInput) {
 
     try {
       const reader = new FileReader();
-      
+
       reader.onload = async (e) => {
         const base64String = e.target.result;
 
@@ -85,10 +99,10 @@ if (fileInput) {
         // 2. Save Base64 string to Firestore
         // Note: We skip updateProfile(photoURL) because it has a short character limit.
         // We rely on Firestore for the image source.
-        await setDoc(doc(db, "users", user.uid), {
+        await safeUpdateUser(user.uid, {
           photoURL: base64String,
           updatedAt: new Date()
-        }, { merge: true });
+        });
 
         alert("Profile photo updated successfully!");
       };
@@ -121,12 +135,12 @@ if (profileForm) {
       });
 
       // 2. Update Firestore Data (Merge to keep email/created props)
-      await setDoc(doc(db, "users", user.uid), {
+      await safeUpdateUser(user.uid, {
         displayName: name,
         phone: phone,
         address: address,
         updatedAt: new Date()
-      }, { merge: true });
+      });
 
       alert("Profile Updated Successfully!");
 
@@ -160,11 +174,11 @@ if (passwordForm) {
     } catch (error) {
       console.error("Error updating password:", error);
       if (error.code === 'auth/requires-recent-login') {
-         alert("Security Check: You need to re-login to change your password.");
-         // Optionally logout user to force re-login
-         await logout();
+        alert("Security Check: You need to re-login to change your password.");
+        // Optionally logout user to force re-login
+        await logout();
       } else {
-         alert("Failed to update password: " + error.message);
+        alert("Failed to update password: " + error.message);
       }
     }
   });
@@ -172,34 +186,75 @@ if (passwordForm) {
 
 
 // DELETE ACCOUNT
+// DELETE ACCOUNT
 window.deleteAccount = async () => {
-  if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
-    const user = auth.currentUser;
-    if (!user) return;
+  if (!confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+    return;
+  }
 
-    try {
-      // 1. Delete Firestore Data
-      await deleteDoc(doc(db, "users", user.uid));
+  const user = auth.currentUser;
+  if (!user) return;
 
-      // 2. Delete Auth User
-      await deleteUser(user);
+  try {
+    // 1. Delete Firestore Data first (while we still have permissions/auth)
+    // Note: If rules require auth, we must be logged in.
+    await deleteDoc(doc(db, "users", user.uid));
 
-      alert("Account deleted. We are sorry to see you go.");
-      window.location.href = "login.html";
+    // 2. Delete Auth User
+    await deleteUser(user);
 
-    } catch (error) {
-      console.error("Error deleting account:", error);
-      // Re-authentication might be needed if critical action fails
-      alert("Error: " + error.message + " (You may need to re-login to prove your identity before deleting)");
+    alert("Account deleted. We are sorry to see you go.");
+    window.location.href = "../auth/login.html";
+
+  } catch (error) {
+    console.error("Error deleting account:", error);
+
+    if (error.code === 'auth/requires-recent-login') {
+      try {
+        await handleReauth(user);
+        // Retry deletion after successful re-auth
+        await deleteDoc(doc(db, "users", user.uid)); // Retry doc delete just in case
+        await deleteUser(user);
+
+        alert("Account deleted successfully.");
+        window.location.href = "../auth/login.html";
+
+      } catch (reauthError) {
+        console.error("Re-auth failed:", reauthError);
+        alert("Authentication failed or cancelled. Account was not deleted.");
+      }
+    } else if (error.code === 'permission-denied') {
+      alert("Permission Error: Please ensure you are logged in correctly. If the issue persists, contact support.");
+    } else {
+      alert("Error: " + error.message);
     }
   }
 };
+
+// Helper: Handle Re-authentication
+async function handleReauth(user) {
+  // Check which provider the user used
+  const providerId = user.providerData[0]?.providerId;
+
+  if (providerId === 'google.com') {
+    const provider = new GoogleAuthProvider();
+    await reauthenticateWithPopup(user, provider);
+  } else if (providerId === 'password') {
+    const password = prompt("Please enter your password to confirm deletion:");
+    if (!password) throw new Error("Password required");
+
+    const credential = EmailAuthProvider.credential(user.email, password);
+    await reauthenticateWithCredential(user, credential);
+  } else {
+    throw new Error("Unsupported auth provider for automatic re-auth.");
+  }
+}
 
 // LOGOUT
 window.logout = async () => {
   try {
     await signOut(auth);
-    window.location.href = "../login.html";
+    window.location.href = "../auth/login.html";
   } catch (error) {
     console.error("Error signing out:", error);
   }

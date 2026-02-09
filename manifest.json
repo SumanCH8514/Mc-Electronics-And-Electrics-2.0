@@ -1,0 +1,20 @@
+{
+  "name": "Mc Electronics And Electrics",
+  "short_name": "Mc Electronics",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#00bbf0",
+  "icons": [
+    {
+      "src": "images/favcon.jpeg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "images/favcon.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

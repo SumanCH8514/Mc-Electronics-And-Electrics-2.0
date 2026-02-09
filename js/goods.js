@@ -1,21 +1,16 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, getDocs, query, orderBy, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBunseGlJg3XiyXzKiepjyilYZ8n5Cl0lE",
-  authDomain: "mc-electronics.firebaseapp.com",
-  projectId: "mc-electronics",
-  storageBucket: "mc-electronics.firebasestorage.app",
-  messagingSenderId: "1021368016185",
-  appId: "1:1021368016185:web:2e0dfa85d55a4c92af9ce8",
-  measurementId: "G-LGB225ZZXM"
-};
+import firebaseConfig from "./firebase-config.js";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 let allProducts = [];
 let activeCategory = "all";
+let currentPage = 1;
+const itemsPerPage = 8;
+let filteredProducts = [];
 
 // Element References
 const productsGrid = document.getElementById('productsGrid');
@@ -28,9 +23,9 @@ const categoryTabs = document.getElementById('categoryTabs');
 // Render Category Tabs
 async function renderCategoryTabs() {
     if (!categoryTabs) return;
-    
+
     let categories = [];
-    
+
     // 1. Try fetching from Metadata
     try {
         const docRef = doc(db, "metadata", "categories");
@@ -41,12 +36,12 @@ async function renderCategoryTabs() {
     } catch (error) {
         console.warn("Metadata fetch failed (likely permissions), falling back to product data:", error);
     }
-    
+
     // 2. Fallback: Extract from products if metadata failed or empty
     if (categories.length === 0 && allProducts.length > 0) {
         categories = [...new Set(allProducts.map(p => p.category).filter(c => c))];
     }
-    
+
     categories.sort();
 
     // 3. Render
@@ -59,9 +54,9 @@ async function renderCategoryTabs() {
     } else {
         // Still loading or actually empty? Check if products loaded
         if (allProducts.length === 0) {
-             categoryTabs.innerHTML = `<div class="cat-tab">Loading...</div>`;
+            categoryTabs.innerHTML = `<div class="cat-tab">Loading...</div>`;
         } else {
-             categoryTabs.innerHTML = `<div class="cat-tab active" data-category="all">All Products</div>`;
+            categoryTabs.innerHTML = `<div class="cat-tab active" data-category="all">All Products</div>`;
         }
     }
 }
@@ -69,11 +64,11 @@ async function renderCategoryTabs() {
 // Select Category (Global)
 window.selectCategory = (cat, tabElement) => {
     activeCategory = cat;
-    
+
     // UI Update
     document.querySelectorAll('.cat-tab').forEach(el => el.classList.remove('active'));
     tabElement.classList.add('active');
-    
+
     applyFilters();
 }
 
@@ -94,7 +89,7 @@ async function renderBrandFilters() {
     } catch (error) {
         console.warn("Brand metadata fetch failed, falling back:", error);
     }
-    
+
     // 2. Fallback: Extract from loaded products
     if (brands.length === 0 && allProducts.length > 0) {
         brands = [...new Set(allProducts.map(p => p.brand).filter(b => b))];
@@ -103,12 +98,12 @@ async function renderBrandFilters() {
     brands.sort();
 
     if (brands.length === 0) {
-         if (allProducts.length === 0) {
-             brandFiltersContainer.innerHTML = '<p class="text-muted"><small>Loading...</small></p>';
-         } else {
-             brandFiltersContainer.innerHTML = '<p class="text-muted"><small>No brands found</small></p>';
-         }
-         return;
+        if (allProducts.length === 0) {
+            brandFiltersContainer.innerHTML = '<p class="text-muted"><small>Loading...</small></p>';
+        } else {
+            brandFiltersContainer.innerHTML = '<p class="text-muted"><small>No brands found</small></p>';
+        }
+        return;
     }
 
     brandFiltersContainer.innerHTML = brands.map(brand => `
@@ -117,6 +112,17 @@ async function renderBrandFilters() {
             <label class="custom-control-label" for="brand${brand.replace(/\s+/g, '')}">${brand}</label>
         </div>
     `).join('');
+
+    // Also populate mobile brand filters
+    const mobileBrandFiltersContainer = document.getElementById('mobileBrandFilters');
+    if (mobileBrandFiltersContainer) {
+        mobileBrandFiltersContainer.innerHTML = brands.map(brand => `
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input brand-filter" id="mobileBrand${brand.replace(/\s+/g, '')}" value="${brand}">
+                <label class="custom-control-label" for="mobileBrand${brand.replace(/\s+/g, '')}">${brand}</label>
+            </div>
+        `).join('');
+    }
 
     // Re-attach event listeners
     document.querySelectorAll('.brand-filter').forEach(cb => {
@@ -130,7 +136,7 @@ async function fetchProducts() {
     try {
         const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
         const querySnapshot = await getDocs(q);
-        
+
         allProducts = [];
         querySnapshot.forEach((doc) => {
             allProducts.push({ id: doc.id, ...doc.data() });
@@ -138,7 +144,7 @@ async function fetchProducts() {
 
         renderBrandFilters(); // Re-run to use fallback if needed
         renderCategoryTabs(); // Re-run to use fallback if needed
-        renderProducts(allProducts);
+        applyFilters(); // Initial render with pagination
 
     } catch (error) {
         console.error("Error fetching products:", error);
@@ -155,8 +161,8 @@ function renderProducts(products) {
     }
 
     productsGrid.innerHTML = products.map(product => `
-        <div class="col-md-4 col-sm-6">
-            <div class="product-card">
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="product-card" onclick="window.location.href='product-details.html?id=${product.id}'" style="cursor: pointer;">
                 <div class="product-img-box">
                     <img src="${product.image || 'images/no-image.png'}" alt="${product.name}">
                 </div>
@@ -173,9 +179,17 @@ function renderProducts(products) {
                         ${product.description || ''}
                     </p>
 
-                    <button class="btn-add-cart" onclick="alert('Added to Cart (Demo)')">
-                        <i class="fa fa-shopping-cart"></i> Add to Cart
-                    </button>
+                    <div class="d-flex align-items-center justify-content-between mt-2" style="gap: 10px;">
+                        <a href="product-details.html?id=${product.id}" onclick="event.stopPropagation()" class="btn-view-details text-center" style="flex: 1; margin: 0;">
+                            <i class="fa fa-eye"></i> View Details
+                        </a>
+                        <button onclick="event.stopPropagation(); quickAddToCart('${product.id}', '${product.name.replace(/'/g, "\\'")}', ${product.price}, '${product.image || 'images/no-image.png'}')" 
+                                class="btn-quick-cart" 
+                                title="Add to Cart"
+                                style="width: 40px; height: 38px; border-radius: 50%; background: #00204a; border: none; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s;">
+                            <i class="fa fa-shopping-cart"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -194,8 +208,8 @@ function applyFilters() {
     // 1. Search (Name/Brand/Desc)
     const searchTerm = searchInput.value.toLowerCase().trim();
     if (searchTerm) {
-        filtered = filtered.filter(p => 
-            p.name.toLowerCase().includes(searchTerm) || 
+        filtered = filtered.filter(p =>
+            p.name.toLowerCase().includes(searchTerm) ||
             p.brand.toLowerCase().includes(searchTerm) ||
             (p.description && p.description.toLowerCase().includes(searchTerm))
         );
@@ -204,9 +218,9 @@ function applyFilters() {
     // 2. Brand Filter
     const brandCheckboxes = document.querySelectorAll('.brand-filter');
     const selectedBrands = Array.from(brandCheckboxes)
-                                .filter(cb => cb.checked)
-                                .map(cb => cb.value.toLowerCase());
-    
+        .filter(cb => cb.checked)
+        .map(cb => cb.value.toLowerCase());
+
     if (selectedBrands.length > 0) {
         filtered = filtered.filter(p => selectedBrands.includes(p.brand.toLowerCase()));
     }
@@ -222,7 +236,87 @@ function applyFilters() {
         filtered.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
     }
 
-    renderProducts(filtered);
+    filteredProducts = filtered;
+    renderPage(1);
+}
+
+// Pagination Logic
+function renderPage(page) {
+    currentPage = page;
+
+    // Calculate start and end index
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+
+    // Slice the data
+    const pageData = filteredProducts.slice(startIndex, endIndex);
+
+    // Render the sliced data
+    renderProducts(pageData);
+
+    // Update Pagination UI
+    updatePagination();
+}
+
+function updatePagination() {
+    const paginationContainer = document.getElementById('paginationContainer');
+    const paginationInfo = document.getElementById('paginationInfo');
+    const paginationControls = document.getElementById('paginationControls');
+
+    if (!paginationContainer || !paginationInfo || !paginationControls) return;
+
+    const totalItems = filteredProducts.length;
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    // Hide pagination if no items or only 1 page (optional, but requirements say "add pagination", usually good to show even if 1 page or hide. 
+    // Requirement says "8 products should be shown. add pagenation".
+    // If 0 items, hide. 
+    if (totalItems === 0) {
+        paginationContainer.style.display = 'none';
+        return;
+    }
+
+    paginationContainer.style.display = 'flex';
+    paginationInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+
+    let paginationHtml = '';
+
+    // Generate Page Numbers (Simplified: 1, 2, 3... or just simple list)
+    // Style request: "1 2 3 4 ... NEXT"
+
+    // Previous Button
+    if (currentPage > 1) {
+        paginationHtml += `<button class="page-link-custom page-link-prev" onclick="window.goToPage(${currentPage - 1})">PREVIOUS</button>`;
+    }
+
+    const maxVisibleButtons = 5; // adjust as needed
+    let startPage = Math.max(1, currentPage - 2);
+    let endPage = Math.min(totalPages, startPage + maxVisibleButtons - 1);
+
+    if (endPage - startPage < maxVisibleButtons - 1) {
+        startPage = Math.max(1, endPage - maxVisibleButtons + 1);
+    }
+
+    // Previous Button (optional, but good for UX, style similar to Next)
+    // Request image shows: (1) 2 3 ... NEXT. Implicitly "1" is current.
+
+    for (let i = startPage; i <= endPage; i++) {
+        const activeClass = i === currentPage ? 'active' : '';
+        paginationHtml += `<button class="page-link-custom ${activeClass}" onclick="window.goToPage(${i})">${i}</button>`;
+    }
+
+    // Next Button
+    if (currentPage < totalPages) {
+        paginationHtml += `<button class="page-link-custom page-link-next" onclick="window.goToPage(${currentPage + 1})">NEXT</button>`;
+    }
+
+    paginationControls.innerHTML = paginationHtml;
+}
+
+window.goToPage = (page) => {
+    renderPage(page);
+    // Scroll to top of grid
+    document.getElementById('productsGrid').scrollIntoView({ behavior: 'smooth' });
 }
 
 // Event Listeners
@@ -238,6 +332,48 @@ if (sortSelect) {
 brandFilters.forEach(cb => {
     cb.addEventListener('change', applyFilters);
 });
+
+// Quick Add to Cart Function
+window.quickAddToCart = async (productId, productName, productPrice, productImage) => {
+    // Import Firebase modules dynamically
+    const { getAuth } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js");
+    const { doc, setDoc, getDoc } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
+
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
+
+    if (!currentUser) {
+        alert("Please login to add items to cart");
+        window.location.href = "auth/login.html";
+        return;
+    }
+
+    try {
+        const cartItemRef = doc(db, 'users', currentUser.uid, 'cart', productId);
+        const docSnap = await getDoc(cartItemRef);
+
+        let newQty = 1;
+        if (docSnap.exists()) {
+            newQty = docSnap.data().quantity + 1;
+        }
+
+        await setDoc(cartItemRef, {
+            productId: productId,
+            name: productName,
+            price: productPrice,
+            image: productImage,
+            quantity: newQty,
+            updatedAt: new Date()
+        }, { merge: true });
+
+        // Visual feedback
+        alert(`${productName} added to cart!`);
+
+    } catch (error) {
+        console.error("Error adding to cart:", error);
+        alert("Error adding item to cart. Please try again.");
+    }
+};
 
 // Initialize
 renderCategoryTabs();

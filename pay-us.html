@@ -22,7 +22,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
   <!--owl slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 
   <!-- font awesome style -->
   <link href="css/font-awesome.min.css" rel="stylesheet" />
@@ -54,38 +55,50 @@
             </span>
           </a>
 
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class=""> </span>
           </button>
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-lg-none sidebar-header">
+
+              <h5 class="mb-0">Mc Electronics</h5>
+              <p class="small text-muted mb-0" style="font-size: 0.7rem; letter-spacing: 1px;">MENU</p>
+              <div id="mobileProfileWrapper" class="mt-3"></div>
+            </div>
             <ul class="navbar-nav  ">
-              <li class="nav-item ">
-                <a class="nav-link" href="index.html">Home </a>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-100">
+                <a class="nav-link" href="index.html"><i class="fa fa-home"></i> Home </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="about.html"> About</a>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-200">
+                <a class="nav-link" href="about.html"><i class="fa fa-info-circle"></i> About</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="service.html">Services</a>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-300">
+                <a class="nav-link" href="catalogue.html"><i class="fa fa-shopping-bag"></i> Products</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="why.html">Why Us </a>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-400">
+                <a class="nav-link" href="service.html"><i class="fa fa-wrench"></i> Services</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="team.html">Team</a>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-100">
+                <a class="nav-link" href="why.html"><i class="fa fa-question-circle"></i> Why Us</a>
               </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="pay-us.html">Pay <span class="sr-only">(current)</span> </a>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-200">
+                <a class="nav-link" href="team.html"><i class="fa fa-users"></i> Team</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="login.html"> <i class="fa fa-user" aria-hidden="true"></i> Login</a>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-300">
+                <a class="nav-link" href="pay-us.html"><i class="fa fa-credit-card"></i> Pay</a>
               </li>
-              <form class="form-inline">
-                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-              </form>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-400">
+                <a class="nav-link" href="https://mc-electronics.0-0-0.click/"> <i class="	fa fa-desktop"></i> POS</a>
+              </li>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-100">
+                <a class="nav-link" href="auth/login.html" id="loginLink"> <i class="fa fa-user" aria-hidden="true"></i>
+                  Login</a>
+              </li>
+              <!-- <li class="nav-item animate-on-scroll animate-fade-up delay-200" id="adminNavItem" style="display: none;">
+                <a class="nav-link" href="admin/dashboard.html"> <i class="fa fa-lock"></i> Admin Panel</a>
+              </li> -->
             </ul>
           </div>
         </nav>
@@ -103,23 +116,40 @@
           <!-- <h2 style="text-decoration: underline;">
             Payment via <span>Gateway</span>
           </h2> -->
-          
 
-      </div>
+
+        </div>
         <br>
         <hr>
         <div class="heading_container heading_center">
-           <h2>
+          <h2>
             Pay <span>Online</span>
           </h2>
         </div>
         <div class="box" style="text-align: center; margin-top: 20px;">
           <div style="margin-bottom: 20px;">
             <label for="upiAmount" style="font-weight: bold; margin-right: 10px;">Enter Amount:</label>
-            <input type="number" id="upiAmount" placeholder="Ex: ₹500" style="padding: 10px; border: 1px solid #ccc; border-radius: 5px; width: 200px;">
+            <input type="number" id="upiAmount" placeholder="Ex: ₹500"
+              style="padding: 10px; border: 1px solid #ccc; border-radius: 5px; width: 200px;">
           </div>
-          <a href="upi://pay?pa=BHARATPE.0104536625@indus&pn=MANOJ CHAKRABORTTY&cu=INR&tn=Pay To MANOJ CHAKRABORTTY" id="__UPI_BUTTON__" style="background: #ff912f;border: 2px solid #8a4100;padding: 10px;text-decoration: none;color: white;font-size: larger;border-radius: 10px;">Pay using UPI</a>
-          <p style="margin-top: 15px; color: #666; font-size: 14px;">(Note: This button works on mobile devices with UPI apps installed)</p>
+
+          <div class="btn-group"
+            style="display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
+            <button id="payUpiBtn"
+              style="background: #ff912f; border: none; padding: 10px 20px; color: white; font-size: 16px; border-radius: 5px; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+              <i class="fa fa-mobile" style="font-size: 20px;"></i> Pay using UPI
+            </button>
+            <button id="payQrBtn"
+              style="background: #00bbf0; border: none; padding: 10px 20px; color: white; font-size: 16px; border-radius: 5px; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+              <i class="fa fa-qrcode" style="font-size: 20px;"></i> Pay using QR
+            </button>
+          </div>
+
+          <!-- Dynamic QR Code Section -->
+          <!-- Removed inline container in favor of Modal -->
+
+          <p style="margin-top: 15px; color: #666; font-size: 14px;">(Note: 'Pay using UPI' opens your UPI app directly
+            on mobile)</p>
         </div>
         <br>
         <hr>
@@ -136,7 +166,7 @@
               <div class="detail-box">
                 <h5>
                   Gpay Merchant Qr Code
-                </h5>          
+                </h5>
               </div>
             </div>
           </div>
@@ -147,12 +177,12 @@
               </div>
               <div class="detail-box">
                 <h5>
-                 PhonePe Merchant Qr Code
+                  PhonePe Merchant Qr Code
                 </h5>
               </div>
             </div>
           </div>
-          
+
           <div class="col-md-4 ">
             <div class="box qr-box">
               <div class="img-box">
@@ -168,29 +198,55 @@
         </div>
         <br>
         <hr>
-        <div class="heading_container heading_center" style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+        <div class="heading_container heading_center"
+          style="display: flex; justify-content: center; align-items: center; gap: 10px;">
           <h2 style="margin: 0;">
-          Bank <span>Account</span>
+            Bank <span>Account</span>
           </h2>
           <button id="toggleBankDetails" class="toggle-btn">Show Details</button>
         </div>
         <div class="" id="bankDetailsContainer" style="display: none;">
           <div class="box ">
-        <p>
-           1. <b>Account Holder Name:</b> Manoj Chakrabortty<br>
-           2. <b>Account Number:</b> 916294128631 <br>
-           3. <b>Bank Name:</b> Paytm Payments Bank <br>
-           4. <b>IFSC Code:</b> PYTM0123456 <br>
-          </p>
+            <p>
+              1. <b>Account Holder Name:</b> Manoj Chakrabortty<br>
+              2. <b>Account Number:</b> 916294128631 <br>
+              3. <b>Bank Name:</b> Paytm Payments Bank <br>
+              4. <b>IFSC Code:</b> PYTM0123456 <br>
+            </p>
           </div>
         </div>
+
+        <!-- UPI QR Modal -->
+        <div class="modal fade" id="qrModal" tabindex="-1" role="dialog" aria-labelledby="qrModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="text-align: center;">
+              <div class="modal-header">
+                <h5 class="modal-title" id="qrModalLabel">Scan to Pay MC Electronics</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <img id="upiQrCode" src="" alt="UPI QR Code" style="width: 250px; height: 250px; margin-bottom: 15px;">
+                <br>
+                <a id="downloadQrBtn" href="#" download="upi_qr_code.png" class="btn btn-dark"
+                  style="background-color: #343a40; color: white;">
+                  <i class="fa fa-download"></i> Download QR
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <script>
-          document.addEventListener('DOMContentLoaded', function() {
+          document.addEventListener('DOMContentLoaded', function () {
+            // Bank Details Toggle
             const toggleBtn = document.getElementById('toggleBankDetails');
             const detailsContainer = document.getElementById('bankDetailsContainer');
 
             if (toggleBtn && detailsContainer) {
-              toggleBtn.addEventListener('click', function() {
+              toggleBtn.addEventListener('click', function () {
                 if (detailsContainer.style.display === 'none') {
                   detailsContainer.style.display = 'block';
                   toggleBtn.innerText = 'Hide Details';
@@ -200,11 +256,70 @@
                 }
               });
             }
+
+            // Pay Online Logic
+            const amountInput = document.getElementById('upiAmount');
+            const payUpiBtn = document.getElementById('payUpiBtn');
+            const payQrBtn = document.getElementById('payQrBtn');
+            const qrCodeImg = document.getElementById('upiQrCode');
+            const downloadQrBtn = document.getElementById('downloadQrBtn');
+
+            // Base UPI parameters
+            const baseParams = "pa=BHARATPE.0104536625@indus&pn=MANOJ CHAKRABORTTY&cu=INR&tn=Payment to Mc Electronics";
+
+            function getFinalUrl(amount) {
+              let url = "upi://pay?" + baseParams;
+              if (amount && amount > 0) {
+                url += "&am=" + amount;
+              }
+              return url;
+            }
+
+            if (payUpiBtn) {
+              payUpiBtn.addEventListener('click', function () {
+                const amount = amountInput.value;
+                if (!amount || amount <= 0) {
+                  alert("Please enter a valid amount");
+                  return;
+                }
+                const finalUrl = getFinalUrl(amount);
+                window.location.href = finalUrl;
+              });
+            }
+
+            if (payQrBtn) {
+              payQrBtn.addEventListener('click', function () {
+                const amount = amountInput.value;
+                if (!amount || amount <= 0) {
+                  alert("Please enter a valid amount");
+                  return;
+                }
+                const finalUrl = getFinalUrl(amount);
+                const qrApiUrl = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(finalUrl);
+
+                qrCodeImg.src = qrApiUrl;
+                // Show Modal using jQuery (since Bootstrap 4 depends on it)
+                $('#qrModal').modal('show');
+
+                fetch(qrApiUrl)
+                  .then(response => response.blob())
+                  .then(blob => {
+                    const objectUrl = URL.createObjectURL(blob);
+                    downloadQrBtn.href = objectUrl;
+                  })
+                  .catch(e => {
+                    console.error('QR download preparation failed', e);
+                    downloadQrBtn.href = qrApiUrl;
+                    downloadQrBtn.target = "_blank";
+                  });
+              });
+            }
           });
         </script>
         <br>
         <hr>
-        <div class="btn-box" style="display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 20px;">
+        <div class="btn-box"
+          style="display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 20px;">
           <a href="index.html" style="margin: 0;">
             Homepage
           </a>
@@ -212,9 +327,8 @@
             SumanRchargeService
           </a>
         </div>
-    </div>
+      </div>
   </section>
-
 
   <!-- end Pay section -->
 
@@ -231,7 +345,10 @@
             <div class="contact_link_box">
               <p>Address:</p>
               <div class="gmap">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.143767942088!2d87.63039937477006!3d23.018492916481357!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f823602a61247d%3A0xdfc12bfb2f664e68!2sMC%20Electronics%20And%20Electrics!5e0!3m2!1sen!2sin!4v1736936820167!5m2!1sen!2sin" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.143767942088!2d87.63039937477006!3d23.018492916481357!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f823602a61247d%3A0xdfc12bfb2f664e68!2sMC%20Electronics%20And%20Electrics!5e0!3m2!1sen!2sin!4v1736936820167!5m2!1sen!2sin"
+                  width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"></iframe>
               </div>
               <a href="https://maps.app.goo.gl/HV7RY9NQ7MfNPcB58" target="_blank">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
@@ -243,7 +360,7 @@
               <a href="tel:+918926171789">
                 <i class="fa fa-phone" aria-hidden="true"></i>
                 <span>
-                 +918926171789
+                  +918926171789
                 </span>
               </a>
               <a href="mailto: electronics.mcaudio@gmail.com">
@@ -269,7 +386,9 @@
               <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Information About Us</span>
             </h4>
             <div style="text-align: center;">
-                <img src="images/logo-mc-electronics.png" style="max-width: 100%; height: auto; margin-bottom: 20px; background: rgba(255, 255, 255, 0.95); padding: 15px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);" alt="MC Electronics And Electrics">
+              <img src="images/logo-mc-electronics.png"
+                style="max-width: 100%; height: auto; margin-bottom: 20px; background: rgba(255, 255, 255, 0.95); padding: 15px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"
+                alt="MC Electronics And Electrics">
             </div>
             <p style="text-align: center; font-size: 0.95rem; line-height: 1.6;">
               <b>Mc Audio Karakberia</b> is a local Business and <b>Electronics And Electrics</b> is its subsidiary.
@@ -292,16 +411,16 @@
                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Services
               </a>
               <a class="" href="why.html">
-                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Why Us
+                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Why Us
               </a>
               <a class="" href="pay-us.html">
-                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Pay Us
+                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Pay Us
               </a>
               <a class="" href="team.html">
-                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Team
+                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Team
               </a>
               <a class="" href="./sitemaps/sitemap1.html">
-                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Sitemap
+                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Sitemap
               </a>
             </div>
           </div>
@@ -311,21 +430,21 @@
             <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Products</span>
           </h4>
           <div class="info_links">
-             <a href="catalogue.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Catalogue
-             </a>
-             <a href="repairing.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Repairing
-             </a>
-             <a href="recharge.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Recharge
-             </a>
-             <a href="recharge.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Bill Payment
-             </a>
-             <a href="https://mc-electronics.0-0-0.click/">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Billing POS
-             </a>
+            <a href="catalogue.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Catalogue
+            </a>
+            <a href="repairing.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Repairing
+            </a>
+            <a href="recharge.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Recharge
+            </a>
+            <a href="recharge.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Bill Payment
+            </a>
+            <a href="https://mc-electronics.0-0-0.click/">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Billing POS
+            </a>
           </div>
         </div>
         <div class="col-md-6 col-lg-2 info_col">
@@ -333,29 +452,33 @@
             <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Our Policy</span>
           </h4>
           <div class="info_links">
-             <a href="privacy.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Privacy
-             </a>
-             <a href="terms.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Terms
-             </a>
-             <a href="refund.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Refunds
-             </a>
+            <a href="pages/privacy.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Privacy
+            </a>
+            <a href="pages/terms.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Terms
+            </a>
+            <a href="pages/return.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Refunds
+            </a>
+            <a href="pages/contact.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Contact
+            </a>
           </div>
         </div>
-    </div>
+      </div>
   </section>
-
   <!-- end info section -->
 
   <!-- footer section -->
   <section class="footer_section" style="padding: 5px 0; background-color: #ffffff;">
     <div class="container">
       <p style="margin: 0; padding: 0; line-height: 1.2; font-size: 0.9rem;">
-        &copy; <span id="displayYear"></span> <a href="http://mc-audio-karakberia.web.app/" target="_blank"><b>Mc Audio</b></a> All Rights Reserved.
+        &copy; <span id="displayYear"></span> <a href="http://mc-audio-karakberia.web.app/" target="_blank"><b>Mc
+            Audio</b></a> All Rights Reserved.
         <br>
-        <span style="font-size: 11px; color: #666;">Site Designed and Maintained by <a href="https://sumanonline.com" target="_blank" style="color: #666; text-decoration: none; font-weight: bold;">SumanOnline</a></span>
+        <span style="font-size: 11px; color: #666;">Site Designed and Maintained by <a href="https://sumanonline.com"
+            target="_blank" style="color: #666; text-decoration: none; font-weight: bold;">SumanOnline</a></span>
       </p>
     </div>
   </section>
@@ -365,8 +488,9 @@
   <!-- jQery -->
   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
   <!-- popper js -->
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
   <!-- bootstrap js -->
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <!-- owl slider -->
@@ -374,26 +498,10 @@
   </script>
   <!-- custom js -->
   <script type="text/javascript" src="js/custom.js"></script>
-  
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const amountInput = document.getElementById('upiAmount');
-      const upiButton = document.getElementById('__UPI_BUTTON__');
-      const baseLink = "upi://pay?pa=bharatpe.9k0pOr7i5d751829@fbpe&pn=MC ELECTRONICS AND ELECTRICS&cu=INR";
-
-      if (amountInput && upiButton) {
-        amountInput.addEventListener('input', function() {
-          const amount = this.value;
-          if (amount) {
-            upiButton.href = baseLink + "&am=" + amount;
-          } else {
-            upiButton.href = baseLink;
-          }
-        });
-      }
-    });
-  </script>
+  <!-- Animations -->
+  <script src="js/animations.js"></script>
+  <!-- Navbar Auth Script -->
+  <script type="module" src="js/navbar-auth.js"></script>
 </body>
 
 </html>

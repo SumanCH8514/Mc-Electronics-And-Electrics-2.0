@@ -2,391 +2,207 @@
 <html>
 
 <head>
-  <!-- Basic -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- Mobile Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Site Metas -->
-  <meta name="keywords" content="Mc Electronics And Electrics , Mc Audio, Mc Electronics" />
-  <meta name="description" content="Mc Electronics And Electrics, Mc Audio Karakberia" />
-  <meta name="author" content="Manoj Chakrabortty" />
-  <link rel="shortcut icon" href="../images/favcon.jpeg" type="">
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="Mc Electronics And Electrics , Mc Audio, Mc Electronics" />
+    <meta name="description" content="Mc Electronics And Electrics, Mc Audio Karakberia" />
+    <meta name="author" content="Manoj Chakrabortty" />
+    <link rel="shortcut icon" href="../images/favcon.jpeg" type="">
 
-  <title>Dashboard - Mc Electronics And Electrics</title>
+    <title>Dashboard - Mc Electronics And Electrics</title>
 
-  <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
 
-  <!-- fonts style -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
-  <!--owl slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <!--owl slider stylesheet -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 
-  <!-- font awesome style -->
-  <link href="../css/font-awesome.min.css" rel="stylesheet" />
+    <!-- font awesome style -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
-  <!-- Custom styles for this template -->
-  <link href="../css/style.css" rel="stylesheet" />
-  <!-- responsive style -->
-  <link href="../css/responsive.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="../css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="../css/responsive.css" rel="stylesheet" />
 
-  <style>
-    .dashboard_section {
-      padding: 120px 0 50px 0;
-    }
+    <!-- Sidebar styles -->
+    <link href="../css/accounts-sidebar.css" rel="stylesheet" />
 
-    .dashboard-sidebar .list-group-item {
-      border: none;
-      border-bottom: 1px solid #eee;
-      color: #333;
-      font-weight: 500;
-      transition: all 0.3s;
-      cursor: pointer;
-    }
-
-    .dashboard-sidebar .list-group-item:hover {
-      background-color: #f8f9fa;
-      color: #00bbf0;
-      padding-left: 25px;
-    }
-
-    .dashboard-sidebar .list-group-item.active {
-      background-color: #00bbf0; /* Project Primary Color */
-      border-color: #00bbf0;
-      color: white;
-    }
-    
-    .dashboard-sidebar .list-group-item.active:hover {
-        padding-left: 20px; /* Reset padding for active item */
-    }
-
-    .dashboard-content h3 {
-      color: #00204a; /* Project Secondary Color */
-      margin-bottom: 20px;
-    }
-
-    .dashboard-content p {
-      color: #666;
-      line-height: 1.6;
-    }
-
-    .dashboard-content a {
-      color: #00bbf0;
-      text-decoration: none;
-    }
-    
-    .dashboard-content a:hover {
-        text-decoration: underline;
-    }
-
-    /* Responsive Adjustments */
-    @media (max-width: 992px) {
-      .dashboard_section {
-        padding-top: 100px; /* Reduced padding but enough for fixed header */
-      }
-    }
-    
-    @media (max-width: 768px) {
-       .dashboard-sidebar {
-         margin-bottom: 30px; /* Spacing between sidebar and content on mobile */
-       }
-       
-       .dashboard-sidebar .list-group-item {
-         padding: 12px 15px; /* Slightly smaller padding */
-       }
-    }
-  </style>
 </head>
 
-<body class="sub_page">
-  <div class="hero_area">
-    <div class="hero_bg_box">
-      <div class="bg_img_box">
-        <img src="../images/hero-bg.png" alt="">
-      </div>
+<body class="sub_page sidebar-layout">
+    <!-- Page Loader -->
+    <div id="page-loader"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffffff; z-index: 99999; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease;">
+        <i class="fa fa-spinner fa-spin" style="font-size: 3rem; color: #00bbf0;"></i>
     </div>
 
-    <!-- header section strats -->
-    <header class="header_section">
-      <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="../index.html">
-            <span>
-              Mc Electronics And Electrics
-            </span>
-          </a>
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h4>Mc Electronics</h4>
+            <small class="text-white-50">My Account</small>
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="dashboard.html" class="active">
+                    <i class="fa fa-tachometer"></i> Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="orders.html">
+                    <i class="fa fa-shopping-bag"></i> Orders
+                </a>
+            </li>
+            <li>
+                <a href="addresses.html">
+                    <i class="fa fa-map-marker"></i> Addresses
+                </a>
+            </li>
+            <li>
+                <a href="my-account.html">
+                    <i class="fa fa-user"></i> Account Details
+                </a>
+            </li>
+            <li>
+                <a href="../index.html">
+                    <i class="fa fa-home"></i> Back to Site
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="logout()" class="text-danger">
+                    <i class="fa fa-sign-out"></i> Logout
+                </a>
+            </li>
+            <li id="adminSidebarItem" style="display: none;">
+                <a href="../admin/dashboard.html" class="text-warning">
+                    <i class="fa fa-lock"></i> Admin Panel
+                </a>
+            </li>
+            <li id="associateSidebarItem" style="display: none;">
+                <a href="../Associate/dashboard.html" class="text-info">
+                    <i class="fa fa-motorcycle"></i> Associate Panel
+                </a>
+            </li>
+        </ul>
+    </nav>
 
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class=""> </span>
-          </button>
+    <!-- Main Content -->
+    <div class="main-content" id="content">
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav  ">
-              <li class="nav-item ">
-                <a class="nav-link" href="../index.html">Home </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../about.html"> About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../service.html">Services</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../why.html">Why Us</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../team.html">Team</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../pay-us.html">Pay</a>
-              </li>
-               <li class="nav-item active">
-                <a class="nav-link" href="dashboard.html"> <i class="fa fa-user" aria-hidden="true"></i> My Account</a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-    </header>
-    <!-- end header section -->
-  </div>
-
-  <!-- Dashboard section -->
-  <section class="dashboard_section layout_padding">
-    <div class="container">
-      <div class="heading_container heading_center mb-5">
-        <h2>
-          My <span>Dashboard</span>
-        </h2>
-      </div>
-      <div class="row">
-        <!-- Sidebar -->
-        <div class="col-md-3 mb-4">
-          <div class="dashboard-sidebar">
-            <div class="list-group">
-              <a href="dashboard.html" class="list-group-item list-group-item-action active">
-                Dashboard
-              </a>
-              <a href="#" class="list-group-item list-group-item-action">Orders</a>
-              <a href="#" class="list-group-item list-group-item-action">Addresses</a>
-              <a href="my-account.html" class="list-group-item list-group-item-action">Account Details</a>
-              <button onclick="logout()" class="list-group-item list-group-item-action text-danger">Log Out</button>
+        <!-- Topbar -->
+        <div class="topbar">
+            <div class="d-flex align-items-center">
+                <div class="toggle-btn mr-3" onclick="toggleSidebar()">
+                    <i class="fa fa-bars"></i>
+                </div>
+                <h4 class="m-0 text-dark">My Dashboard</h4>
             </div>
-          </div>
+            <div class="user-profile">
+                <!-- Placeholder for user image if available, or just name -->
+                <div class="mr-2 text-right d-none d-md-block">
+                    <span id="userDisplayNameHeader" style="font-weight: 500; color: #333;">User</span>
+                    <small class="d-block text-muted">Customer</small>
+                </div>
+                <img src="../images/client1.gif" alt="User" id="userImg">
+            </div>
         </div>
 
-        <!-- Content -->
-        <div class="col-md-9">
-          <div class="dashboard-content">
-            <h3>Hello, <span id="userDisplayName">User</span>!</h3>
-            <p>
-              (not <span id="userDisplayNameSmall">User</span>? <a href="#" onclick="logout()">Log out</a>)
-            </p>
-            <p class="mt-4">
-              From your account dashboard you can view your <a href="#">recent orders</a>, manage your <a href="#">shipping and billing addresses</a>, and <a href="my-account.html">edit your password and account details</a>.
-            </p>
-          </div>
-        </div>
-      </div>
+        <!-- Dashboard section -->
+        <section class="dashboard_section">
+            <div class="container-fluid"> <!-- Changed to fluid for better use of space in main-content -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="dashboard-content p-4 bg-white rounded shadow-sm">
+                            <h3>Hello, <span id="userDisplayName">User</span>!</h3>
+                            <p>
+                                (not <span id="userDisplayNameSmall">User</span>? <a href="#" onclick="logout()">Log
+                                    out</a>)
+                            </p>
+                            <p class="mt-4">
+                                From your account dashboard you can view your <a href="orders.html">recent orders</a>,
+                                manage your <a href="addresses.html">shipping and billing addresses</a>, and <a
+                                    href="my-account.html">edit your password and account details</a>.
+                            </p>
+
+                            <!-- Quick Links Cards -->
+                            <div class="row mt-5">
+                                <div class="col-md-4 mb-4">
+                                    <div class="card h-100 border-0 shadow-sm text-center p-4">
+                                        <div class="card-body">
+                                            <i class="fa fa-shopping-bag fa-3x text-info mb-3"></i>
+                                            <h5>Orders</h5>
+                                            <p class="text-muted">Check your order status and history.</p>
+                                            <a href="orders.html" class="btn btn-outline-info">View Orders</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="card h-100 border-0 shadow-sm text-center p-4">
+                                        <div class="card-body">
+                                            <i class="fa fa-map-marker fa-3x text-info mb-3"></i>
+                                            <h5>Addresses</h5>
+                                            <p class="text-muted">Manage shipping and billing addresses.</p>
+                                            <a href="addresses.html" class="btn btn-outline-info">Manage Addresses</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="card h-100 border-0 shadow-sm text-center p-4">
+                                        <div class="card-body">
+                                            <i class="fa fa-user fa-3x text-info mb-3"></i>
+                                            <h5>Account Details</h5>
+                                            <p class="text-muted">Update your personal information.</p>
+                                            <a href="my-account.html" class="btn btn-outline-info">Edit Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end Dashboard section -->
+
+
+        <!-- footer section (Keep minimal footer for dashboard to save space) -->
+        <section class="footer_section mt-auto"
+            style="padding: 20px 0; background-color: #fff; border-top: 1px solid #eee;">
+            <div class="container-fluid">
+                <p class="text-center" style="margin: 0; padding: 0; line-height: 1.2; font-size: 0.9rem; color: #666;">
+                    &copy; <span id="displayYear"></span> <a href="http://mc-audio-karakberia.web.app/" target="_blank"
+                        style="color: #00204a;"><b>Mc Audio</b></a> All Rights Reserved.
+                </p>
+            </div>
+        </section>
+        <!-- footer section -->
     </div>
-  </section>
-  <!-- end Dashboard section -->
 
+    <!-- jQery -->
+    <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+    <!-- popper js -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
+    <!-- bootstrap js -->
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+    <!-- custom js -->
+    <script type="text/javascript" src="../js/custom.js"></script>
 
-  <!-- info section -->
-  <section class="info_section layout_padding2">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-lg-3 info_col">
-          <div class="info_contact">
-            <h4>
-              <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Visit Our Shop:</span>
-            </h4>
-            <div class="contact_link_box">
-              <p>Address:</p>
-              <div class="gmap">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.143767942088!2d87.63039937477006!3d23.018492916481357!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f823602a61247d%3A0xdfc12bfb2f664e68!2sMC%20Electronics%20And%20Electrics!5e0!3m2!1sen!2sin!4v1736936820167!5m2!1sen!2sin" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-              </div>
-              <a href="https://maps.app.goo.gl/HV7RY9NQ7MfNPcB58" target="_blank">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span>
-                  Karakberia,Karak Berya,
-                  Kotulpur,Bankura,WB,722141
-                </span>
-              </a>
-              <a href="tel:+918926171789">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>
-                 +918926171789
-                </span>
-              </a>
-              <a href="mailto: electronics.mcaudio@gmail.com">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-                <span>
-                  Click To email
-                </span>
-              </a>
-            </div>
-          </div>
-          <div class="info_social">
-            <a href="https://www.facebook.com/MCAUDIOMANOJ/">
-              <i class="fa fa-facebook" aria-hidden="true"></i>
-            </a>
-            <a href="https://www.youtube.com/@mcaudiokarakberia">
-              <i class="fa fa-youtube" aria-hidden="true"></i>
-            </a>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 info_col">
-          <div class="info_detail">
-            <h4 style="text-align: center; margin-bottom: 20px;">
-              <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Information About Us</span>
-            </h4>
-            <div style="text-align: center;">
-                <img src="../images/logo-mc-electronics.png" style="max-width: 100%; height: auto; margin-bottom: 20px; background: rgba(255, 255, 255, 0.95); padding: 15px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);" alt="MC Electronics And Electrics">
-            </div>
-            <p style="text-align: center; font-size: 0.95rem; line-height: 1.6;">
-              <b>Mc Audio Karakberia</b> is a local Business and <b>Electronics And Electrics</b> is its subsidiary.
-            </p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-2 mx-auto info_col">
-          <div class="info_link_box">
-            <h4>
-              <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Links</span>
-            </h4>
-            <div class="info_links">
-              <a class="active" href="../index.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Home
-              </a>
-              <a class="" href="../about.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; About
-              </a>
-              <a class="" href="../service.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Services
-              </a>
-              <a class="" href="../why.html">
-                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Why Us
-              </a>
-              <a class="" href="../pay-us.html">
-                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Pay Us
-              </a>
-              <a class="" href="../team.html">
-                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Team
-              </a>
-              <a class="" href="../sitemaps/sitemap1.html">
-                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Sitemap
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-2 info_col">
-          <h4>
-            <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Products</span>
-          </h4>
-          <div class="info_links">
-             <a href="../catalogue.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Catalogue
-             </a>
-             <a href="../repairing.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Repairing
-             </a>
-             <a href="../recharge.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Recharge
-             </a>
-             <a href="../recharge.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Bill Payment
-             </a>
-             <a href="https://mc-electronics.0-0-0.click/">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Billing POS
-             </a>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-2 info_col">
-          <h4>
-            <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Our Policy</span>
-          </h4>
-          <div class="info_links">
-             <a href="../privacy.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Privacy
-             </a>
-             <a href="../terms.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Terms
-             </a>
-             <a href="../refund.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Refunds
-             </a>
-          </div>
-        </div>
-    </div>
-  </section>
+    <!-- Sidebar Logic -->
+    <script src="../js/accounts-sidebar.js"></script>
 
-  <!-- end info section -->
-
-
-  <!-- footer section -->
-  <section class="footer_section" style="padding: 5px 0; background-color: #ffffff;">
-    <div class="container">
-      <p style="margin: 0; padding: 0; line-height: 1.2; font-size: 0.9rem;">
-        &copy; <span id="displayYear"></span> <a href="http://mc-audio-karakberia.web.app/" target="_blank"><b>Mc Audio</b></a> All Rights Reserved.
-        <br>
-        <span style="font-size: 11px; color: #666;">Site Designed and Maintained by <a href="https://sumanonline.com" target="_blank" style="color: #666; text-decoration: none; font-weight: bold;">SumanOnline</a></span>
-      </p>
-    </div>
-  </section>
-  <!-- footer section -->
-
-  <!-- jQery -->
-  <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
-  <!-- popper js -->
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-  </script>
-  <!-- bootstrap js -->
-  <script type="text/javascript" src="../js/bootstrap.js"></script>
-  <!-- custom js -->
-  <script type="text/javascript" src="../js/custom.js"></script>
-  
-  <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-      // Firebase Config
-      const firebaseConfig = {
-        apiKey: "AIzaSyBunseGlJg3XiyXzKiepjyilYZ8n5Cl0lE",
-        authDomain: "mc-electronics.firebaseapp.com",
-        projectId: "mc-electronics",
-        storageBucket: "mc-electronics.firebasestorage.app",
-        messagingSenderId: "1021368016185",
-        appId: "1:1021368016185:web:2e0dfa85d55a4c92af9ce8",
-        measurementId: "G-LGB225ZZXM"
-      };
-
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-
-      // Check Auth State
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          const name = user.displayName || user.email;
-          document.getElementById('userDisplayName').textContent = name;
-          document.getElementById('userDisplayNameSmall').textContent = name;
-        } else {
-          // Redirect to login if not logged in
-           window.location.href = "../login.html";
-        }
-      });
-
-      // Logout Function
-      window.logout = function() {
-          signOut(auth).then(() => {
-              window.location.href = "../login.html";
-          }).catch((error) => {
-              console.error("Logout Error:", error);
-          });
-      }
-  </script>
+    <script type="module" src="../js/accounts-auth.js"></script>
 
 </body>
 

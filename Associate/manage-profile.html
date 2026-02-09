@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="../images/favcon.jpeg" type="image/jpeg">
+    <title>Manage Profile - Mc Electronics And Electrics</title>
+
+
+    <link rel="stylesheet" href="../css/bootstrap.css">
+
+    <link href="../css/font-awesome.min.css" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #00204a;
+            /* Dark Blue */
+            --accent-color: #00bbf0;
+            /* Cyan */
+            --bg-color: #f4f6f9;
+            --text-color: #333;
+            --sidebar-width: 250px;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--primary-color);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            color: #fff;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .sidebar-header h4 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0 0;
+        }
+
+        .sidebar-menu li {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 15px 20px;
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            color: #fff;
+            background-color: var(--accent-color);
+            padding-left: 25px;
+        }
+
+        .sidebar-menu i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        /* Topbar */
+        .topbar {
+            background-color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .toggle-btn {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+            display: none;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            text-align: right;
+        }
+
+        .user-info {
+            margin-right: 15px;
+        }
+
+        .user-name {
+            display: block;
+            font-weight: 500;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .user-role {
+            font-size: 0.85rem;
+            color: #888;
+            display: block;
+        }
+
+        .user-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-color);
+            padding: 2px;
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            color: #6c757d;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        /* Profile Card */
+        .profile-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+
+        .profile-pic-section {
+            text-align: center;
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 30px;
+        }
+
+        .profile-pic-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-pic-preview {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-color);
+        }
+
+        .change-pic-btn {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .change-pic-btn:hover {
+            background-color: var(--primary-color);
+        }
+
+        .section-header {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--accent-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .section-header i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                margin-left: -250px;
+            }
+
+            .sidebar.active {
+                margin-left: 0;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .toggle-btn {
+                display: block;
+            }
+
+            .topbar {
+                padding: 15px;
+            }
+
+            .page-title {
+                font-size: 1.2rem;
+                text-align: center;
+                flex-grow: 1;
+            }
+        }
+
+        /* Sidebar Overlay */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        .sidebar-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar-close-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+
+    <div id="page-loader"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffffff; z-index: 99999; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease;">
+        <i class="fa fa-spinner fa-spin" style="font-size: 3rem; color: #00bbf0;"></i>
+    </div>
+
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-close-btn" onclick="toggleSidebar()">
+                <i class="fa fa-times"></i>
+            </div>
+            <h4>Mc Electronics</h4>
+            <small>Associate Panel</small>
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="dashboard.html">
+                    <i class="fa fa-tachometer"></i> Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="window.location.href='dashboard.html'; return false;">
+                    <i class="fa fa-qrcode"></i> Scan QR Code
+                </a>
+            </li>
+            <li>
+                <a href="manage-profile.html" class="active">
+                    <i class="fa fa-user"></i> My Profile
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="window.location.href='dashboard.html'; return false;">
+                    <i class="fa fa-money"></i> Payout Details
+                </a>
+            </li>
+            <li>
+                <a href="../index.html">
+                    <i class="fa fa-home"></i> Back to Site
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="logout()">
+                    <i class="fa fa-sign-out"></i> Logout
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+
+    <div class="main-content" id="content">
+
+        <div class="topbar">
+            <div class="d-flex align-items-center">
+                <div class="toggle-btn mr-3 d-md-none" onclick="toggleSidebar()"
+                    style="display: block; margin-bottom: 0; font-size: 1.2rem;">
+                    <i class="fa fa-bars"></i>
+                </div>
+                <h2 class="page-title">Manage Profile</h2>
+            </div>
+
+            <div class="user-profile">
+                <div class="user-info d-none d-sm-block">
+                    <span class="user-name" id="associateName">Loading...</span>
+                    <span class="user-role">Delivery Associate</span>
+                </div>
+                <img src="../images/client1.gif" alt="Associate" class="user-img" id="associateImg">
+            </div>
+        </div>
+
+
+        <div class="profile-card">
+            <div class="profile-pic-section">
+                <div class="profile-pic-wrapper">
+                    <img id="profilePicPreview" src="../images/client1.gif" alt="Profile" class="profile-pic-preview">
+                    <button type="button" class="change-pic-btn"
+                        onclick="document.getElementById('profilePicInput').click()">
+                        <i class="fa fa-camera"></i>
+                    </button>
+                </div>
+                <input type="file" id="profilePicInput" accept="image/*" style="display: none;">
+                <p class="text-muted mt-3 mb-0">Click the camera icon to change your profile picture</p>
+            </div>
+
+
+            <h5 class="section-header">
+                <i class="fa fa-user"></i> Personal Information
+            </h5>
+            <form id="personalInfoForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Full Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="profileName" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" id="profileEmail" readonly>
+                            <small class="text-muted">Email cannot be changed</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Mobile Number <span class="text-danger">*</span></label>
+                            <input type="tel" class="form-control" id="profileMobile"
+                                placeholder="10-digit mobile number" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Date of Birth</label>
+                            <input type="date" class="form-control" id="profileDOB">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <select class="form-control" id="profileGender">
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                                <option value="prefer-not-to-say">Prefer not to say</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="profile-card">
+            <h5 class="section-header">
+                <i class="fa fa-briefcase"></i> Employment Details
+            </h5>
+            <form id="employmentForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Employment Type <span class="text-danger">*</span></label>
+                            <div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="partTime" name="employmentType" value="part-time"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="partTime">Part-time</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="fullTime" name="employmentType" value="full-time"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="fullTime">Full-time</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Availability</label>
+                            <select class="form-control" id="profileAvailability">
+                                <option value="">Select Availability</option>
+                                <option value="weekdays">Weekdays Only</option>
+                                <option value="weekends">Weekends Only</option>
+                                <option value="both">Both Weekdays & Weekends</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Preferred Shift</label>
+                            <select class="form-control" id="profileShift">
+                                <option value="">Select Shift</option>
+                                <option value="morning">Morning (6 AM - 12 PM)</option>
+                                <option value="afternoon">Afternoon (12 PM - 6 PM)</option>
+                                <option value="evening">Evening (6 PM - 12 AM)</option>
+                                <option value="night">Night (12 AM - 6 AM)</option>
+                                <option value="flexible">Flexible</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Vehicle Type</label>
+                            <select class="form-control" id="profileVehicle">
+                                <option value="">Select Vehicle</option>
+                                <option value="bicycle">Bicycle</option>
+                                <option value="scooter">Scooter</option>
+                                <option value="motorcycle">Motorcycle</option>
+                                <option value="car">Car</option>
+                                <option value="e-bike">E-bike</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Joining Date</label>
+                            <input type="text" class="form-control" id="profileJoiningDate" readonly>
+                            <small class="text-muted">Auto-set on first login</small>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="profile-card">
+            <h5 class="section-header">
+                <i class="fa fa-map-marker"></i> Address & Emergency Contact
+            </h5>
+            <form id="addressForm">
+                <h6 class="mb-3 text-primary"><i class="fa fa-home"></i> Current Address</h6>
+                <div class="form-group">
+                    <label>Street Address</label>
+                    <textarea class="form-control" id="profileStreet" rows="2"
+                        placeholder="House No., Street, Locality"></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" class="form-control" id="profileCity">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>State</label>
+                            <input type="text" class="form-control" id="profileState">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>PIN Code</label>
+                            <input type="text" class="form-control" id="profilePinCode" placeholder="6-digit PIN code"
+                                maxlength="6">
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+
+                <h6 class="mb-3 text-primary"><i class="fa fa-phone"></i> Emergency Contact</h6>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Contact Name</label>
+                            <input type="text" class="form-control" id="emergencyName" placeholder="Full Name">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Contact Number</label>
+                            <input type="tel" class="form-control" id="emergencyPhone"
+                                placeholder="10-digit mobile number">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Relationship</label>
+                            <input type="text" class="form-control" id="emergencyRelation"
+                                placeholder="e.g., Father, Mother, Spouse">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="text-center mb-4">
+            <button type="button" class="btn btn-primary btn-lg px-5" id="saveProfileBtn">
+                <i class="fa fa-save"></i> Save Changes
+            </button>
+            <a href="dashboard.html" class="btn btn-secondary btn-lg px-5 ml-2">
+                <i class="fa fa-times"></i> Cancel
+            </a>
+        </div>
+
+
+        <footer class="mt-5 text-center text-muted">
+            <p>&copy; 2026 Mc Electronics Associate Panel.</p>
+        </footer>
+
+    </div>
+
+
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
+
+
+    <script type="module" src="../js/associate-profile-page.js"></script>
+
+</body>
+
+</html>

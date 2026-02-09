@@ -22,7 +22,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
   <!--owl slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 
   <!-- font awesome style -->
   <link href="css/font-awesome.min.css" rel="stylesheet" />
@@ -31,129 +32,641 @@
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
-  
+
   <style>
+    .goods_section {
+      padding-top: 120px;
+      min-height: 800px;
+      padding-bottom: 25px;
+    }
+
+    .filter-box {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .filter-title {
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #00204a;
+      border-bottom: 2px solid #00bbf0;
+      padding-bottom: 5px;
+      display: inline-block;
+    }
+
+    .product-card {
+      border: 1px solid #eee;
+      transition: all 0.3s;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transform: translateY(-5px);
+    }
+
+    .product-img-box {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: #fff;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .product-img-box img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    .product-detail-box {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .product-brand {
+      font-size: 12px;
+      color: #999;
+      text-transform: uppercase;
+    }
+
+    .product-name {
+      font-weight: 600;
+      color: #333;
+      margin: 5px 0;
+      height: 40px;
+      /* Fixed height for 2 lines */
+      overflow: hidden;
+      font-size: 15px;
+    }
+
+    .product-price {
+      color: #00bbf0;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .product-mrp {
+      color: #999;
+      text-decoration: line-through;
+      font-size: 14px;
+      margin-left: 5px;
+    }
+
+    .btn-view-details {
+      background: #00204a;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      margin-top: 10px;
+      transition: all 0.3s;
+      display: inline-block;
+      /* Ensure anchor tag works like a button */
+      text-decoration: none;
+    }
+
+    .btn-view-details:hover {
+      background: #00bbf0;
+      color: white;
+      text-decoration: none;
+    }
+
+    /* Loading Spinner */
+    .loader {
+      border: 5px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 5px solid #00bbf0;
+      width: 40px;
+      height: 40px;
+      -webkit-animation: spin 1s linear infinite;
+      /* Safari */
+      animation: spin 1s linear infinite;
+      margin: 50px auto;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Mobile Sort & Filter Bar */
+    .mobile-sort-filter-bar {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 0px;
+      /* Reduced padding */
+      margin: 0px 0 20px 0;
+      display: inline-flex;
+      /* Changed to inline-flex to fit content */
+      align-items: center;
+      justify-content: flex-start;
+      /* Left align */
+      gap: 0;
+      min-width: 200px;
+      /* Ensure a minimum width */
+    }
+
+    .sort-filter-btn {
+      flex: 1;
+      background: none;
+      border: none;
+      padding: 10px 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .sort-filter-btn:active {
+      background: #f5f5f5;
+    }
+
+    .sort-filter-btn i {
+      font-size: 16px;
+    }
+
+    .vertical-divider {
+      width: 1px;
+      height: 24px;
+      background: #e0e0e0;
+    }
+
+    .filter-badge {
+      position: absolute;
+      top: 5px;
+      right: 15px;
+      background: #ff4444;
+      color: white;
+      border-radius: 10px;
+      padding: 2px 6px;
+      font-size: 10px;
+      font-weight: bold;
+      min-width: 18px;
+      text-align: center;
+    }
+
+    /* List View Styles */
+    /* List View Styles */
+    .products-grid.list-view .col-6,
+    .products-grid.list-view .col-md-4,
+    .products-grid.list-view .col-lg-3 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+
+    .products-grid.list-view .product-card {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      min-height: 160px;
+      /* Increased height */
+      padding: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      /* Softer shadow */
+      border: 1px solid #f0f0f0;
+    }
+
+    .products-grid.list-view .product-img-box {
+      width: 130px;
+      height: 130px;
+      flex-shrink: 0;
+      padding: 5px;
+      border-bottom: none;
+      margin-right: 20px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .products-grid.list-view .product-detail-box {
+      text-align: left;
+      flex-grow: 1;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .products-grid.list-view .product-brand {
+      margin-bottom: 5px;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+    }
+
+    .products-grid.list-view .product-name {
+      height: auto;
+      margin-bottom: 8px;
+      font-size: 16px;
+      line-height: 1.4;
+      font-weight: 600;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .products-grid.list-view .product-price {
+      font-size: 18px;
+      margin-bottom: 0;
+    }
+
+    .products-grid.list-view .btn-view-details {
+      display: none;
+    }
+
+    .products-grid.list-view .btn-quick-cart {
+      display: none !important;
+    }
+
+    /* Ensure quick add cart button is positioned well in list view if present */
+    .products-grid.list-view .product-card {
+      position: relative;
+      cursor: pointer;
+      /* Ensure pointer cursor */
+    }
+
+    /* Mobile Modals */
+    .mobile-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      display: none;
+    }
+
+    .mobile-modal.active {
+      display: block;
+    }
+
+    .modal-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      animation: fadeIn 0.3s;
+    }
+
+    .mobile-modal .modal-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      border-radius: 16px 16px 0 0;
+      max-height: 80vh;
+      overflow-y: auto;
+      animation: slideUp 0.3s;
+    }
+
+    .mobile-modal .modal-header {
+      padding: 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mobile-modal .modal-header h5 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: #666;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .mobile-modal .modal-body {
+      padding: 20px;
+    }
+
+    .mobile-modal .modal-footer {
+      padding: 15px 20px;
+      border-top: 1px solid #eee;
+      display: flex;
+      gap: 10px;
+    }
+
+    .mobile-modal .modal-footer .btn {
+      flex: 1;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 500;
+    }
+
+    .sort-option {
+      padding: 15px;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .sort-option:hover {
+      background: #f8f8f8;
+    }
+
+    .sort-option:last-child {
+      border-bottom: none;
+    }
+
+    .sort-option i {
+      font-size: 18px;
+      color: #666;
+    }
+
+    .sort-option span {
+      font-size: 15px;
+      color: #333;
+    }
+
+    .filter-section {
+      margin-bottom: 20px;
+    }
+
+    .filter-section h6 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(100%);
+      }
+
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 992px) {
       .goods_section {
-          padding-top: 120px;
-          min-height: 800px;
+        padding-top: 100px;
       }
-      
-      .filter-box {
-          background: #f8f9fa;
-          padding: 20px;
-          border-radius: 5px;
-          margin-bottom: 20px;
-      }
-      
-      .filter-title {
-          font-weight: bold;
-          margin-bottom: 15px;
-          color: #00204a;
-          border-bottom: 2px solid #00bbf0;
-          padding-bottom: 5px;
-          display: inline-block;
-      }
-      
-      .product-card {
-          border: 1px solid #eee;
-          transition: all 0.3s;
-          margin-bottom: 30px;
-          border-radius: 10px;
-          background: #fff;
-          overflow: hidden;
-      }
-      
-      .product-card:hover {
-          box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-          transform: translateY(-5px);
-      }
-      
-      .product-img-box {
-          height: 200px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 20px;
-          background: #fff;
-          border-bottom: 1px solid #f0f0f0;
-      }
-      
-      .product-img-box img {
-          max-height: 100%;
-          max-width: 100%;
-          object-fit: contain;
-      }
-      
-      .product-detail-box {
-          padding: 15px;
-          text-align: center;
-      }
-      
-      .product-brand {
-          font-size: 12px;
-          color: #999;
-          text-transform: uppercase;
-      }
-      
-      .product-name {
-          font-weight: 600;
-          color: #333;
-          margin: 5px 0;
-          height: 40px; /* Fixed height for 2 lines */
-          overflow: hidden;
-          font-size: 15px;
-      }
-      
-      .product-price {
-          color: #00bbf0;
-          font-weight: bold;
-          font-size: 18px;
-      }
-      
-      .product-mrp {
-          color: #999;
-          text-decoration: line-through;
-          font-size: 14px;
-          margin-left: 5px;
-      }
+    }
 
-      .btn-add-cart {
-          background: #00204a;
-          color: white;
-          border: none;
-          padding: 8px 15px;
-          border-radius: 20px;
-          font-size: 14px;
-          margin-top: 10px;
-          transition: all 0.3s;
-      }
-      
-      .btn-add-cart:hover {
-          background: #00bbf0;
-      }
+    /* Floating Cart Icon */
+    .floating-cart-icon {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background-color: #00204a;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      z-index: 1000;
+      transition: transform 0.3s;
+    }
 
-      /* Loading Spinner */
-      .loader {
-        border: 5px solid #f3f3f3;
-        border-radius: 50%;
-        border-top: 5px solid #00bbf0;
-        width: 40px;
-        height: 40px;
-        -webkit-animation: spin 1s linear infinite; /* Safari */
-        animation: spin 1s linear infinite;
-        margin: 50px auto;
-      }
+    .floating-cart-icon:hover {
+      transform: scale(1.1);
+    }
 
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-      
-      @media (max-width: 992px) {
-          .goods_section {
-              padding-top: 100px;
-          }
-      }
+    .cart-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: red;
+      color: white;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    /* Cart Sidebar */
+    .cart-sidebar {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 350px;
+      height: 100%;
+      background: white;
+      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+      z-index: 1001;
+      transition: right 0.3s ease-in-out;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-sidebar.open {
+      right: 0;
+    }
+
+    .cart-header {
+      padding: 20px;
+      background: #00204a;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-header h3 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    .close-cart-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .cart-items-container {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .cart-item {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 15px;
+    }
+
+    .cart-item img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      margin-right: 15px;
+      border-radius: 5px;
+    }
+
+    .cart-item-details {
+      flex: 1;
+    }
+
+    .cart-item-title {
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .cart-item-price {
+      color: #00204a;
+      font-weight: bold;
+    }
+
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
+    }
+
+    .qty-btn {
+      width: 25px;
+      height: 25px;
+      background: #eee;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+
+    .qty-display {
+      margin: 0 10px;
+      font-size: 14px;
+    }
+
+    .remove-item-btn {
+      margin-left: auto;
+      color: red;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .cart-footer {
+      padding: 20px;
+      border-top: 1px solid #eee;
+      background: #f9f9f9;
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .cart-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      display: none;
+    }
+
+    .cart-overlay.show {
+      display: block;
+    }
+
+    .category-tabs {
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 5px;
+      scrollbar-width: none;
+      /* Firefox */
+    }
+
+    .category-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Chrome/Safari */
+
+    .cat-tab {
+      padding: 8px 20px;
+      margin-right: 15px;
+      cursor: pointer;
+      font-weight: 500;
+      color: #777;
+      border-radius: 4px;
+      transition: all 0.3s;
+      font-size: 1rem;
+    }
+
+    .cat-tab:hover {
+      color: #000;
+    }
+
+    .cat-tab.active {
+      background-color: #000;
+      color: #fff;
+    }
   </style>
 </head>
 
@@ -169,30 +682,50 @@
             </span>
           </a>
 
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class=""> </span>
           </button>
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-lg-none sidebar-header">
+
+              <h5 class="mb-0">Mc Electronics</h5>
+              <p class="small text-muted mb-0" style="font-size: 0.7rem; letter-spacing: 1px;">MENU</p>
+              <div id="mobileProfileWrapper" class="mt-3"></div>
+            </div>
             <ul class="navbar-nav  ">
-              <li class="nav-item ">
-                <a class="nav-link" href="index.html">Home </a>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-100">
+                <a class="nav-link" href="index.html"><i class="fa fa-home"></i> Home </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="about.html"> About</a>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-200">
+                <a class="nav-link" href="about.html"><i class="fa fa-info-circle"></i> About</a>
               </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="catalogue.html"> Products </a>
+              <li class="nav-item active animate-on-scroll animate-fade-up delay-300">
+                <a class="nav-link" href="catalogue.html"><i class="fa fa-shopping-bag"></i> Products</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="service.html">Services</a>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-400">
+                <a class="nav-link" href="service.html"><i class="fa fa-wrench"></i> Services</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="pay-us.html">Pay</a>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-100">
+                <a class="nav-link" href="why.html"><i class="fa fa-question-circle"></i> Why Us</a>
               </li>
-               <li class="nav-item" id="authNavItem">
-                <a class="nav-link" href="login.html" id="loginLink"> <i class="fa fa-user" aria-hidden="true"></i> Login</a>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-200">
+                <a class="nav-link" href="team.html"><i class="fa fa-users"></i> Team</a>
               </li>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-300">
+                <a class="nav-link" href="pay-us.html"><i class="fa fa-credit-card"></i> Pay</a>
+              </li>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-400">
+                <a class="nav-link" href="https://mc-electronics.0-0-0.click/"> <i class="	fa fa-desktop"></i> POS</a>
+              </li>
+              <li class="nav-item animate-on-scroll animate-fade-up delay-100">
+                <a class="nav-link" href="auth/login.html" id="loginLink"> <i class="fa fa-user" aria-hidden="true"></i>
+                  Login</a>
+              </li>
+              <!-- <li class="nav-item animate-on-scroll animate-fade-up delay-200" id="adminNavItem" style="display: none;">
+                <a class="nav-link" href="admin/dashboard.html"> <i class="fa fa-lock"></i> Admin Panel</a>
+              </li> -->
             </ul>
           </div>
         </nav>
@@ -203,86 +736,259 @@
 
   <!-- Goods section -->
   <section class="goods_section layout_padding">
-    <div class="container">
-      <div class="heading_container heading_center mb-5">
+    <div class="container-fluid">
+      <div class="heading_container heading_center mb-2">
         <h2>
           Our <span>Catalogue</span>
         </h2>
       </div>
-      
+
       <div class="row">
         <!-- Category Tabs -->
-        <div class="col-12 mb-4">
-            <style>
-                .category-tabs {
-                    display: flex;
-                    overflow-x: auto;
-                    white-space: nowrap;
-                    padding-bottom: 10px;
-                    border-bottom: 1px solid #eee;
-                    margin-bottom: 20px;
-                    scrollbar-width: none; /* Firefox */
-                }
-                .category-tabs::-webkit-scrollbar { display: none; } /* Chrome/Safari */
-                
-                .cat-tab {
-                    padding: 8px 20px;
-                    margin-right: 15px;
-                    cursor: pointer;
-                    font-weight: 500;
-                    color: #777;
-                    border-radius: 4px;
-                    transition: all 0.3s;
-                    font-size: 1rem;
-                }
-                .cat-tab:hover { color: #000; }
-                .cat-tab.active {
-                    background-color: #000;
-                    color: #fff;
-                }
-            </style>
-            <div class="category-tabs" id="categoryTabs">
-                <div class="cat-tab active" data-category="all">All Products</div>
-                <!-- Dynamic categories will be injected here -->
-                 <div class="cat-tab">Loading...</div>
+        <div class="col-12 mb-1">
+          <style>
+
+          </style>
+          <div class="category-tabs" id="categoryTabs">
+            <div class="cat-tab active" data-category="all">All Products</div>
+            <!-- Dynamic categories will be injected here -->
+            <div class="cat-tab">Loading...</div>
+          </div>
+        </div>
+
+        <!-- Mobile Sort & Filter Bar + View Toggle -->
+        <div class="col-12 d-lg-none">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="mobile-sort-filter-bar" style="margin: 0;">
+              <button class="sort-filter-btn" id="mobileSortBtn">
+                <i class="fa fa-sort"></i>
+                <span>Sort</span>
+              </button>
+              <div class="vertical-divider"></div>
+              <button class="sort-filter-btn" id="mobileFilterBtn">
+                <i class="fa fa-filter"></i>
+                <span>Filter</span>
+                <span class="filter-badge" id="filterBadge" style="display: none;">0</span>
+              </button>
             </div>
+
+            <button id="viewToggleBtn" class="btn btn-outline-secondary"
+              style="border: 1px solid #e0e0e0; background: white; color: #333; height: 42px; width: 42px; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+              <i class="fa fa-list" style="font-size: 18px;"></i>
+            </button>
+          </div>
+          <!-- Divider -->
+          <div style="width: 100%; display: flex; justify-content: center; margin-bottom: 20px;">
+            <hr style="width: 95%; border-top: 1px solid #eee; margin: 0;">
+          </div>
         </div>
 
         <!-- Sidebar Filters -->
-          <div class="col-lg-3">
-              <div class="filter-box">
-                  <h5 class="filter-title">Search</h5>
-                  <div class="input-group mb-3">
-                      <input type="text" class="form-control" id="searchInput" placeholder="Search products...">
-                      <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="searchBtn"><i class="fa fa-search"></i></button>
-                      </div>
-                  </div>
-
-                  <h5 class="filter-title mt-4">Sort By</h5>
-                  <select class="form-control" id="sortSelect">
-                      <option value="newest">Newest First</option>
-                      <option value="price_asc">Price: Low to High</option>
-                      <option value="price_desc">Price: High to Low</option>
-                  </select>
-
-                  <h5 class="filter-title mt-4">Brands</h5>
-                  <div id="brandFilters">
-                      <p class="text-muted"><small>Loading brands...</small></p>
-                  </div>
+        <div class="col-lg-2 d-none d-lg-block">
+          <div class="filter-box">
+            <h5 class="filter-title">Search</h5>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" id="searchInput" placeholder="Search products...">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="searchBtn"><i
+                    class="fa fa-search"></i></button>
               </div>
+            </div>
+
+            <h5 class="filter-title mt-4">Sort By</h5>
+            <select class="form-control" id="sortSelect">
+              <option value="newest">Newest First</option>
+              <option value="price_asc">Price: Low to High</option>
+              <option value="price_desc">Price: High to Low</option>
+            </select>
+
+            <h5 class="filter-title mt-4">Brands</h5>
+            <div id="brandFilters">
+              <p class="text-muted"><small>Loading brands...</small></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="col-lg-10">
+          <div class="row justify-content-start" id="productsGrid">
+            <!-- Products will be loaded here -->
+            <div class="col-12 text-center">
+              <div class="loader"></div>
+              <p>Loading products...</p>
+            </div>
           </div>
 
-          <!-- Product Grid -->
-          <div class="col-lg-9">
-              <div class="row" id="productsGrid">
-                  <!-- Products will be loaded here -->
-                  <div class="col-12 text-center">
-                      <div class="loader"></div>
-                      <p>Loading products...</p>
+          <!-- Pagination -->
+          <div class="row mt-5">
+            <div class="col-12">
+              <nav aria-label="Page navigation">
+                <style>
+                  .mt-5,
+                  .my-5 {
+                    margin-top: 0rem !important;
+                  }
+
+                  .pagination-container {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 10px 0;
+                    border-top: 1px solid #eee;
+                    border-bottom: 1px solid #eee;
+                    position: relative;
+                  }
+
+                  .pagination-info {
+                    color: #555;
+                    font-size: 14px;
+                    position: absolute;
+                    left: 0;
+                  }
+
+                  .pagination-controls {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                  }
+
+                  .page-link-custom {
+                    border: none;
+                    background: none;
+                    color: #333;
+                    font-weight: 500;
+                    padding: 5px 10px;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                    text-decoration: none;
+                  }
+
+                  .page-link-custom:hover {
+                    color: #00bbf0;
+                    text-decoration: none;
+                    background-color: #f8f9fa;
+                    border-radius: 4px;
+                  }
+
+                  .page-link-custom.active {
+                    background-color: #00bbf0;
+                    color: white;
+                    border-radius: 50%;
+                    width: 35px;
+                    height: 35px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  }
+
+                  .page-link-custom.disabled {
+                    color: #ccc;
+                    pointer-events: none;
+                  }
+
+                  .page-link-next,
+                  .page-link-prev {
+                    color: #00204a;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    font-size: 14px;
+                  }
+
+                  .page-link-next:hover,
+                  .page-link-prev:hover {
+                    text-decoration: underline;
+                    background: none;
+                  }
+
+                  @media (max-width: 576px) {
+                    .pagination-container {
+                      flex-direction: column;
+                      gap: 10px;
+                      padding-bottom: 20px;
+                    }
+
+                    .pagination-info {
+                      position: static;
+                      margin-bottom: 5px;
+                    }
+                  }
+                </style>
+                <div class="pagination-container" id="paginationContainer" style="display: none;">
+                  <div class="pagination-info" id="paginationInfo">
+                    Page 1 of 1
                   </div>
-              </div>
+                  <div class="pagination-controls" id="paginationControls">
+                    <!-- Pagination buttons will be injected here -->
+                  </div>
+                </div>
+              </nav>
+            </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Mobile Sort Modal -->
+      <div class="mobile-modal" id="sortModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5>Sort By</h5>
+            <button class="modal-close" onclick="closeSortModal()">
+              <i class="fa fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="sort-option" data-sort="newest">
+              <i class="fa fa-circle-o"></i>
+              <span>Newest First</span>
+            </div>
+            <div class="sort-option" data-sort="price_asc">
+              <i class="fa fa-arrow-up"></i>
+              <span>Price: Low to High</span>
+            </div>
+            <div class="sort-option" data-sort="price_desc">
+              <i class="fa fa-arrow-down"></i>
+              <span>Price: High to Low</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Filter Modal -->
+      <div class="mobile-modal" id="filterModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5>Filter Products</h5>
+            <button class="modal-close" onclick="closeFilterModal()">
+              <i class="fa fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="filter-section">
+              <h6>Search</h6>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" id="mobileSearchInput" placeholder="Search products...">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="filter-section">
+              <h6>Brands</h6>
+              <div id="mobileBrandFilters">
+                <p class="text-muted"><small>Loading brands...</small></p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="clearFilters()">Clear All</button>
+            <button class="btn btn-primary" onclick="applyFilters()">Apply</button>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -303,7 +1009,10 @@
             <div class="contact_link_box">
               <p>Address:</p>
               <div class="gmap">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.143767942088!2d87.63039937477006!3d23.018492916481357!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f823602a61247d%3A0xdfc12bfb2f664e68!2sMC%20Electronics%20And%20Electrics!5e0!3m2!1sen!2sin!4v1736936820167!5m2!1sen!2sin" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.143767942088!2d87.63039937477006!3d23.018492916481357!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f823602a61247d%3A0xdfc12bfb2f664e68!2sMC%20Electronics%20And%20Electrics!5e0!3m2!1sen!2sin!4v1736936820167!5m2!1sen!2sin"
+                  width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"></iframe>
               </div>
               <a href="https://maps.app.goo.gl/HV7RY9NQ7MfNPcB58" target="_blank">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
@@ -315,7 +1024,7 @@
               <a href="tel:+918926171789">
                 <i class="fa fa-phone" aria-hidden="true"></i>
                 <span>
-                 +918926171789
+                  +918926171789
                 </span>
               </a>
               <a href="mailto: electronics.mcaudio@gmail.com">
@@ -341,7 +1050,9 @@
               <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Information About Us</span>
             </h4>
             <div style="text-align: center;">
-                <img src="images/logo-mc-electronics.png" style="max-width: 100%; height: auto; margin-bottom: 20px; background: rgba(255, 255, 255, 0.95); padding: 15px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);" alt="MC Electronics And Electrics">
+              <img src="images/logo-mc-electronics.png"
+                style="max-width: 100%; height: auto; margin-bottom: 20px; background: rgba(255, 255, 255, 0.95); padding: 15px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"
+                alt="MC Electronics And Electrics">
             </div>
             <p style="text-align: center; font-size: 0.95rem; line-height: 1.6;">
               <b>Mc Audio Karakberia</b> is a local Business and <b>Electronics And Electrics</b> is its subsidiary.
@@ -364,16 +1075,16 @@
                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Services
               </a>
               <a class="" href="why.html">
-                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Why Us
+                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Why Us
               </a>
               <a class="" href="pay-us.html">
-                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Pay Us
+                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Pay Us
               </a>
               <a class="" href="team.html">
-                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Team
+                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Team
               </a>
               <a class="" href="./sitemaps/sitemap1.html">
-                 <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Sitemap
+                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Sitemap
               </a>
             </div>
           </div>
@@ -383,21 +1094,21 @@
             <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Products</span>
           </h4>
           <div class="info_links">
-             <a href="catalogue.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Catalogue
-             </a>
-             <a href="repairing.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Repairing
-             </a>
-             <a href="recharge.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Recharge
-             </a>
-             <a href="recharge.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Bill Payment
-             </a>
-             <a href="https://mc-electronics.0-0-0.click/">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Billing POS
-             </a>
+            <a href="catalogue.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Catalogue
+            </a>
+            <a href="repairing.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Repairing
+            </a>
+            <a href="recharge.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Recharge
+            </a>
+            <a href="recharge.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Bill Payment
+            </a>
+            <a href="https://mc-electronics.0-0-0.click/">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Billing POS
+            </a>
           </div>
         </div>
         <div class="col-md-6 col-lg-2 info_col">
@@ -405,18 +1116,21 @@
             <span style="border-bottom: 2px dotted #fff; padding-bottom: 5px;">Our Policy</span>
           </h4>
           <div class="info_links">
-             <a href="privacy.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Privacy
-             </a>
-             <a href="terms.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Terms
-             </a>
-             <a href="refund.html">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Refunds
-             </a>
+            <a href="pages/privacy.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Privacy
+            </a>
+            <a href="pages/terms.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Terms
+            </a>
+            <a href="pages/return.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Refunds
+            </a>
+            <a href="pages/contact.html">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Contact
+            </a>
           </div>
         </div>
-    </div>
+      </div>
   </section>
 
   <!-- end info section -->
@@ -425,9 +1139,11 @@
   <section class="footer_section" style="padding: 5px 0; background-color: #ffffff;">
     <div class="container">
       <p style="margin: 0; padding: 0; line-height: 1.2; font-size: 0.9rem;">
-        &copy; <span id="displayYear"></span> <a href="http://mc-audio-karakberia.web.app/" target="_blank"><b>Mc Audio</b></a> All Rights Reserved.
+        &copy; <span id="displayYear"></span> <a href="http://mc-audio-karakberia.web.app/" target="_blank"><b>Mc
+            Audio</b></a> All Rights Reserved.
         <br>
-        <span style="font-size: 11px; color: #666;">Site Designed and Maintained by <a href="https://sumanonline.com" target="_blank" style="color: #666; text-decoration: none; font-weight: bold;">SumanOnline</a></span>
+        <span style="font-size: 11px; color: #666;">Site Designed and Maintained by <a href="https://sumanonline.com"
+            target="_blank" style="color: #666; text-decoration: none; font-weight: bold;">SumanOnline</a></span>
       </p>
     </div>
   </section>
@@ -438,11 +1154,280 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/custom.js"></script>
-  
+  <!-- Animations -->
+  <script src="js/animations.js"></script>
+
   <script type="module" src="js/goods.js"></script>
-  
+
   <!-- Navbar Auth (To update Login/My Account link) -->
   <script type="module" src="js/navbar-auth.js"></script>
 
+  <!-- Cart Logic -->
+  <script type="module" src="js/cart.js"></script>
+
+  <!-- Floating Cart Icon -->
+  <div id="floatingCartIcon" class="floating-cart-icon" style="display: none;">
+    <i class="fa fa-shopping-cart"></i>
+    <span id="cartBadge" class="cart-badge" style="display: none;">0</span>
+  </div>
+
+  <!-- Cart Sidebar -->
+  <div id="cartSidebar" class="cart-sidebar">
+    <div class="cart-header">
+      <h3>Your Cart</h3>
+      <button id="closeCartBtn" class="close-cart-btn"><i class="fa fa-times"></i></button>
+    </div>
+    <div id="cartItemsContainer" class="cart-items-container">
+      <p class="empty-cart-msg">Your cart is empty.</p>
+    </div>
+    <div class="cart-footer">
+      <div id="cartAddressBlock" class="mb-3"
+        style="font-size: 0.9rem; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
+        <strong>Address:</strong> <span id="cartDeliveryAddress" class="text-muted">Loading...</span>
+      </div>
+      <div class="cart-total">
+        <span>Total:</span>
+        <span id="cartTotalAmount">₹0</span>
+      </div>
+      <button id="placeOrderBtn" class="btn btn-primary btn-block"
+        style="background-color: #00204a; border-color: #00204a;">Place Order</button>
+    </div>
+  </div>
+  <div id="cartOverlay" class="cart-overlay"></div>
+
+  <div class="modal fade" id="selectAddressModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Select Delivery Address</h5>
+          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body" id="addressSelectionList">
+          <!-- Addresses injected here -->
+        </div>
+        <div class="modal-footer">
+          <span class="text-muted small mr-auto">Only saved addresses are shown.</span>
+          <a href="accounts/addresses.html" class="btn btn-sm btn-outline-primary">Manage Addresses</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Modal -->
+  <div class="modal fade" id="paymentModal" tabindex="-1" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #00204a; color: white;">
+          <h5 class="modal-title">Payment Method</h5>
+          <button type="button" class="close text-white" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-center font-weight-bold mb-3">Total Amount: <span id="paymentTotalDisplay"
+              class="text-success">₹0</span></p>
+
+          <div class="form-group">
+            <div class="custom-control custom-radio mb-2">
+              <input type="radio" id="payOnline" name="paymentMethod" class="custom-control-input" value="Prepaid"
+                onchange="window.togglePaymentDetails()">
+              <label class="custom-control-label font-weight-bold" for="payOnline">Prepaid (Pay Online)</label>
+            </div>
+            <!-- Dynamic QR Section -->
+            <div id="qrPaymentSection" class="text-center p-3 border rounded mb-3 bg-light" style="display: none;">
+              <p class="small text-muted mb-2">Scan QR to Pay</p>
+              <img id="paymentQRCode" src="" alt="QR Code" class="img-fluid border p-2 bg-white mb-2"
+                style="width: 150px; height: 150px;">
+              <p class="small font-weight-bold text-dark">UPI ID: 8514900224@upi</p>
+
+              <a id="payGenericUpiBtn" href="#" class="btn btn-warning btn-block mb-2 font-weight-bold">
+                <i class="fa fa-mobile mr-1"></i> Pay using UPI App
+              </a>
+
+              <hr>
+              <button class="btn btn-success btn-block" onclick="window.processOrder('Prepaid')">I have made the
+                payment</button>
+            </div>
+
+            <div class="custom-control custom-radio">
+              <input type="radio" id="payCOD" name="paymentMethod" class="custom-control-input" value="COD"
+                onchange="window.togglePaymentDetails()">
+              <label class="custom-control-label font-weight-bold" for="payCOD">Cash on Delivery (COD)</label>
+            </div>
+            <div id="codSection" class="p-3" style="display: none;">
+              <button class="btn btn-primary btn-block" onclick="window.processOrder('COD')">Confirm Order</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Mobile Sort and Filter Modal Functions
+    const sortModal = document.getElementById('sortModal');
+    const filterModal = document.getElementById('filterModal');
+    const mobileSortBtn = document.getElementById('mobileSortBtn');
+    const mobileFilterBtn = document.getElementById('mobileFilterBtn');
+    const filterBadge = document.getElementById('filterBadge');
+
+    // Open Sort Modal
+    if (mobileSortBtn) {
+      mobileSortBtn.addEventListener('click', () => {
+        sortModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    }
+
+    // Open Filter Modal
+    if (mobileFilterBtn) {
+      mobileFilterBtn.addEventListener('click', () => {
+        filterModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    }
+
+    // Close Sort Modal
+    function closeSortModal() {
+      sortModal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close Filter Modal
+    function closeFilterModal() {
+      filterModal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close on overlay click
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', function () {
+        this.parentElement.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      });
+    });
+
+    // Handle Sort Option Click
+    document.querySelectorAll('.sort-option').forEach(option => {
+      option.addEventListener('click', function () {
+        const sortValue = this.getAttribute('data-sort');
+        // Update desktop sort select to trigger existing sort logic
+        const sortSelect = document.getElementById('sortSelect');
+        if (sortSelect) {
+          sortSelect.value = sortValue;
+          sortSelect.dispatchEvent(new Event('change'));
+        }
+        closeSortModal();
+      });
+    });
+
+    // Sync mobile search with desktop search
+    const mobileSearchInput = document.getElementById('mobileSearchInput');
+    const desktopSearchInput = document.getElementById('searchInput');
+
+    if (mobileSearchInput && desktopSearchInput) {
+      mobileSearchInput.addEventListener('input', function () {
+        desktopSearchInput.value = this.value;
+        desktopSearchInput.dispatchEvent(new Event('input'));
+      });
+    }
+
+    // Clear Filters
+    function clearFilters() {
+      // Clear search
+      if (mobileSearchInput) mobileSearchInput.value = '';
+      if (desktopSearchInput) desktopSearchInput.value = '';
+
+      // Uncheck all brand checkboxes
+      document.querySelectorAll('#mobileBrandFilters input[type="checkbox"]').forEach(cb => {
+        cb.checked = false;
+      });
+      document.querySelectorAll('#brandFilters input[type="checkbox"]').forEach(cb => {
+        cb.checked = false;
+      });
+
+      // Update badge
+      updateFilterBadge();
+
+      // Trigger filter update
+      if (desktopSearchInput) {
+        desktopSearchInput.dispatchEvent(new Event('input'));
+      }
+    }
+
+    // Apply Filters
+    function applyFilters() {
+      // Sync mobile brand filters to desktop
+      const mobileBrands = document.querySelectorAll('#mobileBrandFilters input[type="checkbox"]:checked');
+      mobileBrands.forEach(mobileCb => {
+        const brandValue = mobileCb.value;
+        const desktopCb = document.querySelector(`#brandFilters input[value="${brandValue}"]`);
+        if (desktopCb) desktopCb.checked = true;
+      });
+
+      // Update badge
+      updateFilterBadge();
+
+      // Trigger filter update
+      if (desktopSearchInput) {
+        desktopSearchInput.dispatchEvent(new Event('input'));
+      }
+
+      closeFilterModal();
+    }
+
+    // Update Filter Badge Count
+    function updateFilterBadge() {
+      let count = 0;
+
+      // Count search
+      if (mobileSearchInput && mobileSearchInput.value.trim()) count++;
+
+      // Count selected brands
+      const selectedBrands = document.querySelectorAll('#mobileBrandFilters input[type="checkbox"]:checked');
+      count += selectedBrands.length;
+
+      // Update badge
+      if (count > 0) {
+        filterBadge.textContent = count;
+        filterBadge.style.display = 'block';
+      } else {
+        filterBadge.style.display = 'none';
+      }
+    }
+
+    // Listen for brand filter changes to update badge
+    document.addEventListener('change', function (e) {
+      if (e.target.matches('#mobileBrandFilters input[type="checkbox"]')) {
+        updateFilterBadge();
+      }
+    });
+
+    // Listen for mobile search input to update badge
+    if (mobileSearchInput) {
+      mobileSearchInput.addEventListener('input', updateFilterBadge);
+    }
+
+    // View Toggle Logic
+    const viewToggleBtn = document.getElementById('viewToggleBtn');
+    const productsGrid = document.getElementById('productsGrid');
+
+    if (viewToggleBtn && productsGrid) {
+      viewToggleBtn.addEventListener('click', function () {
+        productsGrid.classList.toggle('list-view');
+        // Add or remove class from container to help with full width
+        productsGrid.classList.toggle('products-grid');
+
+        const icon = this.querySelector('i');
+        if (productsGrid.classList.contains('list-view')) {
+          icon.classList.remove('fa-list');
+          icon.classList.add('fa-th');
+        } else {
+          icon.classList.remove('fa-th');
+          icon.classList.add('fa-list');
+        }
+      });
+    }
+  </script>
+
 </body>
+
 </html>

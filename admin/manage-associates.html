@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="../images/favcon.jpeg" type="image/jpeg">
+    <title>Manage Associates - Mc Electronics</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <!-- Font Awesome -->
+    <link href="../css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #00204a;
+            /* Dark Blue */
+            --accent-color: #00bbf0;
+            /* Cyan */
+            --bg-color: #f4f6f9;
+            --text-color: #333;
+            --sidebar-width: 250px;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--primary-color);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            color: #fff;
+            transition: all 0.3s;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        /* Sidebar Scrollbar */
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .sidebar-header h4 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0 0;
+        }
+
+        .sidebar-menu li {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 15px 20px;
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            color: #fff;
+            background-color: var(--accent-color);
+            padding-left: 25px;
+        }
+
+        .sidebar-menu i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        /* Topbar */
+        .topbar {
+            background-color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .toggle-btn {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+            display: none;
+            /* Hidden on desktop */
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            text-align: right;
+        }
+
+        .user-info {
+            margin-right: 15px;
+        }
+
+        .user-name {
+            display: block;
+            font-weight: 500;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .user-role {
+            font-size: 0.85rem;
+            color: #888;
+            display: block;
+        }
+
+        .user-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-color);
+            padding: 2px;
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            color: #6c757d;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        /* Section Title */
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--accent-color);
+            padding-left: 15px;
+        }
+
+        /* Table */
+        .table-container {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow-x: auto;
+        }
+
+        .custom-table th {
+            border-top: none;
+            background-color: #f8f9fa;
+            color: var(--primary-color);
+        }
+
+        .badge-success {
+            background-color: #28a745;
+        }
+
+        .badge-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .badge-danger {
+            background-color: #dc3545;
+        }
+
+        .associate-img-small {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+
+        /* Make Address column wider in Assign Delivery table */
+        .custom-table th:nth-child(3),
+        .custom-table td:nth-child(3) {
+            min-width: 250px;
+            max-width: 350px;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+
+        /* Reduce Status column width in All Associates table */
+        #allAssociatesTable th:nth-child(3),
+        #allAssociatesTable td:nth-child(3) {
+            width: 100px;
+            max-width: 100px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                margin-left: -250px;
+            }
+
+            .sidebar.active {
+                margin-left: 0;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .toggle-btn {
+                display: block;
+            }
+
+            .topbar {
+                padding: 15px;
+            }
+
+            .page-title {
+                font-size: 1.2rem;
+                text-align: center;
+                flex-grow: 1;
+            }
+
+            /* Reduce Status column width in All Associates table on mobile */
+            #allAssociatesTable th:nth-child(3),
+            #allAssociatesTable td:nth-child(3) {
+                width: 80px !important;
+                max-width: 80px !important;
+            }
+        }
+
+        /* Full Screen Modal Custom CSS */
+        .modal-full {
+            padding: 0 !important;
+        }
+
+        .modal-full .modal-dialog {
+            width: 100%;
+            max-width: none;
+            height: 100%;
+            margin: 0;
+        }
+
+        .modal-full .modal-content {
+            height: 100%;
+            border: 0;
+            border-radius: 0;
+        }
+
+        .modal-full .modal-body {
+            overflow-y: auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Page Loader -->
+    <div id="page-loader"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffffff; z-index: 99999; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease;">
+        <i class="fa fa-spinner fa-spin" style="font-size: 3rem; color: #00bbf0;"></i>
+    </div>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h4>Mc Electronics</h4>
+            <small>Admin Panel</small>
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="dashboard.html">
+                    <i class="fa fa-tachometer"></i> Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="manage-associates.html" class="active">
+                    <i class="fa fa-id-badge"></i> Associates
+                </a>
+            </li>
+            <li>
+                <a href="add-product.html">
+                    <i class="fa fa-plus-circle"></i> Add Product
+                </a>
+            </li>
+            <li>
+                <a href="manage-products.html">
+                    <i class="fa fa-list"></i> Manage Products
+                </a>
+            </li>
+            <li>
+                <a href="orders.html">
+                    <i class="fa fa-shopping-bag"></i> Orders
+                </a>
+            </li>
+            <li>
+                <a href="manage-users.html">
+                    <i class="fa fa-users"></i> Manage Users
+                </a>
+            </li>
+            <li>
+                <a href="manage-metadata.html">
+                    <i class="fa fa-tags"></i> Categories
+                </a>
+            </li>
+            <li>
+                <a href="manage-db.html">
+                    <i class="fa fa-database"></i> Manage DB
+                </a>
+            </li>
+            <li>
+                <a href="track-order.html">
+                    <i class="fa fa-map-marker"></i> Track Order
+                </a>
+            </li>
+            <li>
+                <a href="settings.html">
+                    <i class="fa fa-cogs"></i> Settings
+                </a>
+            </li>
+            <li>
+                <a href="../index.html">
+                    <i class="fa fa-home"></i> Back to Site
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="logout()">
+                    <i class="fa fa-sign-out"></i> Logout
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content" id="content">
+        <!-- Topbar -->
+        <div class="topbar">
+            <div class="d-flex align-items-center">
+                <div class="toggle-btn mr-3 d-md-none"
+                    onclick="document.getElementById('sidebar').classList.toggle('active')"
+                    style="display: block; margin-bottom: 0; font-size: 1.2rem;">
+                    <i class="fa fa-bars"></i>
+                </div>
+                <h2 class="page-title">Manage Associates</h2>
+            </div>
+
+            <div class="user-profile">
+                <div class="user-info d-none d-sm-block">
+                    <span class="user-name" id="adminName">Loading...</span>
+                    <span class="user-role">Administrator</span>
+                </div>
+                <img src="../images/client1.gif" alt="Admin" class="user-img" id="adminImg">
+            </div>
+        </div>
+
+        <!-- Section 1: All Associates -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="section-title">All Associates</h3>
+                <div class="row align-items-center mb-3">
+                    <div class="col-md-6">
+                        <p class="text-muted mb-0">View and manage associate details.</p>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="table custom-table table-hover" id="allAssociatesTable">
+                        <thead>
+                            <tr>
+                                <th>Associate</th>
+                                <th>Mobile</th>
+                                <th>Status</th>
+                                <th>Type</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="associatesTableBody">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center mt-3">
+                    <button id="viewMoreAssociatesBtn" class="btn btn-outline-primary" style="display: none;">
+                        View More Associates
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Assign Delivery -->
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <h3 class="section-title">Assign Delivery</h3>
+                <div class="row align-items-center mb-3">
+                    <div class="col-md-6">
+                        <p class="text-muted mb-0">Assign orders with status "Out for Delivery" to associates.</p>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="table custom-table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Address</th>
+                                <th>Status</th>
+                                <th>Assign</th>
+                            </tr>
+                        </thead>
+                        <tbody id="assignDeliveryTableBody">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center mt-3">
+                    <button id="assignMoreProductsBtn" class="btn btn-outline-primary" style="display: none;">
+                        Assign More Products
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modals for View More -->
+
+        <!-- View All Associates Modal -->
+        <div class="modal fade modal-full" id="allAssociatesModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">All Associates</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group mb-3">
+                            <input type="text" id="associateSearchInput" class="form-control"
+                                placeholder="Search by Name, Mobile or Email...">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-search"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table custom-table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Associate</th>
+                                        <th>Mobile</th>
+                                        <th>Email</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="modalAssociatesTableBody">
+                                    <!-- Full List -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Assign More Products Modal -->
+        <div class="modal fade modal-full" id="assignProductsModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Assign Products for Delivery</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group mb-3">
+                            <input type="text" id="assignSearchInput" class="form-control"
+                                placeholder="Search Orders...">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-search"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table custom-table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Customer</th>
+                                        <th>Address</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="modalAssignTableBody">
+                                    <!-- Full List -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Associate Selection Modal (Small) -->
+        <div class="modal fade" id="selectAssociateModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Select Associate</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="selectedOrderId">
+                        <div class="form-group">
+                            <label>Choose Associate</label>
+                            <select class="form-control" id="associateSelectDropdown">
+                                <option value="">Loading...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="confirmAssignBtn">Assign Delivery</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Associate Modal -->
+        <div class="modal fade" id="editAssociateModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Associate</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Associate Profile Form (Read-only mostly, maybe status toggle) -->
+                        <!-- For now, just display details -->
+                        <div id="associateDetailsContent">
+                            <!-- Populated via JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-5 text-center text-muted">
+        <p>&copy; 2026 Mc Electronics Admin Panel.</p>
+    </footer>
+
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+    </script>
+    <!-- Core Scripts -->
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
+
+    <script src="../js/admin-sidebar.js"></script>
+
+    <!-- Auth & Logic -->
+    <script type="module" src="../js/admin-associates.js"></script>
+
+</body>
+
+</html>

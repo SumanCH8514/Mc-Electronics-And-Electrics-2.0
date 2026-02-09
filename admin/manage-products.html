@@ -7,44 +7,223 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="../images/favcon.jpeg" type="image/jpeg">
     <title>Manage Products - Admin Dashboard</title>
-    
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../css/bootstrap.css">
     <!-- Font Awesome -->
     <link href="../css/font-awesome.min.css" rel="stylesheet" />
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    
+
     <style>
-        :root { --primary-color: #00204a; --accent-color: #00bbf0; --bg-color: #f4f6f9; --sidebar-width: 250px; }
-        body { font-family: 'Roboto', sans-serif; background-color: var(--bg-color); margin: 0; overflow-x: hidden; }
+        :root {
+            --primary-color: #00204a;
+            --accent-color: #00bbf0;
+            --bg-color: #f4f6f9;
+            --sidebar-width: 250px;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            overflow-x: hidden;
+        }
 
         /* Sidebar & Layout */
-        .sidebar { width: var(--sidebar-width); background-color: var(--primary-color); height: 100vh; position: fixed; top: 0; left: 0; color: #fff; transition: all 0.3s; z-index: 1000; }
-        .sidebar-header { padding: 20px; background-color: rgba(0,0,0,0.2); text-align: center; }
-        .sidebar-header h4 { margin: 0; font-weight: 700; font-size: 1.2rem; }
-        .sidebar-menu { list-style: none; padding: 0; margin: 20px 0 0 0; }
-        .sidebar-menu li { border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .sidebar-menu a { display: block; padding: 15px 20px; color: #bdc3c7; text-decoration: none; transition: all 0.3s; }
-        .sidebar-menu a:hover, .sidebar-menu a.active { color: #fff; background-color: var(--accent-color); padding-left: 25px; }
-        .sidebar-menu i { margin-right: 10px; width: 20px; text-align: center; }
-        .main-content { margin-left: var(--sidebar-width); padding: 20px; }
-        .toggle-btn { display: none; font-size: 1.5rem; cursor: pointer; color: var(--primary-color); margin-bottom: 20px; }
-        
-        .table-card { background: #fff; padding: 25px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); overflow-x: auto; }
-        .custom-table th { border-top: none; background-color: #f8f9fa; color: var(--primary-color); }
-        .product-img-sm { width: 50px; height: 50px; object-fit: contain; margin-right: 10px; border: 1px solid #eee; border-radius: 4px; }
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--primary-color);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            color: #fff;
+            transition: all 0.3s;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        /* Sidebar Scrollbar */
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .sidebar-header h4 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0 0;
+        }
+
+        .sidebar-menu li {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 15px 20px;
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            color: #fff;
+            background-color: var(--accent-color);
+            padding-left: 25px;
+        }
+
+        .sidebar-menu i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 20px;
+        }
+
+        .toggle-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .table-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow-x: auto;
+        }
+
+        .custom-table th {
+            border-top: none;
+            background-color: #f8f9fa;
+            color: var(--primary-color);
+        }
+
+        .product-img-sm {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            margin-right: 10px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+
+        /* Updated Topbar Style */
+        .topbar {
+            background-color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            color: #6c757d;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            text-align: right;
+        }
+
+        .user-info {
+            margin-right: 15px;
+        }
+
+        .user-name {
+            display: block;
+            font-weight: 500;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .user-role {
+            font-size: 0.85rem;
+            color: #888;
+            display: block;
+        }
+
+        .user-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-color);
+            padding: 2px;
+        }
 
         @media (max-width: 768px) {
-            .sidebar { margin-left: -250px; }
-            .sidebar.active { margin-left: 0; }
-            .main-content { margin-left: 0; }
-            .toggle-btn { display: block; }
+            .sidebar {
+                margin-left: -250px;
+            }
+
+            .sidebar.active {
+                margin-left: 0;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .toggle-btn {
+                display: block;
+            }
+
+            .topbar {
+                padding: 15px;
+            }
+
+            .page-title {
+                font-size: 1.2rem;
+                text-align: center;
+                flex-grow: 1;
+            }
         }
     </style>
 </head>
 
 <body>
+    <!-- Page Loader -->
+    <div id="page-loader"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffffff; z-index: 99999; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease;">
+        <i class="fa fa-spinner fa-spin" style="font-size: 3rem; color: #00bbf0;"></i>
+    </div>
 
     <!-- Sidebar -->
     <nav class="sidebar" id="sidebar">
@@ -54,11 +233,30 @@
         </div>
         <ul class="sidebar-menu">
             <li><a href="dashboard.html"><i class="fa fa-tachometer"></i> Dashboard</a></li>
+            <li>
+                <a href="manage-associates.html">
+                    <i class="fa fa-id-badge"></i> Associates
+                </a>
+            </li>
+            <li>
+                <a href="manage-associates.html">
+                    <i class="fa fa-id-badge"></i> Associates
+                </a>
+            </li>
             <li><a href="add-product.html"><i class="fa fa-plus-circle"></i> Add Product</a></li>
             <li><a href="manage-products.html" class="active"><i class="fa fa-list"></i> Manage Products</a></li>
-            <li><a href="#"><i class="fa fa-shopping-bag"></i> Orders</a></li>
-             <li><a href="manage-users.html"><i class="fa fa-users"></i> Users</a></li>
-             <li><a href="manage-metadata.html"><i class="fa fa-tags"></i> Categories</a></li>
+            <li>
+                <a href="orders.html"><i class="fa fa-shopping-bag"></i> Orders</a>
+            </li>
+            <li><a href="manage-users.html"><i class="fa fa-users"></i> Manage Users</a></li>
+            <li><a href="manage-metadata.html"><i class="fa fa-tags"></i> Categories</a></li>
+            <li><a href="manage-db.html"><i class="fa fa-database"></i> Manage DB</a></li>
+            <li><a href="track-order.html"><i class="fa fa-map-marker"></i> Track Order</a></li>
+            <li>
+                <a href="settings.html">
+                    <i class="fa fa-cogs"></i> Settings
+                </a>
+            </li>
             <li><a href="../index.html"><i class="fa fa-home"></i> Back to Site</a></li>
             <li><a href="#" onclick="logout()"><i class="fa fa-sign-out"></i> Logout</a></li>
         </ul>
@@ -66,12 +264,27 @@
 
     <!-- Main Content -->
     <div class="main-content">
-        <div class="toggle-btn" onclick="document.getElementById('sidebar').classList.toggle('active')">
-            <i class="fa fa-bars"></i> Menu
+        <!-- New Topbar Layout -->
+        <div class="topbar">
+            <div class="d-flex align-items-center">
+                <div class="toggle-btn mr-3 d-md-none"
+                    onclick="document.getElementById('sidebar').classList.toggle('active')"
+                    style="display: block; margin-bottom: 0; font-size: 1.2rem;">
+                    <i class="fa fa-bars"></i>
+                </div>
+                <h2 class="page-title">Manage Products</h2>
+            </div>
+
+            <div class="user-profile">
+                <div class="user-info d-none d-sm-block">
+                    <span class="user-name" id="adminName">Loading...</span>
+                    <!-- Using 'Administrator' as role, can be dynamic if needed -->
+                    <span class="user-role">Administrator</span>
+                </div>
+                <img src="../images/client1.gif" alt="Admin" class="user-img" id="adminImg">
+            </div>
         </div>
 
-        <h3 class="mb-4" style="color: var(--primary-color); font-weight: 700;">Manage Products</h3>
-        
         <div class="table-card">
             <table class="table custom-table table-hover">
                 <thead>
@@ -96,7 +309,9 @@
     <!-- Scripts -->
     <script src="../js/jquery-3.4.1.min.js"></script>
     <script src="../js/bootstrap.js"></script>
+    <script src="../js/admin-sidebar.js"></script>
     <script type="module" src="../js/admin-manage-products.js"></script>
 
 </body>
+
 </html>

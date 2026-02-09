@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="../images/favcon.jpeg" type="image/jpeg">
+    <title>Become a Delivery Associate - Mc Electronics And Electrics</title>
+
+
+    <link rel="stylesheet" href="../css/bootstrap.css">
+
+    <link href="../css/font-awesome.min.css" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #00204a;
+            --accent-color: #00bbf0;
+            --bg-color: #f8f9fa;
+            /* Slightly off-white for modern feel */
+            --dark-bg: #1a1a2e;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            overflow-x: hidden;
+            color: #333;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #fff;
+            padding: 10px 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            color: var(--primary-color) !important;
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .nav-btn {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary-color);
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-btn-primary {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            color: #fff;
+        }
+
+        .nav-btn-primary:hover {
+            background: #009ecb;
+            border-color: #009ecb;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-bg) 100%);
+            color: #fff;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative Patterns */
+        .hero-decor {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .decor-1 {
+            width: 300px;
+            height: 300px;
+            top: -50px;
+            left: -50px;
+        }
+
+        .decor-2 {
+            width: 200px;
+            height: 200px;
+            bottom: 20px;
+            right: 10%;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btn {
+            background-color: var(--accent-color);
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 5px 15px rgba(0, 187, 240, 0.4);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 187, 240, 0.5);
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--accent-color);
+            margin: 10px auto 0;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: 15px;
+            transition: all 0.3s;
+            height: 100%;
+            background: #fff;
+            border: 1px solid #eee;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-color: transparent;
+        }
+
+        .feature-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(0, 187, 240, 0.1);
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+        }
+
+        .feature-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .feature-desc {
+            color: #666;
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+
+        /* Incentive Section */
+        .incentive-section {
+            padding: 80px 0;
+            background: #f1f8ff;
+        }
+
+        .incentive-box {
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .check-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .check-list li {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: #444;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .check-list i {
+            color: #28a745;
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .navbar {
+                padding: 10px 15px;
+            }
+
+            .nav-btn {
+                padding: 5px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <nav class="navbar d-flex justify-content-between align-items-center">
+        <a href="../index.html" class="navbar-brand">
+            <img src="../images/logo-mc-electronics.png" alt="Mc Electronics">
+            <span class="d-none d-sm-inline">Mc Electronics And Electrics</span>
+            <span class="d-sm-none">Mc Electronics</span>
+        </a>
+        <div class="d-flex align-items-center">
+            <a href="../auth/associate-login.html" class="nav-btn">Login</a>
+            <a href="../auth/associate-login.html" class="nav-btn nav-btn-primary d-none d-sm-inline-block">Join Now</a>
+        </div>
+    </nav>
+
+
+    <section class="hero-section">
+        <div class="hero-decor decor-1"></div>
+        <div class="hero-decor decor-2"></div>
+        <div class="container relative">
+            <h1 class="hero-title">Delivering Happiness,<br>Earning Freedom.</h1>
+            <p class="hero-subtitle">Turn your free time into earnings. Join <strong>Mc Electronics And
+                    Electrics</strong> as a Delivery Associate today and enjoy flexibility, great pay, and modern
+                e-bikes.</p>
+            <a href="../auth/associate-login.html" class="cta-btn">Start Earning Today</a>
+        </div>
+    </section>
+
+
+    <section class="features-section">
+        <div class="container text-center">
+            <h2 class="section-title">Why Deliver With Us?</h2>
+
+            <div class="row">
+
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper">
+                            <i class="fa fa-motorcycle"></i>
+                        </div>
+                        <h4 class="feature-title">E-Bike Provided</h4>
+                        <p class="feature-desc">Don't have a vehicle? No problem! We provide modern, eco-friendly
+                            e-bikes to help you deliver efficiently.</p>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper">
+                            <i class="fa fa-money"></i>
+                        </div>
+                        <h4 class="feature-title">Excellent Payouts</h4>
+                        <p class="feature-desc">Earn competitive rates per delivery. Get paid weekly directly to your
+                            bank account with complete transparency.</p>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                        <h4 class="feature-title">Totally Flexible</h4>
+                        <p class="feature-desc">Be your own boss. Choose your own hours and work when it fits your
+                            schedule. Full-time or Part-time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="incentive-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4">
+                    <div class="incentive-box">
+                        <h3 class="mb-4" style="color: var(--primary-color); font-weight: 700;">Boost Your Earnings</h3>
+                        <p class="mb-4">We believe in rewarding hard work. Our incentive program is designed to help you
+                            earn even more on top of your base pay.</p>
+
+                        <ul class="check-list">
+                            <li>
+                                <i class="fa fa-check-circle"></i>
+                                <div>
+                                    <strong>Weekend Bonus</strong>
+                                    <br> <small class="text-muted">Earn extra for deliveries completed on
+                                        weekends.</small>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa fa-check-circle"></i>
+                                <div>
+                                    <strong>Peak Hour Surge</strong>
+                                    <br> <small class="text-muted">Higher rates during busy lunch and dinner
+                                        hours.</small>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa fa-check-circle"></i>
+                                <div>
+                                    <strong>Milestone Rewards</strong>
+                                    <br> <small class="text-muted">Complete specific number of orders to unlock cash
+                                        bonuses.</small>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center text-lg-right">
+                    <img src="../images/delivery-truck.png" alt="Delivery Success"
+                        style="max-width: 100%; height: auto;" onerror="this.src='../images/logo-mc-electronics.png'">
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section style="background: var(--primary-color); padding: 60px 0; text-align: center; color: #fff;">
+        <div class="container">
+            <h2 class="mb-4">Ready to hit the road?</h2>
+            <a href="../auth/associate-login.html" class="nav-btn nav-btn-primary"
+                style="padding: 15px 40px; font-size: 1.2rem;">Join the Team</a>
+        </div>
+    </section>
+
+
+    <footer class="text-center py-4 text-muted" style="background: #eee;">
+        <small>&copy; 2024 Mc Electronics And Electrics. All rights reserved.</small>
+    </footer>
+
+
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
+
+</body>
+
+</html>

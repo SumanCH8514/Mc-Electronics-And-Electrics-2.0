@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mc Electronics - Password Reset</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        /* Header section with deep navy background */
+        .header {
+            background-color: #000044;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .logo {
+            max-width: 200px;
+            height: auto;
+        }
+        /* Main body content */
+        .content {
+            padding: 40px 30px;
+            color: #333333;
+            line-height: 1.6;
+        }
+        .content h2 {
+            color: #000044;
+            margin-bottom: 20px;
+        }
+        /* Electric blue button */
+        .btn-container {
+            text-align: center;
+            padding: 30px 0;
+        }
+        .button {
+            background-color: #00C2FF;
+            color: #ffffff !important;
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            display: inline-block;
+            box-shadow: 0 4px 6px rgba(0, 194, 255, 0.3);
+        }
+        /* Footer with navy background */
+        .footer {
+            background-color: #000044;
+            color: #ffffff;
+            text-align: center;
+            padding: 25px;
+            font-size: 13px;
+        }
+        .footer a {
+            color: #00C2FF;
+            text-decoration: none;
+        }
+        .fallback-link {
+            font-size: 11px;
+            color: #888888;
+            margin-top: 25px;
+            word-break: break-all;
+        }
+        .accent-text {
+            color: #00C2FF;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://sumandigitalpoint.site/images/logo-mc-electronics.png" alt="Mc Electronics Logo" class="logo">
+        </div>
+
+        <div class="content">
+            <h2>Hello,</h2>
+            <p>Follow this link to reset your <span class="accent-text">%APP_NAME%</span> password for your <strong>%EMAIL%</strong> account.</p>
+            
+            <div class="btn-container">
+                <a href="%LINK%" class="button">Reset Password</a>
+            </div>
+            
+            <p>If you didn’t ask to reset your password, you can safely ignore this email.</p>
+            
+            <p>Thanks,<br>
+            <strong>Your %APP_NAME% team</strong></p>
+
+            <div class="fallback-link">
+                <p>If the button above doesn't work, copy and paste this URL into your browser:</p>
+                <p>%LINK%</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2026 <strong>Mc Electronics And Electrics</strong></p>
+            <p><a href="https://mc-electronics.web.app/">Visit our Website</a> | <a href="https://mc-electronics.web.app/pages/contact.html">Support</a></p>
+        </div>
+    </div>
+</body>
+</html>

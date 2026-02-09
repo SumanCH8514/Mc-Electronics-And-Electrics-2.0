@@ -69,6 +69,19 @@ async function loadProductData() {
             document.getElementById('productPrice').value = p.price;
             document.getElementById('productMrp').value = p.mrp || p.price;
             document.getElementById('productDesc').value = p.description;
+            
+            // Populate Highlights
+            if (p.highlights && Array.isArray(p.highlights)) {
+                document.getElementById('productHighlights').value = p.highlights.join('\n');
+            } else {
+                document.getElementById('productHighlights').value = "";
+            }
+
+            // Populate Warranty (Extract number)
+            // e.g. "2 Year Manufacturer Warranty" -> 2
+            // "No Warranty" -> 0
+            // Simple parseInt works for "2 Year..." but returns NaN for "No Warranty"
+            document.getElementById('productWarranty').value = parseInt(p.warranty) || 0;
 
             currentImage = p.image;
             if (currentImage) {
@@ -125,6 +138,17 @@ if (form) {
             const price = parseFloat(document.getElementById('productPrice').value);
             const mrp = parseFloat(document.getElementById('productMrp').value) || price;
             const desc = document.getElementById('productDesc').value;
+            
+            // Process Highlights
+            const highlightsRaw = document.getElementById('productHighlights').value;
+            const highlights = highlightsRaw.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+
+            // Process Warranty
+            const warrantyYears = parseInt(document.getElementById('productWarranty').value) || 0;
+            let warrantyStr = "No Warranty";
+            if (warrantyYears > 0) {
+                warrantyStr = `${warrantyYears} Year Manufacturer Warranty`;
+            }
 
             // Generate Keywords
             const searchKeywords = [
@@ -140,6 +164,8 @@ if (form) {
                 price: price,
                 mrp: mrp,
                 description: desc,
+                highlights: highlights,
+                warranty: warrantyStr,
                 image: base64Image || currentImage,
                 searchKeywords: searchKeywords,
                 updatedAt: new Date().toISOString()

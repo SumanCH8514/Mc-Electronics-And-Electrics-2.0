@@ -1,8 +1,6 @@
-@media (max-width: 1300px) {
-}
+@media (max-width: 1300px) {}
 
-@media (max-width: 1120px) {
-}
+@media (max-width: 1120px) {}
 
 @media (max-width: 992px) {
   .hero_area {
@@ -21,20 +19,271 @@
     padding: 120px 0 75px 0;
   }
 
-  .custom_nav-container .navbar-nav {
-    padding-top: 15px;
+  /* Sidebar Menu Styles */
+  .navbar-collapse {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 285px;
+    height: 100vh;
+    background: linear-gradient(130deg, #231a6f, #0f054c);
+    z-index: 9999;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    display: block !important;
+    /* Override Bootstrap's collapse display:none */
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    overflow-x: hidden;
+    opacity: 0;
+    pointer-events: none;
+    /* Prevent clicks when hidden */
+  }
+
+  .sidebar-header {
+    text-align: center;
+    padding: 20px 15px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    /* Removed negative margin */
+  }
+
+  .sidebar-header h5 {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  .sidebar-header p {
+    color: #00bbf0 !important;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 0;
+  }
+
+  .sidebar-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+    z-index: 10;
+  }
+
+  .sidebar-close-btn:hover {
+    color: #00bbf0;
+  }
+
+  /* Mobile Profile Styles */
+  .mobile-profile-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: none;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 15px auto;
+  }
+
+  .mobile-profile-box {
+    border: none;
+    background: white;
+    border-radius: 5px;
+    padding: 10px 15px;
+    /* display: flex; */
     align-items: center;
+    justify-content: space-between;
+    color: #0b062c;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin: 2px 0;
+    display: block;
+    width: 65%;
+    margin: 0 auto 5px auto;
+  }
+
+  .mobile-profile-box i.fa-caret-down {
+    margin-left: 10px;
+  }
+
+  /* Adjust dropdown for mobile profile box */
+  .mobile-profile-box+.dropdown-menu {
+    width: 100%;
+    margin-left: 0px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 0;
+    margin-top: 0;
+    padding: 0;
+    position: static;
+    float: none;
+    box-shadow: none;
+    display: none;
+    /* Hidden by default, toggled by JS/Bootstrap */
+  }
+
+  .mobile-profile-box+.dropdown-menu.show {
+    display: block;
+  }
+
+  .mobile-profile-box+.dropdown-menu .dropdown-item {
+    color: white !important;
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    background: transparent;
+  }
+
+  .mobile-profile-box+.dropdown-menu .dropdown-item:last-child {
+    border-bottom: none;
+  }
+
+  .mobile-profile-box+.dropdown-menu .dropdown-item i {
+    width: 25px;
+    text-align: center;
+    margin-right: 10px;
+  }
+
+  .mobile-profile-box+.dropdown-menu .dropdown-item:hover,
+  .mobile-profile-box+.dropdown-menu .dropdown-item:focus {
+    background: rgba(255, 255, 255, 0.1);
+    color: white !important;
+  }
+
+  .mobile-profile-box+.dropdown-menu .dropdown-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.5) !important;
+    margin: 0;
+  }
+
+  .navbar-collapse.show {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Handle Bootstrap's collapsing state to avoid flash */
+  .navbar-collapse.collapsing {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100vh !important;
+    background: linear-gradient(130deg, #231a6f, #0f054c);
+    z-index: 9999;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    display: block;
+    opacity: 1;
+    /* Keep opacity 1 during transition if we want to see it slide */
+  }
+
+  /* Backdrop for the sidebar */
+  .navbar-collapse.show::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: -100vw;
+    /* Position relative to the sidebar */
+    width: 200vw;
+    /* Wide enough to cover screen */
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    pointer-events: all;
+    /* We can't easily click backdrop to close without JS, but visually it helps focus */
+  }
+
+  .custom_nav-container .navbar-nav {
+    padding-top: 0px;
+    padding-left: 20px;
+    align-items: flex-start;
+    /* Align items to left in sidebar */
+  }
+
+  .custom_nav-container .navbar-nav .nav-item {
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .custom_nav-container .navbar-nav .nav-item:last-child {
+    border-bottom: none;
   }
 
   .custom_nav-container .navbar-nav .nav-item .nav-link {
-    padding: 5px 25px;
-    margin: 5px 0;
+    padding: 12px 0;
+    margin: 0;
+    text-align: left;
+    display: block;
+    font-size: 16px;
   }
+
+  .custom_nav-container .navbar-nav .nav-item .nav-link i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+  }
+
+  /* Toggler button z-index fix to stay above sidebar */
+  .navbar-toggler {
+    z-index: 10000;
+    position: relative;
+  }
+
+  .navbar-toggler[aria-expanded="true"] {
+    position: fixed;
+    right: 25px;
+    top: 25px;
+  }
+
+  /* Fix for scrollable profile dropdown on mobile */
+  .dropdown-menu {
+    position: static !important;
+    float: none;
+    width: 0%;
+    background: #0b062c;
+    border: 1px solid white;
+    margin-top: 6px;
+    margin-left: -18px;
+    padding-left: 0px;
+    display: none;
+  }
+
+  .dropdown-item {
+    color: #fff !important;
+    background: transparent !important;
+  }
+
+  .dropdown-item:hover,
+  .dropdown-item:focus {
+    background: rgba(255, 255, 255, 0.2) !important;
+    color: #fff !important;
+  }
+
+
 }
 
 @media (max-width: 768px) {
   .about_section .img-box {
     margin-bottom: 45px;
+  }
+
+  .whatsapp_float {
+    bottom: 20px;
+    right: 15px;
   }
 }
 
@@ -68,12 +317,18 @@
   .slider_section .detail-box h1 {
     font-size: 2rem;
   }
+
   .navbar-brand span {
-    font-weight: bold;
-    font-size: 15px;
+    font-weight: 700;
+    font-size: 17px;
     color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6), 0 0 10px rgba(0, 187, 240, 0.6);
+    letter-spacing: 0.5px;
+    white-space: normal;
+    word-wrap: break-word;
   }
-  .navbar-brand span:hover{
+
+  .navbar-brand span:hover {
     text-shadow: 0 0 15px rgba(254, 254, 254, 0.8);
   }
 
@@ -92,11 +347,7 @@
   }
 }
 
-@media (max-width: 768px) {
-  .slider_section .img-box {
-    height: 300px;
-  }
-}
+
 
 @media (max-width: 420px) {
   .service_section .box {
@@ -109,8 +360,7 @@
   }
 }
 
-@media (max-width: 376px) {
-}
+
 
 @media (min-width: 1200px) {
   .container {

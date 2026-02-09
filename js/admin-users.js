@@ -10,16 +10,16 @@ async function fetchUsers() {
 
     try {
         tableBody.innerHTML = '<tr><td colspan="5" class="text-center">Loading...</td></tr>';
-        
+
         const querySnapshot = await getDocs(collection(db, "users"));
         let html = "";
-        
+
         querySnapshot.forEach((doc) => {
             const user = doc.data();
             const uid = doc.id;
             const photo = user.photoURL || '../images/client1.jpg'; // Default image
-            const roleBadge = user.role === 'admin' 
-                ? `<span class="role-badge-admin">Admin</span>` 
+            const roleBadge = user.role === 'admin'
+                ? `<span class="role-badge-admin">Admin</span>`
                 : `<span class="role-badge-user">User</span>`;
 
             html += `
@@ -47,9 +47,9 @@ async function fetchUsers() {
         });
 
         if (html === "") {
-             html = '<tr><td colspan="5" class="text-center">No users found</td></tr>';
+            html = '<tr><td colspan="5" class="text-center">No users found</td></tr>';
         }
-        
+
         tableBody.innerHTML = html;
 
     } catch (error) {
@@ -80,22 +80,22 @@ if (editForm) {
         const newPhone = document.getElementById('editUserPhone').value;
 
         const btn = editForm.querySelector('button[type="submit"]');
-        
+
         try {
             btn.disabled = true;
             btn.innerText = "Saving...";
-            
+
             await updateDoc(doc(db, "users", uid), {
                 displayName: newName,
                 email: newEmail,
                 phone: newPhone,
                 role: newRole
             });
-            
+
             $('#editUserModal').modal('hide');
             fetchUsers(); // Refresh table
             alert("User details updated successfully!");
-            
+
         } catch (error) {
             console.error("Update error:", error);
             alert("Failed to update role: " + error.message);

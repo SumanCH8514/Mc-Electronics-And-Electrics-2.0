@@ -37,7 +37,7 @@
 	<priority>1.0</priority>
 </url>
 <url>
-	<loc>https://mc-electronics.web.app/login.html</loc>
+	<loc>https://mc-electronics.web.app/auth/login.html</loc>
 	<lastmod>2025-01-17T13:29:43+01:00</lastmod>
 	<priority>1.0</priority>
 </url>
